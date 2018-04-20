@@ -1,9 +1,9 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    {{title}}
-  </h1>
-  <div>
-    <app-login-component></app-login-component>
-  </div>
+
+<ul>
+  <li><a routerLink="" routerLinkActive="inactive">{{title}}</a></li>
+  <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+  <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+</ul>
+<div class="app ng-scope ng-fadeInLeft2">
+  <router-outlet></router-outlet>
 </div>
