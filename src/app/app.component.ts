@@ -15,5 +15,5 @@ export class AppComponent {
 
   }
 
-  title = 'Greenhouse app';
+  title = 'Smart Greenhouse Application';
 }

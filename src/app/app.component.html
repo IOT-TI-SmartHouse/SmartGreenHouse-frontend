@@ -1,9 +1,23 @@
+<header>
+  <div class="container">
+    <div id="branding">
+      <h1><span>{{title}}</span></h1>
+    </div>
+    <nav>
+        <ul>
+          <!-- <li><a routerLink="" routerLinkActive="inactive">{{title}}</a></li> -->
+          <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+          <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+          <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+        </ul>
+    </nav>
+  </div>
+</header>
 
-<ul>
-  <li><a routerLink="" routerLinkActive="inactive">{{title}}</a></li>
-  <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
-  <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
-</ul>
-<div class="app ng-scope ng-fadeInLeft2">
+<section id="router">
   <router-outlet></router-outlet>
-</div>
+</section>
+
+<footer>
+  <p>Smart Greenhouse</p>
+</footer>
