@@ -20,12 +20,10 @@ export class LoginComponent {
         console.log('login');
         console.log(`${this.username} : ${this.password}`);
 
-        this.loginService.login(this.username, this.password).subscribe(response => {
-            console.log(response);
-        });
+        this.loginService.login(this.username, this.password);
 
-        //if(login succesfull){
-            //switch 
-        //}
+        // if(login succesfull){
+            // switch
+        // }
     }
 }

@@ -10,6 +10,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { HomeComponent } from './home/home.component';
 import { WeatherService } from './dashboard/services/weather.services';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthGuard } from './auth-guard.services';
+//import { AuthInterceptor } from './auth-intercepter.services';
 
 
 @NgModule({
@@ -24,7 +26,13 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     AppComponent, HomeComponent,
   ],
-  providers: [ WeatherService ],
-  bootstrap: [AppComponent]
+  providers: [ WeatherService , AuthGuard ,
+  // {
+  //   provide: AuthInterceptor,
+  //   useClass: TokenInterceptor,
+  //   multi: true
+  // }
+],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
