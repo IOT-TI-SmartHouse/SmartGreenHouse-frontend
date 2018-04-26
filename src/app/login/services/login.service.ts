@@ -2,11 +2,12 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import * as moment from 'moment';
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable()
 export class LoginService {
 
-    private ip = 'http://192.168.1.170:3000';
+    private ip = 'http://localhost:3000';
 
     /**
      * Constructor
@@ -19,7 +20,9 @@ export class LoginService {
         return this.http.post(`${this.ip}/user/login`, {
             username: username,
             password: password
-        }).subscribe(res => this.setSession) ;
+        }).subscribe(res => {
+            this.setSession(res) ;
+        });
     }
 
     public register(username: string, password: string, isAdmin: boolean) {
@@ -37,15 +40,13 @@ export class LoginService {
         });
     }
 
-    loggedIn() {
-        // return tokenNotExpired();
-    }
-
     private setSession(authResult) {
-        const expiresAt = moment().add(authResult.expiresIn, 'second');
+        const decoded = jwt_decode(authResult.token);
+        console.log(decoded);
+        const expiresAt = moment().add(decoded.exp, 'second');
 
-        localStorage.setItem('id_token', authResult.idToken);
-        localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()) );
+        localStorage.setItem('id_token', authResult.token);
+        localStorage.setItem('expires_at', decoded.exp);
     }
 
     logout() {
@@ -53,8 +54,8 @@ export class LoginService {
         localStorage.removeItem('expires_at');
     }
 
-    public isLoggedIn() {
-        return moment().isBefore(this.getExpiration());
+    public isLoggedIn(): boolean {
+        return (Date.now() / 1000) < this.getExpiration();
     }
 
     isLoggedOut() {
@@ -64,6 +65,6 @@ export class LoginService {
     getExpiration() {
         const expiration = localStorage.getItem('expires_at');
         const expiresAt = JSON.parse(expiration);
-        return moment(expiresAt);
+        return expiresAt;
     }
 }

@@ -4,29 +4,27 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/loginscreen/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoginModule } from './login/login.module';
 import { AppRoutingModule } from './app-routing-module';
-import { DashboardModule } from './dashboard/dashboard.module';
 import { HomeComponent } from './home/home.component';
 import { WeatherService } from './dashboard/services/weather.services';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './auth-guard.services';
-//import { AuthInterceptor } from './auth-intercepter.services';
+import { DashboardComponent } from './dashboard/dashboardscreen/dashboard.component';
+import { LoginService } from './login/services/login.service';
+// import { AuthInterceptor } from './auth-intercepter.services';
 
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
-    LoginModule,
-    DashboardModule,
     AppRoutingModule,
     HttpClientModule
   ],
   declarations: [
-    AppComponent, HomeComponent,
+    AppComponent, HomeComponent, DashboardComponent, LoginComponent
   ],
-  providers: [ WeatherService , AuthGuard ,
+  providers: [ WeatherService , AuthGuard , LoginService,
   // {
   //   provide: AuthInterceptor,
   //   useClass: TokenInterceptor,
