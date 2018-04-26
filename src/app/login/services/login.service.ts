@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import * as jwt_decode from 'jwt-decode';
 import { Router } from '@angular/router';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 
 @Injectable()
 export class LoginService {
@@ -23,14 +23,14 @@ export class LoginService {
             password: password
         }).subscribe(res => {
             this.setSession(res);
-            swal('Good job!', 'You clicked the button!', 'success');
+            swal('Success!', 'Successfully logged in!', 'success');
         }, error => {
-            swal('Login failed', 'error');
+            swal('Login failed', 'The login attempt has failed', 'error');
         });
     }
 
     public register(username: string, password: string, isAdmin: boolean) {
-        return this.http.post('${this.ip}/user/register', {
+        return this.http.post(`${this.ip}/user/register`, {
             username: username,
             password: password,
             isAdmin: isAdmin
@@ -38,7 +38,7 @@ export class LoginService {
     }
 
     public getUser(username: string, password: string): Observable<any> {
-        return this.http.post('${this.ip}/user/register', {
+        return this.http.post(`${this.ip}/user/register`, {
             username: username,
             password: password
         });
@@ -56,6 +56,7 @@ export class LoginService {
     logout() {
         localStorage.removeItem('id_token');
         localStorage.removeItem('expires_at');
+        swal('Success!', 'Successfully logged out!', 'success');
     }
 
     public isLoggedIn(): boolean {

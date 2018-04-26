@@ -19,7 +19,6 @@ export class AppComponent {
   }
 
   logout() {
-    console.log('logout');
     this.loginService.logout();
   }
 }
