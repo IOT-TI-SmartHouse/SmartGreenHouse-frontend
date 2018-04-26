@@ -60,8 +60,11 @@ header .active{
 
 footer{
     padding:20px;
-    margin-top:20px;
+    margin-top:-180px;
     color:#ffffff;
     background-color:#e8491d;
     text-align: center;
+    position: fixed;
+    bottom: 0px;
+    width:100%;
 }
