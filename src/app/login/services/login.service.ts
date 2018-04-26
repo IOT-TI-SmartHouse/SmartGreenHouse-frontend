@@ -1,8 +1,9 @@
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
-import * as moment from 'moment';
 import * as jwt_decode from 'jwt-decode';
+import { Router } from '@angular/router';
+import swal from 'sweetalert';
 
 @Injectable()
 export class LoginService {
@@ -12,7 +13,7 @@ export class LoginService {
     /**
      * Constructor
      */
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private router: Router) {
         //
     }
 
@@ -21,7 +22,10 @@ export class LoginService {
             username: username,
             password: password
         }).subscribe(res => {
-            this.setSession(res) ;
+            this.setSession(res);
+            swal('Good job!', 'You clicked the button!', 'success');
+        }, error => {
+            swal('Login failed', 'error');
         });
     }
 
@@ -42,11 +46,11 @@ export class LoginService {
 
     private setSession(authResult) {
         const decoded = jwt_decode(authResult.token);
-        console.log(decoded);
-        const expiresAt = moment().add(decoded.exp, 'second');
 
         localStorage.setItem('id_token', authResult.token);
         localStorage.setItem('expires_at', decoded.exp);
+
+        this.router.navigate(['/home']);
     }
 
     logout() {
