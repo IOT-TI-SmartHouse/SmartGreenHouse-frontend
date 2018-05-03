@@ -16,15 +16,10 @@ export class LoginService {
         //
     }
 
-    public login(username: string, password: string) {
+    public login(username: string, password: string): Observable<Object> {
         return this.http.post(`${environment.apiEndpoint}/user/login`, {
             username: username,
             password: password
-        }).subscribe(res => {
-            this.setSession(res);
-            swal('Success!', 'Successfully logged in!', 'success');
-        }, error => {
-            swal('Login failed', 'The login attempt has failed', 'error');
         });
     }
 
@@ -48,7 +43,7 @@ export class LoginService {
         });
     }
 
-    private setSession(authResult) {
+    public setSession(authResult) {
         const decoded = jwt_decode(authResult.token);
 
         localStorage.setItem('id_token', authResult.token);

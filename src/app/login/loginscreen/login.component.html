@@ -1,22 +1,29 @@
 
-<div class="login-page">
-    <div class="form">
-        <form class="register-form">
-        <input type="text" placeholder="name"/>
-        <input type="text" [(ngModel)]="username" [ngModelOptions]="{standalone:true}" type="text" placeholder="username">
-        <input type="password" [(ngModel)]="password" [ngModelOptions]="{standalone:true}"  type="password"placeholder="password">
-        <!-- <input [(ngModel)]="password" [ngModelOptions]="{standalone:true}" type="password" placeholder="password"/>
-        <input [(ngModel)]="username" [ngModelOptions]="{standalone:true}" type="text" placeholder="email address"/> -->
-        <button>create</button>
-        <p class="message">Already registered? <a href="#">Sign In</a></p>
-        </form>
-        <form class="login-form">
-        <input type="text" [(ngModel)]="username" [ngModelOptions]="{standalone:true}" placeholder="username"/>
-        <input type="password" [(ngModel)]="password" [ngModelOptions]="{standalone:true}" placeholder="password"/>
-        <button (click)="login()">login</button>
-        </form>
+
+    <div class="login-page">
+        <div class="form">
+            <form class="register-form">
+            <input type="text" placeholder="name"/>
+            <input type="text" [(ngModel)]="username" [ngModelOptions]="{standalone:true}" type="text" placeholder="username">
+            <input type="password" [(ngModel)]="password" [ngModelOptions]="{standalone:true}"  type="password"placeholder="password">
+            <!-- <input [(ngModel)]="password" [ngModelOptions]="{standalone:true}" type="password" placeholder="password"/>
+            <input [(ngModel)]="username" [ngModelOptions]="{standalone:true}" type="text" placeholder="email address"/> -->
+            <button>create</button>
+            <p class="message">Already registered? <a href="#">Sign In</a></p>
+            </form>
+            <form class="login-form">
+            <input type="text" [(ngModel)]="username" [ngModelOptions]="{standalone:true}" placeholder="username"/>
+            <input type="password" [(ngModel)]="password" [ngModelOptions]="{standalone:true}" placeholder="password"/>
+            <button (click)="login()">login</button>
+            </form>
+        </div>
+    
+        <div class="loadingOverlay" *ngIf="loading">
+
+        </div>
+        <div class="loader" *ngIf="loading"></div>
     </div>
-</div>
+
 
 <!-- <h1>Enter username and password</h1>
 
