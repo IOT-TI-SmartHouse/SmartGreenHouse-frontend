@@ -17,13 +17,6 @@ export class LoginComponent {
     }
 
     public login(): void {
-        console.log('login');
-        console.log(`${this.username} : ${this.password}`);
-
         this.loginService.login(this.username, this.password);
-
-        // if(login succesfull){
-            // switch
-        // }
     }
 }

@@ -4,11 +4,10 @@ import { HttpClient } from '@angular/common/http';
 import * as jwt_decode from 'jwt-decode';
 import { Router } from '@angular/router';
 import swal from 'sweetalert2';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class LoginService {
-
-    private ip = 'http://localhost:3000';
 
     /**
      * Constructor
@@ -18,7 +17,7 @@ export class LoginService {
     }
 
     public login(username: string, password: string) {
-        return this.http.post(`${this.ip}/user/login`, {
+        return this.http.post(`${environment.apiEndpoint}/user/login`, {
             username: username,
             password: password
         }).subscribe(res => {
@@ -30,15 +29,20 @@ export class LoginService {
     }
 
     public register(username: string, password: string, isAdmin: boolean) {
-        return this.http.post(`${this.ip}/user/register`, {
+        return this.http.post(`${environment.apiEndpoint}/user/register`, {
             username: username,
             password: password,
             isAdmin: isAdmin
-        }).subscribe(res => this.setSession) ;
+        }).subscribe(res => {
+            this.setSession(res);
+            swal('Success!', 'Successfully registered!', 'success');
+        }, error => {
+            swal('Register failed', 'The register attempt has failed', 'error');
+        });
     }
 
     public getUser(username: string, password: string): Observable<any> {
-        return this.http.post(`${this.ip}/user/register`, {
+        return this.http.post(`${environment.apiEndpoint}/user/register`, {
             username: username,
             password: password
         });

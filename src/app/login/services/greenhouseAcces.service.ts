@@ -6,8 +6,6 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class GreenhouseAccesService {
 
-    private ip = 'http://192.168.1.170:3000';
-
     /**
      * Constructor
      */
