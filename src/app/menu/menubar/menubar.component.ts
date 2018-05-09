@@ -10,6 +10,8 @@ import { LoginService } from '../../login/services/login.service';
 })
 export class MenuBarComponent {
 
+    title = 'Smart Greenhouse Application';
+
     constructor(private router: Router, private loginService: LoginService) {
 
     }
