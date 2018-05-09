@@ -28,11 +28,6 @@ export class LoginService {
             username: username,
             password: password,
             isAdmin: isAdmin
-        }).subscribe(res => {
-            this.setSession(res);
-            swal('Success!', 'Successfully registered!', 'success');
-        }, error => {
-            swal('Register failed', 'The register attempt has failed', 'error');
         });
     }
 
