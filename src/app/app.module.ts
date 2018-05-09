@@ -11,6 +11,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './auth-guard.services';
 import { DashboardComponent } from './dashboard/dashboardscreen/dashboard.component';
 import { LoginService } from './login/services/login.service';
+import { AdminComponent } from './adminControl/admin.component';
+import { UserControlComponent } from './adminControl/user-control/user-control.component';
+import { GreenHouseControlComponent } from './adminControl/green-house-control/green-house-control.component';
+import { GreenHouseAccesControlComponent } from './adminControl/green-house-acces-control/green-house-acces-control.component';
+import {GreenhouseService} from './login/services/greenhouse.service';
+import { GreenhouseAccesService } from './login/services/greenhouseAcces.service';
+
 // import { AuthInterceptor } from './auth-intercepter.services';
 
 
@@ -22,9 +29,10 @@ import { LoginService } from './login/services/login.service';
     HttpClientModule
   ],
   declarations: [
-    AppComponent, HomeComponent, DashboardComponent, LoginComponent
+    AppComponent, HomeComponent, DashboardComponent, LoginComponent, AdminComponent,
+    UserControlComponent, GreenHouseControlComponent, GreenHouseAccesControlComponent
   ],
-  providers: [ WeatherService , AuthGuard , LoginService,
+  providers: [ WeatherService , AuthGuard , LoginService, GreenhouseService, GreenhouseAccesService
   // {
   //   provide: AuthInterceptor,
   //   useClass: TokenInterceptor,

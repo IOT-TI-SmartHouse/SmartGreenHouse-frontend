@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import swal from 'sweetalert2';
+import {environment} from '../../../environments/environment';
 
 
 @Injectable()
@@ -14,34 +15,31 @@ export class GreenhouseService {
     }
 
     // create new greenhouse
-    register() {
-        //
-    }
-
-    // get greenhouse
-    get(greenhouseId: number) {
-        //
-    }
+  public register(name: string, location: string) {
+    return this.http.post(`${environment.apiEndpoint}/greenhouse/register`, {
+      name: name,
+      location: location
+    }, {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'x-access-token': localStorage.getItem('id_token')
+      })
+    }).subscribe(res => {
+      // console.log("id of new greenhouse: " + res.greenhouse);
+      swal('Success!', 'Successfully registered!', 'success');
+    }, error => {
+      swal('Register failed', 'The register attempt has failed', 'error');
+    });
+  }
 
     // update greenhouse
     update() {
         //
     }
 
-    // admin only
+    // adminControl only
     // get all greenhouses
     getAll() {
-        //
-    }
-
-    // add user to greenhouse
-    addUser(greenhouse: number, user: number) {
-        //
-    }
-
-    // admin only
-    // add department
-    addDepartment() {
         //
     }
 }

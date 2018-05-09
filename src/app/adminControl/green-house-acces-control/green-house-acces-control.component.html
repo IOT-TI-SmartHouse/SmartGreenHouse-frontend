@@ -1,0 +1,10 @@
+<p>
+  here the admin can add new greenhouseccess to the database.
+</p>
+<div class="form">
+  <form class="register-form">
+    <input type="text" [(ngModel)]="user" [ngModelOptions]="{standalone:true}" placeholder="user ID">
+    <input type="text" [(ngModel)]="greenhouse" [ngModelOptions]="{standalone:true}" placeholder="greenhouse ID">
+    <button (click)="addGreenHouseAccess()">Add Greenhouse Access</button>
+  </form>
+</div>
