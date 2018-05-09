@@ -1,6 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import swal from 'sweetalert2';
+import {environment} from '../../../environments/environment';
 
 
 @Injectable()
@@ -13,27 +15,22 @@ export class GreenhouseAccesService {
         //
     }
 
-    addUser() {
-        //
-    }
 
-    // admin only
-    // get all greenhouseAcces
-    getAll() {
-        //
-    }
-
-    // get all acces for user
-    getAllForUser(user: number) {
-        //
-    }
-
-    update(greenhouse: number, user: number) {
-
-    }
-
-    get(id: number) {
-        //
-    }
+  // create new greenhouseaccess
+  public register(user: string, greenhouse: string) {
+    return this.http.post(`${environment.apiEndpoint}/greenhouseaccess/register`, {
+      user: user,
+      greenhouse: greenhouse
+    }, {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'x-access-token': localStorage.getItem('id_token')
+      })
+    }).subscribe(res => {
+      swal('Success!', 'Successfully registered new access!', 'success');
+    }, error => {
+      swal('Register failed', 'The register attempt has failed', 'error');
+    });
+  }
 
 }

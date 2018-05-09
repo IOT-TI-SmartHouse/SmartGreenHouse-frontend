@@ -1,0 +1,13 @@
+<p>
+  here the admin can add new users to the database.
+</p>
+
+
+<div class="form">
+  <form class="register-form">
+    <input type="text" [(ngModel)]="username" [ngModelOptions]="{standalone:true}" type="text" placeholder="username">
+    <input type="password" [(ngModel)]="password" [ngModelOptions]="{standalone:true}"  type="password"placeholder="password">
+    <input type="checkbox" [(ngModel)]="isAdmin" [ngModelOptions]="{standalone:true}" type="checkbox">
+    <button (click)="addUser()">Add User</button>
+  </form>
+</div>

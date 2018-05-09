@@ -5,6 +5,7 @@ import * as jwt_decode from 'jwt-decode';
 import { Router } from '@angular/router';
 import swal from 'sweetalert2';
 import { environment } from '../../../environments/environment';
+import {HttpHeaders} from '@angular/common/http';
 
 @Injectable()
 export class LoginService {
@@ -28,11 +29,21 @@ export class LoginService {
             username: username,
             password: password,
             isAdmin: isAdmin
+        }, {
+          headers: new HttpHeaders({
+            'Content-Type':  'application/json',
+            'x-access-token': localStorage.getItem('id_token')
+          })
+        }).subscribe(res => {
+            // console.log("jwt token of new user: " + res.token);
+            swal('Success!', 'Successfully registered!', 'success');
+        }, error => {
+            swal('Register failed', 'The register attempt has failed', 'error');
         });
     }
 
     public getUser(username: string, password: string): Observable<any> {
-        return this.http.post(`${environment.apiEndpoint}/user/register`, {
+        return this.http.post(`${environment.apiEndpoint}/user/get`, {
             username: username,
             password: password
         });
