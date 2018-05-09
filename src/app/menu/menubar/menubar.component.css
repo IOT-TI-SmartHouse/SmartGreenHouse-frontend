@@ -2,7 +2,7 @@
 nav{
     width: 100%;
     overflow: hidden;
-    height: 44px;
+    height: 60px;
 }
 
 a{
@@ -28,6 +28,13 @@ li{
 }
 
 li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+}
+
+.title {
     display: block;
     color: white;
     text-align: center;
