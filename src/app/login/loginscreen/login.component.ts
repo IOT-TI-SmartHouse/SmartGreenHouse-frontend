@@ -13,21 +13,26 @@ export class LoginComponent {
     public username: string;
     public password: string;
 
-    public loading: boolean;
+    public loading = false;
 
     constructor(private loginService: LoginService) {
 
     }
 
     public login(): void {
-        this.loading = true;
-        this.loginService.login(this.username, this.password).subscribe(res => {
-            this.loading = false;
-            swal('Success!', 'Successfully logged in!', 'success');
-            this.loginService.setSession(res);
-        }, error => {
-            this.loading = false;
-            swal('Login failed', 'The login attempt has failed', 'error');
-        });
+        // only attempt loggin if no loggin attempt is currently going on
+        if (!this.loading) {
+            this.loading = true;
+            this.loginService.login(this.username, this.password).subscribe(res => {
+                console.log(res);
+                this.loading = false;
+                swal('Success!', 'Successfully logged in!', 'success');
+                this.loginService.setSession(res);
+            }, error => {
+                console.log(error);
+                this.loading = false;
+                swal('Login failed', 'The login attempt has failed', 'error');
+            });
+        }
     }
 }

@@ -16,7 +16,7 @@ export class LoginService {
         //
     }
 
-    public login(username: string, password: string): Observable<Object> {
+    public login(username: string, password: string) {
         return this.http.post(`${environment.apiEndpoint}/user/login`, {
             username: username,
             password: password
@@ -58,6 +58,9 @@ export class LoginService {
         swal('Success!', 'Successfully logged out!', 'success');
     }
 
+    /**
+     * check if current login session is still valid
+     */
     public isLoggedIn(): boolean {
         return (Date.now() / 1000) < this.getExpiration();
     }
