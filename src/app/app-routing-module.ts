@@ -41,7 +41,7 @@ const appRoutes: Routes = [
         component: LoginComponent
     },
     {
-        path: 'admin',
+        path: 'controlpanel',
         component: AdminComponent
     },
     {
