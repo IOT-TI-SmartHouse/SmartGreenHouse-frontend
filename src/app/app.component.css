@@ -6,68 +6,15 @@
   --button-green-color: #21b700;
 }
 
-/* .container{
-    width:95%;
-    margin: auto;
-    overflow: hidden;
-} */
-
-/* header{
-    background: var(--medium-grey);
-    color:#ffffff;
-    padding-top:15px;
-    min-height:70px;
-    border-bottom: var(--green-color) 3px solid;
-    position:fixed;
-    width: 100%;
-    top: 0;
+section {
+  margin: 0px;
+  padding: 0px;
 }
 
-header a{
-    color: var(--text-dark-grey);
-    text-decoration:none;
-    text-transform: uppercase;
-    font-size:16px;
+.container {
+  margin: auto;
+  overflow: hidden;
 }
-
-header ul{
-    margin:0;
-    padding:0;
-}
-
-header li{
-    float: left;
-    display: inline;
-    padding: 0 20px 0 20px;
-}
-
-header #branding{
-    float: left;
-}
-
-header #brading h1{
-    margin:0;
-
-}
-
-header nav{
-    float:right;
-    margin-top:20px;
-}
-
-header .highlight, header .current a{
-    color: var(--green-color);
-    font-weight: bold;
-}
-
-header a:hover{
-    font-weight: bold;
-}
-
-header .active{
-    color: var(--green-color);
-    font-weight: bold;
-} */
 
 footer{
     padding:0;
