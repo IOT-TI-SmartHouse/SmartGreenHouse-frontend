@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './auth-guard.services';
 import { DashboardComponent } from './dashboard/dashboardscreen/dashboard.component';
 import { LoginService } from './login/services/login.service';
+import { MenuBarComponent } from './menu/menubar/menubar.component';
 import { AdminComponent } from './adminControl/admin.component';
 import { UserControlComponent } from './adminControl/user-control/user-control.component';
 import { GreenHouseControlComponent } from './adminControl/green-house-control/green-house-control.component';

@@ -1,18 +1,5 @@
 <header *ngIf="loginService.isLoggedIn()">
-  <div class="container">
-    <div id="branding">
-      <h1><span>{{title}}</span></h1>
-    </div>
-    <nav>
-        <ul>
-          <!-- <li><a routerLink="" routerLinkActive="inactive">{{title}}</a></li> -->
-          <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
-          <li><a routerLink="/admin" routerLinkActive="active">Admin</a></li>
-          <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
-          <li><a (click)="logout()" routerLink="/login" routerLinkActive="active">Logout</a></li>
-        </ul>
-    </nav>
-  </div>
+    <app-menubar-component></app-menubar-component>
 </header>
 
 <section id="router">
