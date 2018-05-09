@@ -17,6 +17,16 @@ const appRoutes: Routes = [
         canActivate: [AuthGuard]
     },
     {
+        path: 'info',
+        component: HomeComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'settings',
+        component: HomeComponent,
+        canActivate: [AuthGuard]
+    },
+    {
         path: 'dashboard',
         component: DashboardComponent,
         canActivate: [AuthGuard]

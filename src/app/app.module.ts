@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './auth-guard.services';
 import { DashboardComponent } from './dashboard/dashboardscreen/dashboard.component';
 import { LoginService } from './login/services/login.service';
+import { MenuBarComponent } from './menu/menubar/menubar.component';
 // import { AuthInterceptor } from './auth-intercepter.services';
 
 
@@ -22,7 +23,7 @@ import { LoginService } from './login/services/login.service';
     HttpClientModule
   ],
   declarations: [
-    AppComponent, HomeComponent, DashboardComponent, LoginComponent
+    AppComponent, HomeComponent, DashboardComponent, LoginComponent, MenuBarComponent
   ],
   providers: [ WeatherService , AuthGuard , LoginService,
   // {
