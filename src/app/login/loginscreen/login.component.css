@@ -30,7 +30,7 @@
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: #e8491d;
+  background: var(--button-green-color);
   width: 100%;
   border: 0;
   padding: 15px;
@@ -41,7 +41,7 @@
   cursor: pointer;
 }
 .form button:hover,.form button:active,.form button:focus {
-  background: #B43916;
+  background: var(--button-green-color);
 }
 .form .message {
   margin: 15px 0 0;
@@ -86,7 +86,7 @@
   text-decoration: none;
 }
 .container .info span .fa {
-  color: #EF3B3A;
+  color: var(--button-green-color);
 }
 body {
   background: #76b852; /* fallback for old browsers */
@@ -96,7 +96,7 @@ body {
   background: linear-gradient(to left, #76b852, #8DC26F);
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;      
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .loadingOverlay {
@@ -104,7 +104,7 @@ body {
   position: fixed;
   width: 100%; /* Full width (cover the whole page) */
   height: 100%; /* Full height (cover the whole page) */
-  top: 0; 
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
@@ -115,7 +115,7 @@ body {
 .loader {
   z-index: 999999;
   position: fixed;
-  top: 50%; 
+  top: 50%;
   left: 50%;
   right: 50%;
   bottom: 50%;
