@@ -1,6 +1,7 @@
 ::ng-deep :root{
   --green-color: #21b700;
-  --medium-grey: #f6f6f6;
+  --light-grey: #f6f6f6;
+  --medium-grey: #cecece;
   --text-dark-grey: #1d1d1d;
   --button-green-color: #21b700;
 }
@@ -72,7 +73,7 @@ footer{
     padding:0;
     margin-top:0;
     color:var(--text-dark-grey);
-    background-color: var(--medium-grey);
+    background-color: var(--light-grey);
     text-align: center;
     position: fixed;
     bottom: 0;

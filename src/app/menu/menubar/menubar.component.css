@@ -1,12 +1,10 @@
 
 nav{
-    width: 100%;
     overflow: hidden;
-    height: 60px;
 }
 
 a{
-    color:#ffffff;
+    color: var(--text-dark-grey);
     text-decoration:none;
     text-transform: uppercase;
     font-size:16px;
@@ -17,10 +15,11 @@ ul{
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: var(--light-grey);
     position: fixed;
     width: 100%;
     top: 0;
+    border-bottom: var(--green-color) 3px solid;
 }
 
 li{
@@ -29,26 +28,26 @@ li{
 
 li a {
     display: block;
-    color: white;
+    color: var(--text-dark-grey);
     text-align: center;
     padding: 14px 16px;
 }
 
 .title {
     display: block;
-    color: white;
+    color: var(--text-dark-grey);
     text-align: center;
     padding: 14px 16px;
 }
 
 li a:hover{
-    background-color: #111;
+    background-color: var(--medium-grey);
 }
 
 .highlight, .current a{
-    color:#4CAF50;
+    color:var(--button-green-color);
 }
 
 .active {
-    background-color: #4CAF50;
+    background-color: var(--button-green-color);
 }
