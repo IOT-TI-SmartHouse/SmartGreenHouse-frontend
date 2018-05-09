@@ -5,13 +5,13 @@
   --button-green-color: #21b700;
 }
 
-.container{
+/* .container{
     width:95%;
     margin: auto;
     overflow: hidden;
-}
+} */
 
-header{
+/* header{
     background: var(--medium-grey);
     color:#ffffff;
     padding-top:15px;
@@ -66,7 +66,7 @@ header a:hover{
 header .active{
     color: var(--green-color);
     font-weight: bold;
-}
+} */
 
 footer{
     padding:0;

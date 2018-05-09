@@ -12,7 +12,7 @@ import { LoginService } from './login/services/login.service';
 })
 export class AppComponent {
 
-  title = 'Smart Greenhouse Application';
+
 
   constructor(private router: Router, private loginService: LoginService) {
 
