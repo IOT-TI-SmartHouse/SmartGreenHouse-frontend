@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AppModule } from '../../app.module';
 import { WeatherService } from '../services/weather.services';
 import { Chart } from 'chart.js';
+import {environment} from '../../../environments/environment';
+import {Observable} from 'rxjs/Observable';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard-component',
@@ -12,7 +15,17 @@ export class DashboardComponent implements OnInit {
 
   chart = [];
 
-  constructor(private weather: WeatherService) {  }
+  constructor(private weather: WeatherService, private http: HttpClient) {  }
+
+  public getAll(token: String): Observable<any> {
+    return this.http.post(`${environment.apiEndpoint}/sensornode/getAll`, {
+      token: token
+    });
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
+  }
 
   ngOnInit() {
     this.weather.sampleForecast()
@@ -60,5 +73,7 @@ export class DashboardComponent implements OnInit {
       });
 
     });
+
+    this.getAll(this.getToken());
   }
 }
