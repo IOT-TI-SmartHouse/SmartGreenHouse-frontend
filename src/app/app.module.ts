@@ -31,7 +31,7 @@ import { GreenhouseAccesService } from './login/services/greenhouseAcces.service
   ],
   declarations: [
     AppComponent, HomeComponent, DashboardComponent, LoginComponent, AdminComponent,
-    UserControlComponent, GreenHouseControlComponent, GreenHouseAccesControlComponent
+    UserControlComponent, GreenHouseControlComponent, GreenHouseAccesControlComponent, MenuBarComponent
   ],
   providers: [ WeatherService , AuthGuard , LoginService, GreenhouseService, GreenhouseAccesService
   // {
