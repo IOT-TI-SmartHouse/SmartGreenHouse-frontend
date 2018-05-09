@@ -1,5 +1,7 @@
-
 nav{
+    position: fixed;
+    width: 100%;
+    top: 0;
     overflow: hidden;
 }
 
@@ -16,9 +18,6 @@ ul{
     padding: 0;
     overflow: hidden;
     background-color: var(--light-grey);
-    position: fixed;
-    width: 100%;
-    top: 0;
     border-bottom: var(--green-color) 3px solid;
 }
 
