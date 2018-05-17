@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  private userControl = false;
+  private greenhouseControl = false;
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  navigateUser() {
+    this.userControl = true;
+    this.greenhouseControl = false;
+    // this.router.navigate(['/userControl']);
+  }
+
+  navigateGreenhouse() {
+    this.greenhouseControl = true;
+    this.userControl = false;
+    // this.router.navigate(['/greenHouseControl']);
   }
 
 }

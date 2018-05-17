@@ -1,0 +1,58 @@
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: var(--light-grey);
+    
+}
+
+li{
+    float: left;
+}
+
+
+li a {
+    display: inline;
+    color: var(--text-dark-grey);
+    text-align: center;
+    padding: 14px 16px;
+}
+
+.btn-group button {
+    width: 50%;
+    background-color: var(--medium-grey); /* background */
+    border: 1px solid green; /* Green border */
+    color: var(--text-dark-grey); /* White text */
+    padding: 10px 24px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    float: left; /* Float the buttons side by side */
+}
+
+.btn-group button:not(:last-child) {
+    border-right: none; /* Prevent double borders */
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.active {
+    background-color: var(--button-green-color);
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+    background-color: var(--button-green-color);
+}
+
+img {
+    float:left;
+}
+h3 {
+    float:left;
+}
