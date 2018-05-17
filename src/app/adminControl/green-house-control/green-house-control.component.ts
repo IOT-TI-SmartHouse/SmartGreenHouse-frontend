@@ -11,7 +11,7 @@ export class GreenHouseControlComponent implements OnInit {
   public name: string;
   public location: string;
 
-  constructor(private greenhouseService: GreenhouseService) { }
+  constructor( private greenhouseService: GreenhouseService) { }
 
   ngOnInit() {
   }

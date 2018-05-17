@@ -6,19 +6,4 @@
       <li><a routerLink="/greenHouseAccessControl" routerLinkActive="active">Add GreenHouseAccess</a></li>
     </ul>
   </nav>
-</div> -->
-
-
-<div class="btn-group">
-  <button (click)="navigateUser()">
-    <img style="height: 40px; width: 40px" src="assets/icons/edit-user.png" />
-    <h3>Add User</h3>
-  </button>
-  <button (click)="navigateGreenhouse()">
-      <img style="height: 40px; width: 40px" src="assets/icons/greenhouse.png" />
-    <h3>Add Greenhouse</h3>
-  </button>
 </div>
-
-<app-user-control *ngIf="userControl"></app-user-control>
-<app-green-house-control *ngIf="greenhouseControl"></app-green-house-control>
