@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { DataTablesModule } from 'angular-datatables';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/loginscreen/login.component';
@@ -18,6 +20,8 @@ import { GreenHouseControlComponent } from './adminControl/green-house-control/g
 import { GreenHouseAccesControlComponent } from './adminControl/green-house-acces-control/green-house-acces-control.component';
 import {GreenhouseService} from './login/services/greenhouse.service';
 import { GreenhouseAccesService } from './login/services/greenhouseAcces.service';
+import { UserRegisterModalComponent } from './adminControl/user-control/user-register-modal/user-register-modal.component';
+import {User} from './dataObjects/classes/user.class';
 
 // import { AuthInterceptor } from './auth-intercepter.services';
 
@@ -27,13 +31,15 @@ import { GreenhouseAccesService } from './login/services/greenhouseAcces.service
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    DataTablesModule,
+    NgbModule.forRoot()
   ],
   declarations: [
     AppComponent, HomeComponent, DashboardComponent, LoginComponent, AdminComponent,
-    UserControlComponent, GreenHouseControlComponent, GreenHouseAccesControlComponent
+    UserControlComponent, GreenHouseControlComponent, GreenHouseAccesControlComponent, MenuBarComponent, UserRegisterModalComponent
   ],
-  providers: [ WeatherService , AuthGuard , LoginService, GreenhouseService, GreenhouseAccesService
+  providers: [ WeatherService , AuthGuard , LoginService, GreenhouseService, GreenhouseAccesService, UserRegisterModalComponent
   // {
   //   provide: AuthInterceptor,
   //   useClass: TokenInterceptor,

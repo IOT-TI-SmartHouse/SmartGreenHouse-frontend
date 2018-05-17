@@ -42,12 +42,6 @@ export class LoginService {
         });
     }
 
-    public getUser(username: string, password: string): Observable<any> {
-        return this.http.post(`${environment.apiEndpoint}/user/get`, {
-            username: username,
-            password: password
-        });
-    }
 
     public setSession(authResult) {
         const decoded = jwt_decode(authResult.token);

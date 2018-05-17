@@ -1,7 +1,6 @@
 <p>
-  here the admin can add new users to the database.
+  jkjaksdjlkajsdfl
 </p>
-
 
 <div class="form">
   <form class="register-form">
@@ -9,5 +8,27 @@
     <input type="password" [(ngModel)]="password" [ngModelOptions]="{standalone:true}"  type="password"placeholder="password">
     <input type="checkbox" [(ngModel)]="isAdmin" [ngModelOptions]="{standalone:true}" type="checkbox">
     <button (click)="addUser()">Add User</button>
+    <button class="btn btn-lg btn-outline-primary" (click)="openModal()">Launch demo modal</button>
   </form>
 </div>
+
+<div>
+  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+    <thead>
+    <tr>
+      <th class="dt-head-left">Username</th>
+      <th class="dt-head-left">isAdmin</th>
+      <th class="dt-head-left">Created At</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.username }}</td>
+      <td>{{ user.isAdmin }}</td>
+      <td>{{user.createdAt}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
