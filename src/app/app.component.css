@@ -1,9 +1,11 @@
 ::ng-deep :root{
-  --green-color: #21b700;
+  --old-green-color: #21b700;
+  --green-color: #7CBB00;
   --light-grey: #f6f6f6;
   --medium-grey: #cecece;
   --text-dark-grey: #1d1d1d;
-  --button-green-color: #21b700;
+  --old-button-green-color: #21b700;
+  --button-green-color: #7CBB00;
 }
 
 section {

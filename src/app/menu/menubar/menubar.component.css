@@ -1,9 +1,10 @@
 nav{
     position: fixed;
     width: 100%;
-    height: 55px;
+    height: 52px;
     top: 0;
     overflow: auto;
+    border-bottom: var(--green-color) 3px solid;
 }
 
 a{
@@ -19,7 +20,6 @@ ul{
     padding: 0;
     overflow: hidden;
     background-color: var(--light-grey);
-    border-bottom: var(--green-color) 3px solid;
 }
 
 li{
