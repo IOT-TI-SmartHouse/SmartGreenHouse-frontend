@@ -22,22 +22,18 @@ export class AdminComponent implements OnInit {
     this.userControl = true;
     this.greenhouseControl = false;
     this.greenhouseAccessControl = false;
-    // this.router.navigate(['/userControl']);
   }
 
   navigateGreenhouse() {
     this.greenhouseControl = true;
     this.userControl = false;
     this.greenhouseAccessControl = false;
-
-    // this.router.navigate(['/greenHouseControl']);
   }
 
   navigateGreenhouseAccess() {
     this.greenhouseControl = false;
     this.userControl = false;
     this.greenhouseAccessControl = true;
-    // this.router.navigate(['/greenHouseControl']);
   }
 
 }
