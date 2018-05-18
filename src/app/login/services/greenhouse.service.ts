@@ -39,7 +39,18 @@ export class GreenhouseService {
 
     // adminControl only
     // get all greenhouses
-    getAll() {
-        //
+    getAll(userId: string) {
+      return this.http.post(`${environment.apiEndpoint}/greenhouse/getAll`, {
+        userId: userId,
+      }, {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+          'x-access-token': localStorage.getItem('id_token')
+        })
+      }).subscribe(res => {
+        console.log(res);
+      }, error => {
+        console.log(error);
+      });
     }
 }
