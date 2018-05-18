@@ -1,14 +1,19 @@
 
 <div class="btn-group">
   <button (click)="navigateUser()" [ngClass]="userControl ? 'selected' : 'inactive'">
-    <img style="height: 40px; width: 40px" src="assets/icons/edit-user.png" />
+    <img style="height: 40px; width: 40px" src="assets/icons/add-user.png" />
     <h3>Users</h3>
   </button>
   <button (click)="navigateGreenhouse()"  [ngClass]="greenhouseControl ? 'selected' : 'inactive'">
       <img style="height: 40px; width: 40px" src="assets/icons/greenhouse.png" />
     <h3>Greenhouses</h3>
   </button>
+  <button (click)="navigateGreenhouseAccess()" [ngClass]="greenhouseAccessControl ? 'selected' : 'inactive'">
+    <img style="height: 40px; width: auto" src="assets/icons/greenhouse-access.png" />
+    <h3>Link User To Greenhouse</h3>
+  </button>
 </div>
 
 <app-user-control *ngIf="userControl"></app-user-control>
 <app-green-house-control *ngIf="greenhouseControl"></app-green-house-control>
+<app-green-house-acces-control *ngIf="greenhouseAccessControl"></app-green-house-acces-control>

@@ -18,6 +18,11 @@ li a {
     padding: 14px 16px;
 }
 
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .btn-group button:not(:last-child) {
     border-right: none; /* Prevent double borders */
 }
@@ -39,11 +44,11 @@ li a {
 }
 
 .btn-group button {
-    width: 50%;
-    /* background-color: var(--light-grey); */
+    width: 33.3333%;
     border: 1px solid var(--button-green-color); /* Green border */
     color: var(--text-dark-grey); /* White text */
-    padding: 10px 24px; /* Some padding */
+    padding-left: 24px; /* Some padding */
+    padding-top: auto;
     cursor: pointer; /* Pointer/hand icon */
     float: left; /* Float the buttons side by side */
 }
