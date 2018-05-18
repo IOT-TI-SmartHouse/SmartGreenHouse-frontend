@@ -1,3 +1,17 @@
-<div *ngIf="chart" style="position: relative; height:40vh; width:80vw">
+<!--div *ngIf="chart" style="position: relative; height:40vh; width:80vw">
     <canvas id="canvas">{{chart}}</canvas>
+</div-->
+
+<div class="container">
+  <h1>Greenhouse list</h1>
+  <ul>
+    <li *ngFor="let greenhouse of greenhouses">
+      <button (click)="loadDepartments(greenhouse._id)">{{greenhouse.name}}</button>
+      <ul *ngIf="showcaseId == greenhouse._id">
+        <li  *ngFor="let department of departments">
+          <button (click)="loadNodes(department._id)">{{department.name}}</button>
+        </li>
+      </ul>
+    </li>
+  </ul>
 </div>

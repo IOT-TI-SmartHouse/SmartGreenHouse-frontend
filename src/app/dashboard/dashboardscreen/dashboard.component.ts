@@ -5,6 +5,8 @@ import { Chart } from 'chart.js';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
+import {HttpHeaders} from '@angular/common/http';
+import {loadConfigurationFromPath} from 'tslint/lib/configuration';
 
 @Component({
   selector: 'app-dashboard-component',
@@ -12,68 +14,69 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  greenhouses;
+  departments;
+  nodes;
 
-  chart = [];
+  public showcaseId: number;
 
   constructor(private weather: WeatherService, private http: HttpClient) {  }
 
-  public getAll(token: String): Observable<any> {
-    return this.http.post(`${environment.apiEndpoint}/sensornode/getAll`, {
-      token: token
+  public getGreenhouses(token: string): Observable<any> {
+    return this.http.get(`${environment.apiEndpoint}/greenhouse/getAll`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/Json',
+        'x-access-token': token
+      })
+    });
+  }
+
+  public getDepartments(token: string, id: string): Observable<any> {
+    return this.http.get(`${environment.apiEndpoint}/greenhousedepartment/getAll`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/Json',
+        'x-access-token': token,
+        'greenhouse': id
+      })
+    });
+  }
+
+  public getNodes(token: string, id: string): Observable<any> {
+    return this.http.get(`${environment.apiEndpoint}/sensornode/getAll`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/Json',
+        'x-access-token': token,
+        'greenhousedepartment': id
+      })
     });
   }
 
   getToken() {
-    return localStorage.getItem('token');
+    return String(localStorage.getItem('id_token'));
+  }
+
+  loadGreenhouses() {
+    this.getGreenhouses(this.getToken()).subscribe(res => {
+      this.greenhouses = res.greenhouses;
+    });
+  }
+
+  loadDepartments(id) {
+    this.showcaseId = id;
+    this.getDepartments(this.getToken(), id).subscribe(res => {
+      this.departments = res.departments;
+    });
+  }
+
+  loadNodes(id) {
+    this.showcaseId = id;
+    this.getNodes(this.getToken(), id).subscribe(res => {
+      this.nodes = res.nodes;
+      alert(this.nodes);
+    });
   }
 
   ngOnInit() {
-    this.weather.sampleForecast()
-    .subscribe(res => {
-      const temp_max = res['list'].map(result => result.main.temp_max);
-      const temp_min = res['list'].map(result => result.main.temp_min);
-      const allDates = res['list'].map(result => result.dt);
-
-      const weatherDates = [];
-      allDates.forEach(element => {
-        const jsdate = new Date(element * 1000);
-        weatherDates.push(jsdate.toLocaleTimeString('en', { year: 'numeric', month: 'short', day: 'numeric'}));
-      });
-
-      this.chart = new Chart('canvas', {
-        type: 'line',
-        data: {
-          labels: weatherDates,
-          datasets: [
-            {
-              data: temp_max,
-              borderColor: '#3cba9f',
-              fill: false
-            },
-            {
-              data: temp_min,
-              borderColor: '#ffcc00',
-              fill: false
-            }
-          ]
-        },
-        options: {
-          legend: {
-            display: false
-          },
-          scales: {
-            xAxes: [{
-              display: true
-            }],
-            yAxes: [{
-              display: true
-            }]
-          }
-        }
-      });
-
-    });
-
-    this.getAll(this.getToken());
+    this.loadGreenhouses();
   }
 }
