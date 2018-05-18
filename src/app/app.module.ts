@@ -20,7 +20,6 @@ import { GreenHouseControlComponent } from './adminControl/green-house-control/g
 import { GreenHouseAccesControlComponent } from './adminControl/green-house-acces-control/green-house-acces-control.component';
 import {GreenhouseService} from './login/services/greenhouse.service';
 import { GreenhouseAccesService } from './login/services/greenhouseAcces.service';
-import { UserRegisterModalComponent } from './adminControl/user-control/user-register-modal/user-register-modal.component';
 import {User} from './dataObjects/classes/user.class';
 
 // import { AuthInterceptor } from './auth-intercepter.services';
@@ -37,9 +36,9 @@ import {User} from './dataObjects/classes/user.class';
   ],
   declarations: [
     AppComponent, HomeComponent, DashboardComponent, LoginComponent, AdminComponent,
-    UserControlComponent, GreenHouseControlComponent, GreenHouseAccesControlComponent, MenuBarComponent, UserRegisterModalComponent
+    UserControlComponent, GreenHouseControlComponent, GreenHouseAccesControlComponent, MenuBarComponent
   ],
-  providers: [ WeatherService , AuthGuard , LoginService, GreenhouseService, GreenhouseAccesService, UserRegisterModalComponent
+  providers: [ WeatherService , AuthGuard , LoginService, GreenhouseService, GreenhouseAccesService
   // {
   //   provide: AuthInterceptor,
   //   useClass: TokenInterceptor,

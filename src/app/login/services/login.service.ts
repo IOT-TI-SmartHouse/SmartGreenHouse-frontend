@@ -34,11 +34,6 @@ export class LoginService {
             'Content-Type':  'application/json',
             'x-access-token': localStorage.getItem('id_token')
           })
-        }).subscribe(res => {
-            // console.log("jwt token of new user: " + res.token);
-            swal('Success!', 'Successfully registered!', 'success');
-        }, error => {
-            swal('Register failed', 'The register attempt has failed', 'error');
         });
     }
 
