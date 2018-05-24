@@ -68,11 +68,11 @@ export class GreenHouseAccesControlComponent implements OnInit {
     return fullList.filter( firstElement => {
       found = false;
       secondList.forEach( secondElement => {
-          if (firstElement._id === secondElement._id) {
-              found = true;
-          }
+        if (firstElement._id === secondElement._id) {
+            found = true;
+        }
       });
-      return found;
+      if ( found === false) { return true; } else if (found === true) { return false; } else { return 'benis'; }
     });
   }
 
