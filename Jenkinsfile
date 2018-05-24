@@ -25,7 +25,7 @@ node {
         checkout scm
         stage("build docker") {
             sh 'docker build -t smargreenhousefrontend:latest .'
-            sh 'docker run --rm -v /var/www:/dist smargreenhousefrontend:latest'
+            sh 'docker run --rm -v /var/www:/var/www smargreenhousefrontend:latest'
         }
        }
 
