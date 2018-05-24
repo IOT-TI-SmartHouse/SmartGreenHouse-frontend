@@ -18,6 +18,8 @@ export class GraphsComponent implements OnInit {
   greenhouse: string;
   department: string;
   nodes;
+  data;
+  chart;
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {  }
 
@@ -57,7 +59,49 @@ export class GraphsComponent implements OnInit {
 
   loadData(id) {
     this.getData(this.getToken(), id).subscribe(res => {
-      alert(JSON.stringify(res));
+      this.data = res.data;
+
+      for (let i = 0; i < this.data.length; i ++) {
+        if (this.data[i].sensorType === 'Temperature') {
+          this.drawTemperature(this.data[i].createdAt, this.data[i].value);
+        }
+        if (this.data[i].sensorType === 'Humidity') {
+          this.drawHumidity(this.data[i].createdAt, this.data[i].value);
+        }
+      }
+    });
+  }
+
+  drawTemperature(timestamp, temperature) {
+    this.chart.data.labels.push(timestamp);
+    this.chart.data.datasets[0].data.push(temperature);
+    this.chart.update();
+  }
+
+  drawHumidity(timestamp, humidity) {
+    this.chart.data.labels.push(timestamp);
+    this.chart.data.datasets[1].data.push(humidity);
+    this.chart.update();
+  }
+
+  drawGraph() {
+    const ctx = document.getElementById('generalChart');
+    this.chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        datasets: [
+          { label: 'Temperature' },
+          { label: 'Humidity' }
+          ] },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero:true
+            }
+          }]
+        }
+      }
     });
   }
 
@@ -66,6 +110,7 @@ export class GraphsComponent implements OnInit {
     this.greenhouse = url.searchParams.get('greenhouse');
     this.department = url.searchParams.get('department');
 
+    this.drawGraph();
     this.loadNodes(this.department);
   }
 }

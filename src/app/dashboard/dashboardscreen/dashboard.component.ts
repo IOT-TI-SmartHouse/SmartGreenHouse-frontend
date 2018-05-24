@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AppModule } from '../../app.module';
-import { Chart } from 'chart.js';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
