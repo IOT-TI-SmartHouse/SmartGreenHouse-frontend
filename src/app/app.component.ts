@@ -1,4 +1,3 @@
-
 import { ChangeDetectorRef, Component, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Event as RouterEvent, NavigationCancel, NavigationEnd, NavigationError, Router, Routes} from '@angular/router';
