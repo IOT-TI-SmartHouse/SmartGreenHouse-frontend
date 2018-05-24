@@ -18,8 +18,9 @@ import { AdminComponent } from './adminControl/admin.component';
 import { UserControlComponent } from './adminControl/user-control/user-control.component';
 import { GreenHouseControlComponent } from './adminControl/green-house-control/green-house-control.component';
 import { GreenHouseAccesControlComponent } from './adminControl/green-house-acces-control/green-house-acces-control.component';
-import {GreenhouseService} from './login/services/greenhouse.service';
+import { GreenhouseService} from './login/services/greenhouse.service';
 import { GreenhouseAccesService } from './login/services/greenhouseAcces.service';
+import { UserService} from './login/services/user.service';
 import {User} from './dataObjects/classes/user.class';
 
 // import { AuthInterceptor } from './auth-intercepter.services';
@@ -32,13 +33,14 @@ import {User} from './dataObjects/classes/user.class';
     AppRoutingModule,
     HttpClientModule,
     DataTablesModule,
+    ReactiveFormsModule,
     NgbModule.forRoot()
   ],
   declarations: [
     AppComponent, HomeComponent, DashboardComponent, LoginComponent, AdminComponent,
     UserControlComponent, GreenHouseControlComponent, GreenHouseAccesControlComponent, MenuBarComponent
   ],
-  providers: [ WeatherService , AuthGuard , LoginService, GreenhouseService, GreenhouseAccesService
+  providers: [ WeatherService , AuthGuard , LoginService, GreenhouseService, GreenhouseAccesService, UserService
   // {
   //   provide: AuthInterceptor,
   //   useClass: TokenInterceptor,

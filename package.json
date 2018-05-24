@@ -24,6 +24,7 @@
     "@ng-bootstrap/ng-bootstrap": "^2.0.0",
     "@types/datatables.net": "^1.10.9",
     "angular-datatables": "^6.0.0",
+    "angular-typeahead": "^1.0.2",
     "bootstrap": "^4.1.1",
     "chart.js": "^2.7.2",
     "core-js": "^2.5.6",
