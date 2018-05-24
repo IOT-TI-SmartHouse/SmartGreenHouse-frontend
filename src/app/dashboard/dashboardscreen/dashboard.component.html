@@ -8,8 +8,8 @@
     <li *ngFor="let greenhouse of greenhouses">
       <button (click)="loadDepartments(greenhouse._id)">{{greenhouse.name}}</button>
       <ul *ngIf="showcaseId == greenhouse._id">
-        <li  *ngFor="let department of departments">
-          <button (click)="loadNodes(department._id)">{{department.name}}</button>
+        <li *ngFor="let department of departments">
+          <a [routerLink]="['graphs']" [queryParams]="{ greenhouse: greenhouse._id, department: department._id }">{{department.name}}</a>
         </li>
       </ul>
     </li>

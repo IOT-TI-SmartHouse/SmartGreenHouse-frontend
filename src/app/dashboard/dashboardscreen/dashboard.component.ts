@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AppModule } from '../../app.module';
-import { WeatherService } from '../services/weather.services';
 import { Chart } from 'chart.js';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs/Observable';
@@ -13,14 +12,14 @@ import {loadConfigurationFromPath} from 'tslint/lib/configuration';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
+
 export class DashboardComponent implements OnInit {
   greenhouses;
   departments;
-  nodes;
 
   public showcaseId: number;
 
-  constructor(private weather: WeatherService, private http: HttpClient) {  }
+  constructor(private http: HttpClient) {  }
 
   public getGreenhouses(token: string): Observable<any> {
     return this.http.get(`${environment.apiEndpoint}/greenhouse/getAll`, {
@@ -41,16 +40,6 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  public getNodes(token: string, id: string): Observable<any> {
-    return this.http.get(`${environment.apiEndpoint}/sensornode/getAll`, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/Json',
-        'x-access-token': token,
-        'greenhousedepartment': id
-      })
-    });
-  }
-
   getToken() {
     return String(localStorage.getItem('id_token'));
   }
@@ -65,14 +54,6 @@ export class DashboardComponent implements OnInit {
     this.showcaseId = id;
     this.getDepartments(this.getToken(), id).subscribe(res => {
       this.departments = res.departments;
-    });
-  }
-
-  loadNodes(id) {
-    this.showcaseId = id;
-    this.getNodes(this.getToken(), id).subscribe(res => {
-      this.nodes = res.nodes;
-      alert(this.nodes);
     });
   }
 
