@@ -8,9 +8,9 @@ import { Router } from '@angular/router';
 })
 export class AdminComponent implements OnInit {
 
-  private userControl = false;
-  private greenhouseControl = false;
-  private greenhouseAccessControl = false;
+  public userControl = false;
+  public greenhouseControl = false;
+  public greenhouseAccessControl = false;
 
   constructor(private router: Router) { }
 

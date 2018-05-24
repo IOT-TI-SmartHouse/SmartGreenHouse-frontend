@@ -14,7 +14,7 @@ export class AppComponent {
 
 
 
-  constructor(private router: Router, private loginService: LoginService) {
+  constructor(private router: Router, public loginService: LoginService) {
 
   }
 
