@@ -14,6 +14,6 @@
   </button>
 </div>
 
-<app-user-control *ngIf="userControl"></app-user-control>
-<app-green-house-control *ngIf="greenhouseControl"></app-green-house-control>
-<app-green-house-acces-control *ngIf="greenhouseAccessControl"></app-green-house-acces-control>
+<app-user-control *ngIf="selectedTab === 0"></app-user-control>
+<app-green-house-control *ngIf="selectedTab === 1"></app-green-house-control>
+<app-green-house-acces-control *ngIf="selectedTab === 2"></app-green-house-acces-control>
