@@ -2,4 +2,6 @@ FROM node:latest
 COPY / /app
 WORKDIR /app
 RUN npm install
-CMD ["npm", "run-script", "build", "--output-path=/var/www"]
+RUN npm run-script build
+# CMD ["npm", "run-script", "build"]
+CMD ["mv", "/app/dist/.", "/var/www"]
