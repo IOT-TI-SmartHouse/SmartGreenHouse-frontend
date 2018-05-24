@@ -8,7 +8,6 @@ import { LoginComponent } from './login/loginscreen/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing-module';
 import { HomeComponent } from './home/home.component';
-import { WeatherService } from './dashboard/services/weather.services';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './auth-guard.services';
 import { DashboardComponent } from './dashboard/dashboardscreen/dashboard.component';
@@ -21,6 +20,7 @@ import { GreenHouseAccesControlComponent } from './adminControl/green-house-acce
 import {GreenhouseService} from './login/services/greenhouse.service';
 import { GreenhouseAccesService } from './login/services/greenhouseAcces.service';
 import {User} from './dataObjects/classes/user.class';
+import { InfoComponent } from './info/info.component';
 
 // import { AuthInterceptor } from './auth-intercepter.services';
 
@@ -35,10 +35,10 @@ import {User} from './dataObjects/classes/user.class';
     NgbModule.forRoot()
   ],
   declarations: [
-    AppComponent, HomeComponent, DashboardComponent, LoginComponent, AdminComponent,
+    AppComponent, HomeComponent, DashboardComponent, LoginComponent, AdminComponent, InfoComponent,
     UserControlComponent, GreenHouseControlComponent, GreenHouseAccesControlComponent, MenuBarComponent
   ],
-  providers: [ WeatherService , AuthGuard , LoginService, GreenhouseService, GreenhouseAccesService
+  providers: [ AuthGuard , LoginService, GreenhouseService, GreenhouseAccesService
   // {
   //   provide: AuthInterceptor,
   //   useClass: TokenInterceptor,
