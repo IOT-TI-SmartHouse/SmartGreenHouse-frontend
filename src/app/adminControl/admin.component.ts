@@ -8,9 +8,9 @@ import { Router } from '@angular/router';
 })
 export class AdminComponent implements OnInit {
 
-  private userControl = false;
-  private greenhouseControl = false;
-  private greenhouseAccessControl = false;
+  public userControl = false;
+  public greenhouseControl = false;
+  public greenhouseAccessControl = false;
 
   constructor(private router: Router) { }
 
@@ -22,22 +22,18 @@ export class AdminComponent implements OnInit {
     this.userControl = true;
     this.greenhouseControl = false;
     this.greenhouseAccessControl = false;
-    // this.router.navigate(['/userControl']);
   }
 
   navigateGreenhouse() {
     this.greenhouseControl = true;
     this.userControl = false;
     this.greenhouseAccessControl = false;
-
-    // this.router.navigate(['/greenHouseControl']);
   }
 
   navigateGreenhouseAccess() {
     this.greenhouseControl = false;
     this.userControl = false;
     this.greenhouseAccessControl = true;
-    // this.router.navigate(['/greenHouseControl']);
   }
 
 }

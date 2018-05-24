@@ -8,6 +8,10 @@
   --button-green-color: #7CBB00;
 }
 
+::ng-deep :focus{
+  outline: none;
+}
+
 section {
   margin: 0px;
   padding: 0px;

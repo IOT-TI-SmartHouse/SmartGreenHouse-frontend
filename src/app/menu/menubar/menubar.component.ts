@@ -8,15 +8,13 @@ import { LoginService } from '../../login/services/login.service';
   templateUrl: './menubar.component.html',
   styleUrls: ['./menubar.component.css']
 })
-export class MenuBarComponent {
 
+export class MenuBarComponent {
     title = 'Smart Greenhouse Application';
 
-    constructor(private router: Router, private loginService: LoginService) {
-
-    }
+    constructor(private router: Router, private loginService: LoginService) { }
 
     logout() {
         this.loginService.logout();
-      }
+    }
 }
