@@ -1,5 +1,5 @@
 FROM node:latest
-COPY /frontend /app
+COPY / /app
 WORKDIR /app
 RUN npm install
 RUN npm run-script build
