@@ -6,34 +6,32 @@ import { Router } from '@angular/router';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
+
 export class AdminComponent implements OnInit {
 
-  public userControl = false;
-  public greenhouseControl = false;
-  public greenhouseAccessControl = false;
+  public selectedTab: SelectedTab = SelectedTab.USER;
 
   constructor(private router: Router) { }
 
   ngOnInit() {
-    this.userControl = true;
   }
 
   navigateUser() {
-    this.userControl = true;
-    this.greenhouseControl = false;
-    this.greenhouseAccessControl = false;
+    this.selectedTab = SelectedTab.USER;
   }
 
   navigateGreenhouse() {
-    this.greenhouseControl = true;
-    this.userControl = false;
-    this.greenhouseAccessControl = false;
+    this.selectedTab = SelectedTab.GREENHOUSE;
   }
 
   navigateGreenhouseAccess() {
-    this.greenhouseControl = false;
-    this.userControl = false;
-    this.greenhouseAccessControl = true;
+    this.selectedTab = SelectedTab.GREENHOUSEACCESS;
   }
 
+}
+enum SelectedTab {
+  USER = 0,
+  GREENHOUSE = 1,
+  GREENHOUSEACCESS = 2,
+  DEPARTMENT = 3
 }
