@@ -29,7 +29,6 @@ export class GreenHouseAccesControlComponent implements OnInit {
   constructor(private greenhouseAccessService: GreenhouseAccesService, private greenhouseService: GreenhouseService, private userService: UserService) { }
 
   ngOnInit() {
-    window.alert = function () { };
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
