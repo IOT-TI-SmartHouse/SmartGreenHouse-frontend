@@ -1,8 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { DataTablesModule } from 'angular-datatables';
-// import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/loginscreen/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -20,13 +18,10 @@ import { GreenHouseAccesControlComponent } from './adminControl/green-house-acce
 import { GreenhouseService} from './login/services/greenhouse.service';
 import { GreenhouseAccesService } from './login/services/greenhouseAcces.service';
 import { UserService} from './login/services/user.service';
-import {User} from './dataObjects/classes/user.class';
 import { InfoComponent } from './info/info.component';
 import { GreenHouseDepartmentControlComponent } from './adminControl/green-house-department-control/green-house-department-control.component';
 import{ GreenhouseDepartmentService} from './login/services/greenhouse-department.service';
-
-
-// import { AuthInterceptor } from './auth-intercepter.services';
+import { ControlComponent } from './control/control.component';
 
 
 @NgModule({
@@ -36,12 +31,11 @@ import{ GreenhouseDepartmentService} from './login/services/greenhouse-departmen
     AppRoutingModule,
     HttpClientModule,
     DataTablesModule,
-    ReactiveFormsModule,
-    // NgbModule.forRoot()
+    ReactiveFormsModule
   ],
   declarations: [
     AppComponent, HomeComponent, DashboardComponent, LoginComponent, AdminComponent, InfoComponent,
-    UserControlComponent, GreenHouseControlComponent, GreenHouseAccesControlComponent, MenuBarComponent, GreenHouseDepartmentControlComponent
+    UserControlComponent, GreenHouseControlComponent, GreenHouseAccesControlComponent, MenuBarComponent, GreenHouseDepartmentControlComponent, ControlComponent
   ],
   providers: [ AuthGuard , LoginService, GreenhouseService, GreenhouseAccesService, UserService, GreenhouseDepartmentService
   // {
