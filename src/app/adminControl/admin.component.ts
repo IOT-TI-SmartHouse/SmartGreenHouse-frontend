@@ -11,7 +11,7 @@ export class AdminComponent implements OnInit {
 
   public selectedTab: SelectedTab = SelectedTab.USER;
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit() {
   }

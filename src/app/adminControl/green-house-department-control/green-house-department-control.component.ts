@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import {GreenhouseService} from '../../login/services/greenhouse.service';
 import { GreenhouseDepartmentService} from '../../login/services/greenhouse-department.service';
-import swal from "sweetalert2";
 
 @Component({
   selector: 'app-green-house-department-control',
@@ -50,5 +49,4 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
   public addDepartment(): void {
     this.departmentService.register(this.name, this.selectedGreenhouse._id);
   }
-
 }

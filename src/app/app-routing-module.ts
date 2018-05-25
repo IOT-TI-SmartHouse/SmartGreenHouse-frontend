@@ -10,6 +10,7 @@ import { UserControlComponent } from './adminControl/user-control/user-control.c
 import { GreenHouseControlComponent} from './adminControl/green-house-control/green-house-control.component';
 import { GreenHouseAccesControlComponent} from './adminControl/green-house-acces-control/green-house-acces-control.component';
 import { InfoComponent } from './info/info.component';
+import { ControlComponent} from './control/control.component';
 
 
 const appRoutes: Routes = [
@@ -43,20 +44,12 @@ const appRoutes: Routes = [
         component: LoginComponent
     },
     {
-        path: 'controlpanel',
+        path: 'admincontrol',
         component: AdminComponent
     },
     {
-      path: 'userControl',
-      component: UserControlComponent
-    },
-    {
-      path: 'greenHouseControl',
-      component: GreenHouseControlComponent
-    },
-    {
-      path: 'greenHouseAccessControl',
-      component: GreenHouseAccesControlComponent
+      path: 'usercontrol',
+      component: ControlComponent
     }
 ];
 

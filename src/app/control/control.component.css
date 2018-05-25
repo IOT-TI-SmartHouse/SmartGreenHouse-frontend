@@ -1,0 +1,61 @@
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--light-grey);
+}
+
+li{
+  float: left;
+}
+
+li a {
+  display: inline;
+  color: var(--text-dark-grey);
+  text-align: center;
+  padding: 14px 16px;
+}
+
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.btn-group button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: var(--button-green-color);
+}
+
+.selected {
+  background-color: var(--button-green-color);
+}
+
+.btn-group button {
+  width: 25%;
+  border: 1px solid var(--button-green-color); /* Green border */
+  color: var(--text-dark-grey); /* White text */
+  padding-left: 24px; /* Some padding */
+  padding-top: auto;
+  cursor: pointer; /* Pointer/hand icon */
+  float: left; /* Float the buttons side by side */
+}
+
+img {
+  float:left;
+}
+h3 {
+  float:left;
+}
