@@ -1,70 +1,34 @@
-.container{
-    width:95%;
-    margin: auto;
-    overflow: hidden;
+::ng-deep :root{
+  --old-green-color: #21b700;
+  --green-color: #7CBB00;
+  --light-grey: #f6f6f6;
+  --medium-grey: #cecece;
+  --text-dark-grey: #1d1d1d;
+  --old-button-green-color: #21b700;
+  --button-green-color: #7CBB00;
 }
 
-header{
-    background:#35424a;
-    color:#ffffff;
-    padding-top:15px;
-    min-height:70px;
-    border-bottom:#e8491d 3px solid;
+::ng-deep :focus{
+  outline: none;
 }
 
-header a{
-    color:#ffffff;
-    text-decoration:none;
-    text-transform: uppercase;
-    font-size:16px;
+section {
+  margin: 0px;
+  padding: 0px;
 }
 
-header ul{
-    margin:0;
-    padding:0;
-}
-
-header li{
-    float: left;
-    display: inline;
-    padding: 0 20px 0 20px;
-}
-
-header #branding{
-    float: left;
-}
-
-header #brading h1{
-    margin:0;
-    
-}
-
-header nav{
-    float:right;
-    margin-top:20px;
-}
-
-header .highlight, header .current a{
-    color:#e8491d;
-    font-weight: bold;
-}
-
-header a:hover{
-    font-weight: bold;
-}
-
-header .active{
-    color:#e8491d;
-    font-weight: bold;
+.container {
+  margin: auto;
+  overflow: hidden;
 }
 
 footer{
-    padding:20px;
-    margin-top:-180px;
-    color:#ffffff;
-    background-color:#e8491d;
+    padding:0;
+    margin-top:0;
+    color:var(--text-dark-grey);
+    background-color: var(--light-grey);
     text-align: center;
     position: fixed;
-    bottom: 0px;
+    bottom: 0;
     width:100%;
 }

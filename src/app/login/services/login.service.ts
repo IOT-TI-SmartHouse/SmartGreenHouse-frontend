@@ -5,6 +5,7 @@ import * as jwt_decode from 'jwt-decode';
 import { Router } from '@angular/router';
 import swal from 'sweetalert2';
 import { environment } from '../../../environments/environment';
+import {HttpHeaders} from '@angular/common/http';
 
 @Injectable()
 export class LoginService {
@@ -28,20 +29,14 @@ export class LoginService {
             username: username,
             password: password,
             isAdmin: isAdmin
-        }).subscribe(res => {
-            this.setSession(res);
-            swal('Success!', 'Successfully registered!', 'success');
-        }, error => {
-            swal('Register failed', 'The register attempt has failed', 'error');
+        }, {
+          headers: new HttpHeaders({
+            'Content-Type':  'application/json',
+            'x-access-token': localStorage.getItem('id_token')
+          })
         });
     }
 
-    public getUser(username: string, password: string): Observable<any> {
-        return this.http.post(`${environment.apiEndpoint}/user/register`, {
-            username: username,
-            password: password
-        });
-    }
 
     public setSession(authResult) {
         const decoded = jwt_decode(authResult.token);
@@ -55,7 +50,15 @@ export class LoginService {
     logout() {
         localStorage.removeItem('id_token');
         localStorage.removeItem('expires_at');
-        swal('Success!', 'Successfully logged out!', 'success');
+        swal({
+            title: 'Success!',
+            text: 'Successfully logged out!',
+            type: 'success',
+            position: 'top-end',
+            timer: 1000,
+            toast: true,
+            showConfirmButton: false,
+        });
     }
 
     /**

@@ -1,0 +1,59 @@
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#usermodal">Add new greenhouse</button>
+
+<div>
+  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+    <thead>
+    <tr>
+      <th class="dt-head-left">Name</th>
+      <th class="dt-head-left">Location</th>
+      <th class="dt-head-left">Created At</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let greenhouse of greenhouses">
+      <td>{{ greenhouse.name }}</td>
+      <td>{{ greenhouse.location }}</td>
+      <td>{{ greenhouse.createdAt}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="usermodal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">ADD NEW GREENHOUSE</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form">
+          <div class="row">
+            <div class="col-sm-4">
+              Greenhouse name:
+            </div>
+            <div class="col-sm-8">
+              <input type="text" placeholder="greenhouse name" [(ngModel)]="name" [ngModelOptions]="{standalone:true}"/>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              Location:
+            </div>
+            <div class="col-sm-8">
+              <input type="text" placeholder="location" [(ngModel)]="location" [ngModelOptions]="{standalone:true}"/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="addGreenHouse()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

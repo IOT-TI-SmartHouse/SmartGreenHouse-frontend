@@ -24,12 +24,18 @@ export class LoginComponent {
         if (!this.loading) {
             this.loading = true;
             this.loginService.login(this.username, this.password).subscribe(res => {
-                console.log(res);
                 this.loading = false;
-                swal('Success!', 'Successfully logged in!', 'success');
+                swal({
+                    title: 'Success!',
+                    text: 'Successfully logged in!',
+                    type: 'success',
+                    position: 'top-end',
+                    timer: 1000,
+                    toast: true,
+                    showConfirmButton: false,
+                });
                 this.loginService.setSession(res);
             }, error => {
-                console.log(error);
                 this.loading = false;
                 swal('Login failed', 'The login attempt has failed', 'error');
             });

@@ -1,4 +1,3 @@
-
 import { ChangeDetectorRef, Component, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Event as RouterEvent, NavigationCancel, NavigationEnd, NavigationError, Router, Routes} from '@angular/router';
@@ -12,9 +11,9 @@ import { LoginService } from './login/services/login.service';
 })
 export class AppComponent {
 
-  title = 'Smart Greenhouse Application';
 
-  constructor(private router: Router, private loginService: LoginService) {
+
+  constructor(private router: Router, public loginService: LoginService) {
 
   }
 

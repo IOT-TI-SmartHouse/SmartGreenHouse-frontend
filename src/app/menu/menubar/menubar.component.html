@@ -1,0 +1,25 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand">
+    <img routerLink="/home" routerLinkActive="inactive" src="../../../assets/icons/smartgreenhouse-logo.png" height="45"/>
+  </a>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item rounded" routerLinkActive="active" routerLink="/dashboard">
+        <a>Dashboard</a>
+      </li>
+      <li class="nav-item rounded" routerLinkActive="active" routerLink="/info">
+        <a>Info</a>
+      </li>
+      <li class="nav-dropdown-item rounded" routerLinkActive="active" routerLink="/controlpanel">
+        <a>Control Panel</a>
+      </li>
+    </ul>
+    <button class="btn navbar-btn" routerLinkActive="active" (click)="logout()" routerLink="/login">
+      <a>Logout</a>
+    </button>
+  </div>
+</nav>
