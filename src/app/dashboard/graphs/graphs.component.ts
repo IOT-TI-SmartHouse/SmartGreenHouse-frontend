@@ -94,16 +94,7 @@ export class GraphsComponent implements OnInit {
         datasets: [
           { label: 'Temperature' },
           { label: 'Humidity' }
-          ] },
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero:true
-            }
-          }]
-        }
-      }
+          ] }
     });
   }
 
