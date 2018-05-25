@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth-guard.services';
 import { DashboardComponent } from './dashboard/dashboardscreen/dashboard.component';
+import { GraphsComponent} from './dashboard/graphs/graphs.component';
 import { LoginComponent } from './login/loginscreen/login.component';
 import { AdminComponent } from './adminControl/admin.component';
 import { UserControlComponent } from './adminControl/user-control/user-control.component';
@@ -30,6 +31,11 @@ const appRoutes: Routes = [
     {
         path: 'dashboard',
         component: DashboardComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'dashboard/graphs',
+        component: GraphsComponent,
         canActivate: [AuthGuard]
     },
     {

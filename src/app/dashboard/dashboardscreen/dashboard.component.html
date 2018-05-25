@@ -1,3 +1,13 @@
-<div *ngIf="chart">
-  <canvas id="canvas">{{chart}}</canvas>
+<div class="container">
+  <h1>Greenhouse list</h1>
+  <ul>
+    <li *ngFor="let greenhouse of greenhouses">
+      <button (click)="loadDepartments(greenhouse._id)">{{greenhouse.name}}</button>
+      <ul *ngIf="showcaseId == greenhouse._id">
+        <li *ngFor="let department of departments">
+          <a [routerLink]="['graphs']" [queryParams]="{ greenhouse: greenhouse._id, department: department._id }">{{department.name}}</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
 </div>

@@ -23,9 +23,10 @@ import { UserService} from './login/services/user.service';
 import {User} from './dataObjects/classes/user.class';
 import { InfoComponent } from './info/info.component';
 import { GreenHouseDepartmentControlComponent } from './adminControl/green-house-department-control/green-house-department-control.component';
-import{ GreenhouseDepartmentService} from './login/services/greenhouse-department.service';
+import { GreenhouseDepartmentService} from './login/services/greenhouse-department.service';
 
 
+import {GraphsComponent} from './dashboard/graphs/graphs.component';
 // import { AuthInterceptor } from './auth-intercepter.services';
 
 
@@ -41,7 +42,8 @@ import{ GreenhouseDepartmentService} from './login/services/greenhouse-departmen
   ],
   declarations: [
     AppComponent, HomeComponent, DashboardComponent, LoginComponent, AdminComponent, InfoComponent,
-    UserControlComponent, GreenHouseControlComponent, GreenHouseAccesControlComponent, MenuBarComponent, GreenHouseDepartmentControlComponent
+    UserControlComponent, GreenHouseControlComponent, GreenHouseAccesControlComponent, MenuBarComponent,
+    GreenHouseDepartmentControlComponent, GraphsComponent
   ],
   providers: [ AuthGuard , LoginService, GreenhouseService, GreenhouseAccesService, UserService, GreenhouseDepartmentService
   // {
