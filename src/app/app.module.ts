@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { DataTablesModule } from 'angular-datatables';
+// import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/loginscreen/login.component';
@@ -24,6 +25,7 @@ import { InfoComponent } from './info/info.component';
 import { GreenHouseDepartmentControlComponent } from './adminControl/green-house-department-control/green-house-department-control.component';
 import{ GreenhouseDepartmentService} from './login/services/greenhouse-department.service';
 
+
 // import { AuthInterceptor } from './auth-intercepter.services';
 
 
@@ -35,7 +37,7 @@ import{ GreenhouseDepartmentService} from './login/services/greenhouse-departmen
     HttpClientModule,
     DataTablesModule,
     ReactiveFormsModule,
-    NgbModule.forRoot()
+    // NgbModule.forRoot()
   ],
   declarations: [
     AppComponent, HomeComponent, DashboardComponent, LoginComponent, AdminComponent, InfoComponent,
