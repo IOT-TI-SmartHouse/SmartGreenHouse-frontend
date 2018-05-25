@@ -50,7 +50,15 @@ export class LoginService {
     logout() {
         localStorage.removeItem('id_token');
         localStorage.removeItem('expires_at');
-        swal('Success!', 'Successfully logged out!', 'success');
+        swal({
+            title: 'Success!',
+            text: 'Successfully logged out!',
+            type: 'success',
+            position: 'top-end',
+            timer: 1000,
+            toast: true,
+            showConfirmButton: false,
+        });
     }
 
     /**
