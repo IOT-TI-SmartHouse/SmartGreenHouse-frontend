@@ -1,7 +1,78 @@
 <div class="form">
   <form class="register-form">
-    <input type="text" [(ngModel)]="user" [ngModelOptions]="{standalone:true}" placeholder="user ID">
-    <input type="text" [(ngModel)]="greenhouse" [ngModelOptions]="{standalone:true}" placeholder="greenhouse ID">
-    <button (click)="addGreenHouseAccess()">Add Greenhouse Access</button>
+    <div class="row">
+      <div class="col-md-2">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div *ngIf="selectedUser != null">
+              {{selectedUser.username}}
+            </div>
+            <div *ngIf="selectedUser == null">
+              {{ userPlaceholder }}
+            </div>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownUser">
+            <div *ngFor="let user of users">
+              <a class="dropdown-item" (click)="selectUser(user)">{{user.username}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownGreenhouse" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div *ngIf="selectedGreenhouse != null">
+              {{selectedGreenhouse.name}}, location: {{selectedGreenhouse.location}}
+            </div>
+            <div *ngIf="selectedGreenhouse == null">
+              {{ greenhousePlaceholder }}
+            </div>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownGreenhouse">
+            <div *ngFor="let greenhouse of greenhouses">
+              <a class="dropdown-item" (click)="selectGreenhouse(greenhouse)">{{greenhouse.name}}, location: {{greenhouse.location}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-lg col-md-12" (click)="addGreenHouseAccess()">Add Greenhouse Access</button>
+      </div>
+    </div>
   </form>
+</div>
+
+
+<h3>Greenhouses which the selected user can access.</h3>
+<div>
+  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" id="greenhousestable">
+    <thead>
+    <tr>
+      <th class="dt-head-left">Name</th>
+      <th class="dt-head-left">Location</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let greenhouse of greenhousesForUser">
+      <td>{{ greenhouse.name }}</td>
+      <td>{{ greenhouse.location }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Users that can access the seleced Greenhouse.</h3>
+<div>
+  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" id="userstable">
+    <thead>
+    <tr>
+      <th class="dt-head-left">Username</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of usersForGreenhouse">
+      <td>{{ user.username }}</td>
+    </tr>
+    </tbody>
+  </table>
 </div>

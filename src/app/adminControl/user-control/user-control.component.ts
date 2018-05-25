@@ -5,6 +5,8 @@ import {Observable} from 'rxjs/Observable';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
 import swal from "sweetalert2";
+import { UserService} from '../../login/services/user.service';
+
 declare var $: any;
 
 
@@ -22,7 +24,7 @@ export class UserControlComponent implements OnInit {
   public password: string;
   public passwordconfirm: string;
   public isAdmin: boolean;
-  constructor(private loginService: LoginService, private http: HttpClient) { }
+  constructor(private loginService: LoginService, private http: HttpClient, private userService: UserService) { }
 
   ngOnInit() {
     this.dtOptions = {
@@ -45,8 +47,7 @@ export class UserControlComponent implements OnInit {
       //   // }
       // ]
     };
-    this.getUsers().subscribe( res => {
-      console.log(res);
+    this.userService.getUsers().subscribe( res => {
       this.users = res.users;
       this.dtTrigger.next();
     });
@@ -56,7 +57,6 @@ export class UserControlComponent implements OnInit {
   public addUser(): void {
     if(this.password === this.passwordconfirm){
       this.loginService.register(this.username, this.password, this.isAdmin).subscribe(res => {
-        // console.log("jwt token of new user: " + res.token);
         swal('Success!', 'Successfully registered new user!', 'success');
         document.getElementById('usermodal').click();
       }, error => {
@@ -64,14 +64,5 @@ export class UserControlComponent implements OnInit {
       });;
     }
     swal('Failed', 'The passwords dont match', 'error');
-  }
-
-  public getUsers(): Observable<any> {
-    return this.http.get(`${environment.apiEndpoint}/user/getAll`, {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'x-access-token': localStorage.getItem('id_token')
-      })
-    });
   }
 }
