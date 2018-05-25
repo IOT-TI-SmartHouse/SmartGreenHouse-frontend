@@ -25,8 +25,6 @@ node {
         checkout scm
         stage("build docker") {
             sh 'docker build -t smargreenhousefrontend:latest .'
-            sh 'rm -r /var/www/*'
-            sh 'docker run --rm -v /var/www:/var/www smargreenhousefrontend:latest'
         }
         stage("remove old files") {
             sh 'rm -rf /var/www/*'
