@@ -20,8 +20,12 @@ import { GreenhouseAccesService } from './login/services/greenhouseAcces.service
 import { UserService} from './login/services/user.service';
 import { InfoComponent } from './info/info.component';
 import { GreenHouseDepartmentControlComponent } from './adminControl/green-house-department-control/green-house-department-control.component';
-import{ GreenhouseDepartmentService} from './login/services/greenhouse-department.service';
 import { ControlComponent } from './control/control.component';
+import { GreenhouseDepartmentService} from './login/services/greenhouse-department.service';
+
+
+import {GraphsComponent} from './dashboard/graphs/graphs.component';
+// import { AuthInterceptor } from './auth-intercepter.services';
 
 
 @NgModule({
@@ -35,7 +39,8 @@ import { ControlComponent } from './control/control.component';
   ],
   declarations: [
     AppComponent, HomeComponent, DashboardComponent, LoginComponent, AdminComponent, InfoComponent,
-    UserControlComponent, GreenHouseControlComponent, GreenHouseAccesControlComponent, MenuBarComponent, GreenHouseDepartmentControlComponent, ControlComponent
+    UserControlComponent, GreenHouseControlComponent, GreenHouseAccesControlComponent, MenuBarComponent,
+    GreenHouseDepartmentControlComponent, ControlComponent , GraphsComponent
   ],
   providers: [ AuthGuard , LoginService, GreenhouseService, GreenhouseAccesService, UserService, GreenhouseDepartmentService
   // {

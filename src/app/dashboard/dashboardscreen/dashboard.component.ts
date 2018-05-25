@@ -1,64 +1,62 @@
 import { Component, OnInit } from '@angular/core';
 import { AppModule } from '../../app.module';
-import { WeatherService } from '../services/weather.services';
-import { Chart } from 'chart.js';
+import {environment} from '../../../environments/environment';
+import {Observable} from 'rxjs/Observable';
+import { HttpClient } from '@angular/common/http';
+import {HttpHeaders} from '@angular/common/http';
+import {loadConfigurationFromPath} from 'tslint/lib/configuration';
 
 @Component({
   selector: 'app-dashboard-component',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent {
 
-  chart = [];
+export class DashboardComponent implements OnInit {
+  greenhouses;
+  departments;
 
-  constructor() {  }
+  public showcaseId: number;
 
-  // ngOnInit() {
-  //   this.weather.sampleForecast()
-  //   .subscribe(res => {
-  //     const temp_max = res['list'].map(result => result.main.temp_max);
-  //     const temp_min = res['list'].map(result => result.main.temp_min);
-  //     const allDates = res['list'].map(result => result.dt);
+  constructor(private http: HttpClient) {  }
 
-  //     const weatherDates = [];
-  //     allDates.forEach(element => {
-  //       const jsdate = new Date(element * 1000);
-  //       weatherDates.push(jsdate.toLocaleTimeString('en', { year: 'numeric', month: 'short', day: 'numeric'}));
-  //     });
+  public getGreenhouses(token: string): Observable<any> {
+    return this.http.get(`${environment.apiEndpoint}/greenhouse/getAll`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/Json',
+        'x-access-token': token
+      })
+    });
+  }
 
-  //     this.chart = new Chart('canvas', {
-  //       type: 'line',
-  //       data: {
-  //         labels: weatherDates,
-  //         datasets: [
-  //           {
-  //             data: temp_max,
-  //             borderColor: '#3cba9f',
-  //             fill: false
-  //           },
-  //           {
-  //             data: temp_min,
-  //             borderColor: '#ffcc00',
-  //             fill: false
-  //           }
-  //         ]
-  //       },
-  //       options: {
-  //         legend: {
-  //           display: false
-  //         },
-  //         scales: {
-  //           xAxes: [{
-  //             display: true
-  //           }],
-  //           yAxes: [{
-  //             display: true
-  //           }]
-  //         }
-  //       }
-  //     });
+  public getDepartments(token: string, id: string): Observable<any> {
+    return this.http.get(`${environment.apiEndpoint}/greenhousedepartment/getAll`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/Json',
+        'x-access-token': token,
+        'greenhouse': id
+      })
+    });
+  }
 
-  //   });
-  // }
+  getToken() {
+    return String(localStorage.getItem('id_token'));
+  }
+
+  loadGreenhouses() {
+    this.getGreenhouses(this.getToken()).subscribe(res => {
+      this.greenhouses = res.greenhouses;
+    });
+  }
+
+  loadDepartments(id) {
+    this.showcaseId = id;
+    this.getDepartments(this.getToken(), id).subscribe(res => {
+      this.departments = res.departments;
+    });
+  }
+
+  ngOnInit() {
+    this.loadGreenhouses();
+  }
 }
