@@ -9,8 +9,8 @@
         <i *ngIf="greenhouse.departments.length != 0 && showcaseId == greenhouse._id" class="fas fa-chevron-right"></i>
       </li>
       <div *ngIf="showcaseId == greenhouse._id">
-        <li class="list-group-item sub-item" *ngFor="let department of greenhouse.departments">
-          <a [routerLink]="['graphs']" [queryParams]="{ greenhouse: greenhouse._id, department: department._id }">     {{department.name}}</a>
+        <li class="list-group-item sub-item" [routerLink]="['graphs']" [queryParams]="{ greenhouse: greenhouse._id, department: department._id }" *ngFor="let department of greenhouse.departments">
+          {{department.name}}
         </li>
       </div>
     </div>

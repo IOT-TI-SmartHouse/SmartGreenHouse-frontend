@@ -1,13 +1,33 @@
 <div class="container">
-  <h1>Graphs</h1>
-  <canvas id="generalChart"></canvas>
+  <div class="row">
+  <div class="col-md-5">
+  </div>
+  <div class="col-md-7">
+      <h1>Graphs</h1>
+  </div>
+</div>
+
+  <div class="row">
+    <div class="col-md-2">
+      <ul class="list-group">
+        <div *ngFor="let node of nodes">
+          <li (click)="loadData(node._id)" class="list-group-item" >
+            {{node.name}}
+          </li>
+        </div>
+      </ul>
+    </div>
+    <div class="col-md-8">
+      <canvas id="generalChart"></canvas>
+    </div>
+    <div class="col-md-2">
+      <button (click)="loadNodes(department);">Combine data</button>
+    </div>
+  </div>
 
   <!--button (click)="loadData(nodes[0]._id)">test 1</button>
   <button (click)="loadData(nodes[1]._id)">test 2</button>
   <button (click)="loadData(nodes[2]._id)">test 3</button-->
 
-  <button (click)="loadNodes(department);">Combine data</button>
-  <li *ngFor="let node of nodes">
-    <button (click)="loadData(node._id)">{{node.name}}</button>
-  </li>
+
 </div>
