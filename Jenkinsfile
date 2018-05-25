@@ -32,6 +32,9 @@ node {
         stage("move new files") {
             sh 'docker run --rm -v /var/www:/var/www smargreenhousefrontend:latest'
         }
+        stage("remove old images") {
+            sh 'docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
+        }
     }
 
 }
