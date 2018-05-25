@@ -17,9 +17,14 @@ a{
 }
 
 li{
+  cursor: pointer;
   float: left;
   display: block;
   padding: 14px 14px;
+}
+
+.navbar-brand {
+  cursor: pointer;
 }
 
 .active{
