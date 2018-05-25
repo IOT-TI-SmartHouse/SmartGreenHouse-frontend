@@ -1,4 +1,13 @@
 <div class="container">
   <h1>Graphs</h1>
   <canvas id="generalChart"></canvas>
+
+  <!--button (click)="loadData(nodes[0]._id)">test 1</button>
+  <button (click)="loadData(nodes[1]._id)">test 2</button>
+  <button (click)="loadData(nodes[2]._id)">test 3</button-->
+
+  <button (click)="loadNodes(department);">Combine data</button>
+  <li *ngFor="let node of nodes">
+    <button (click)="loadData(node._id)">{{node.name}}</button>
+  </li>
 </div>

@@ -58,6 +58,8 @@ export class GraphsComponent implements OnInit {
   }
 
   loadData(id) {
+    this.clearGraph();
+
     this.getData(this.getToken(), id).subscribe(res => {
       this.data = res.data;
 
@@ -103,6 +105,16 @@ export class GraphsComponent implements OnInit {
         }
       }
     });
+  }
+
+  clearGraph() {
+    this.chart.data.labels = [];
+
+    for (let i = 0; i < this.chart.data.datasets.length; i ++) {
+      this.chart.data.datasets[i].data = [];
+    }
+
+    this.chart.update();
   }
 
   ngOnInit() {
