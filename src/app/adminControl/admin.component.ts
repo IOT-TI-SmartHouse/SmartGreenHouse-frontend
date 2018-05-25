@@ -6,47 +6,35 @@ import { Router } from '@angular/router';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
+
 export class AdminComponent implements OnInit {
 
-  public userControl = false;
-  public greenhouseControl = false;
-  public greenhouseAccessControl = false;
-  public greenhouseDepartmentControl = false;
+  public selectedTab: SelectedTab = SelectedTab.USER;
 
   constructor(private router: Router) { }
 
   ngOnInit() {
-    this.userControl = true;
   }
 
   navigateUser() {
-    this.userControl = true;
-    this.greenhouseControl = false;
-    this.greenhouseAccessControl = false;
-    this.greenhouseDepartmentControl = false;
-    // this.router.navigate(['/userControl']);
+    this.selectedTab = SelectedTab.USER;
   }
 
   navigateGreenhouse() {
-    this.greenhouseControl = true;
-    this.userControl = false;
-    this.greenhouseAccessControl = false;
-    this.greenhouseDepartmentControl = false;
-    // this.router.navigate(['/greenHouseControl']);
+    this.selectedTab = SelectedTab.GREENHOUSE;
   }
 
   navigateGreenhouseAccess() {
-    this.greenhouseControl = false;
-    this.userControl = false;
-    this.greenhouseAccessControl = true;
-    this.greenhouseDepartmentControl = false;
-    // this.router.navigate(['/greenHouseControl']);
+    this.selectedTab = SelectedTab.GREENHOUSEACCESS;
   }
 
   navigateGreenhouseDepartment() {
-    this.greenhouseControl = false;
-    this.userControl = false;
-    this.greenhouseAccessControl = false;
-    this.greenhouseDepartmentControl = true;
+    this.selectedTab = SelectedTab.DEPARTMENT;
   }
+}
+enum SelectedTab {
+  USER = 0,
+  GREENHOUSE = 1,
+  GREENHOUSEACCESS = 2,
+  DEPARTMENT = 3
 }

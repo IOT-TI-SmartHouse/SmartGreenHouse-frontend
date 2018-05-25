@@ -8,6 +8,7 @@ import { AdminComponent } from './adminControl/admin.component';
 import { UserControlComponent } from './adminControl/user-control/user-control.component';
 import { GreenHouseControlComponent} from './adminControl/green-house-control/green-house-control.component';
 import { GreenHouseAccesControlComponent} from './adminControl/green-house-acces-control/green-house-acces-control.component';
+import { InfoComponent } from './info/info.component';
 
 
 const appRoutes: Routes = [
@@ -23,12 +24,7 @@ const appRoutes: Routes = [
     },
     {
         path: 'info',
-        component: HomeComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: 'settings',
-        component: HomeComponent,
+        component: InfoComponent,
         canActivate: [AuthGuard]
     },
     {

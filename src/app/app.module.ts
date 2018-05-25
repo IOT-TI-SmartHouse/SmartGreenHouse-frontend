@@ -1,14 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { DataTablesModule } from 'angular-datatables';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/loginscreen/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing-module';
 import { HomeComponent } from './home/home.component';
-import { WeatherService } from './dashboard/services/weather.services';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './auth-guard.services';
 import { DashboardComponent } from './dashboard/dashboardscreen/dashboard.component';
@@ -22,6 +20,7 @@ import { GreenhouseService} from './login/services/greenhouse.service';
 import { GreenhouseAccesService } from './login/services/greenhouseAcces.service';
 import { UserService} from './login/services/user.service';
 import {User} from './dataObjects/classes/user.class';
+import { InfoComponent } from './info/info.component';
 import { GreenHouseDepartmentControlComponent } from './adminControl/green-house-department-control/green-house-department-control.component';
 import{ GreenhouseDepartmentService} from './login/services/greenhouse-department.service';
 
@@ -39,10 +38,10 @@ import{ GreenhouseDepartmentService} from './login/services/greenhouse-departmen
     NgbModule.forRoot()
   ],
   declarations: [
-    AppComponent, HomeComponent, DashboardComponent, LoginComponent, AdminComponent,
+    AppComponent, HomeComponent, DashboardComponent, LoginComponent, AdminComponent, InfoComponent,
     UserControlComponent, GreenHouseControlComponent, GreenHouseAccesControlComponent, MenuBarComponent, GreenHouseDepartmentControlComponent
   ],
-  providers: [ WeatherService , AuthGuard , LoginService, GreenhouseService, GreenhouseAccesService, UserService, GreenhouseDepartmentService
+  providers: [ AuthGuard , LoginService, GreenhouseService, GreenhouseAccesService, UserService, GreenhouseDepartmentService
   // {
   //   provide: AuthInterceptor,
   //   useClass: TokenInterceptor,
