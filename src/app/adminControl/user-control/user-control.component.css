@@ -16,6 +16,10 @@
   float: right;
 }
 
+button {
+  background-color: var(--button-green-color);
+}
+
 .form label{
   float: left;
 }

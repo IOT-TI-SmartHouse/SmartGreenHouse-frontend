@@ -20,3 +20,6 @@
   float: left;
 }
 
+button {
+  background-color: var(--button-green-color);
+}
