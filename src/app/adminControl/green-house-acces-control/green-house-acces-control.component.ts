@@ -3,9 +3,6 @@ import { GreenhouseAccesService} from '../../login/services/greenhouseAcces.serv
 import { Subject} from 'rxjs/Subject';
 import { GreenhouseService} from '../../login/services/greenhouse.service';
 import { UserService} from '../../login/services/user.service';
-import { Observable} from 'rxjs/Observable';
-import {debounceTime, distinctUntilChanged, filter, map, merge} from 'rxjs/operators';
-import { NgbTypeahead} from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -15,10 +12,12 @@ import { NgbTypeahead} from '@ng-bootstrap/ng-bootstrap';
 })
 export class GreenHouseAccesControlComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
+
   users: any[];
   greenhouses: any = [];
-  Access: any = [];
-  dtTrigger: Subject<any> = new Subject();
+  greenhousesForUser: any[];
+  usersForGreenhouse: any[];
 
 
   public userPlaceholder = 'select a user';
@@ -26,12 +25,18 @@ export class GreenHouseAccesControlComponent implements OnInit {
   public selectedUser: any;
   public selectedGreenhouse: any;
 
-  greenhousesForUser: any[];
-
 
   constructor(private greenhouseAccessService: GreenhouseAccesService, private greenhouseService: GreenhouseService, private userService: UserService) { }
 
   ngOnInit() {
+    window.alert = function () { };
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10,
+      searching: false,
+      lengthChange: false
+      // lengthMenu: [[10, 25, 50, 100, -1], [ 10, 25, 50, 100, 'All']]
+    };
 
     this.greenhouseService.getGreenhouses().subscribe( res => {
       this.greenhouses = res.greenhouses;
@@ -44,35 +49,28 @@ export class GreenHouseAccesControlComponent implements OnInit {
 
   public selectUser(user) {
     this.selectedUser = user;
-    console.log("getAll");
     this.greenhouseService.getAll(user._id).subscribe( res => {
       console.log(res);
-      this.greenhousesForUser = (res as any).users;
+      this.greenhousesForUser = (res as any).greenhouses;
+      $('#userstable').DataTable().destroy();
+      $('#greenhousestable').DataTable().destroy();
+      this.dtTrigger.next();
     });
-    console.log(this.greenhousesForUser);
   }
 
   public selectGreenhouse(greenhouse) {
     this.selectedGreenhouse = greenhouse;
+    this.greenhouseService.getAllAccess(greenhouse._id).subscribe( res => {
+      console.log(res);
+      this.usersForGreenhouse = (res as any).users;
+      $('#userstable').DataTable().destroy();
+      $('#greenhousestable').DataTable().destroy();
+      this.dtTrigger.next();
+    });
   }
-
-
-
-  // @ViewChild('instance') instance: NgbTypeahead;
-  // focus$ = new Subject<string>();
-  // click$ = new Subject<string>();
-  //
-  // search = (text$: Observable<string>) =>
-  //   text$.pipe(
-  //     debounceTime(200),
-  //     distinctUntilChanged(),
-  //     merge(this.focus$),
-  //     merge(this.click$.pipe(filter(() => !this.instance.isPopupOpen()))),
-  //     map(term => (term === '' ? this.users
-  //       : this.users.filter(v => v.username.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10))
-  //   );
 
   public addGreenHouseAccess(): void {
     this.greenhouseAccessService.register(this.selectedUser._id, this.selectedGreenhouse._id);
   }
+
 }

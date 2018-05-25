@@ -52,23 +52,21 @@ export class GreenhouseService {
     // adminControl only
     // get all greenhouses
     getAll(userId: string) {
-      return this.http.post(`${environment.apiEndpoint}/greenhouse/getAll`, {
-        userid: userId,
-      }, {
+      return this.http.get(`${environment.apiEndpoint}/greenhouse/getAll`, {
         headers: new HttpHeaders({
           'Content-Type':  'application/json',
-          'x-access-token': localStorage.getItem('id_token')
+          'x-access-token': localStorage.getItem('id_token'),
+          'userid': userId
         })
       });
     }
 
   getAllAccess(greenhouseId: string) {
-    return this.http.post(`${environment.apiEndpoint}/greenhouse/getAllAccess`, {
-      greenhouseId: greenhouseId,
-    }, {
+    return this.http.get(`${environment.apiEndpoint}/greenhouse/getAllAccess`, {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
-        'x-access-token': localStorage.getItem('id_token')
+        'x-access-token': localStorage.getItem('id_token'),
+        'greenhouseid': greenhouseId
       })
     });
   }

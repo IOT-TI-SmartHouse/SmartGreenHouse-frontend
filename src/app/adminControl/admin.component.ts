@@ -8,9 +8,10 @@ import { Router } from '@angular/router';
 })
 export class AdminComponent implements OnInit {
 
-  private userControl = false;
-  private greenhouseControl = false;
-  private greenhouseAccessControl = false;
+  public userControl = false;
+  public greenhouseControl = false;
+  public greenhouseAccessControl = false;
+  public greenhouseDepartmentControl = false;
 
   constructor(private router: Router) { }
 
@@ -22,6 +23,7 @@ export class AdminComponent implements OnInit {
     this.userControl = true;
     this.greenhouseControl = false;
     this.greenhouseAccessControl = false;
+    this.greenhouseDepartmentControl = false;
     // this.router.navigate(['/userControl']);
   }
 
@@ -29,7 +31,7 @@ export class AdminComponent implements OnInit {
     this.greenhouseControl = true;
     this.userControl = false;
     this.greenhouseAccessControl = false;
-
+    this.greenhouseDepartmentControl = false;
     // this.router.navigate(['/greenHouseControl']);
   }
 
@@ -37,7 +39,14 @@ export class AdminComponent implements OnInit {
     this.greenhouseControl = false;
     this.userControl = false;
     this.greenhouseAccessControl = true;
+    this.greenhouseDepartmentControl = false;
     // this.router.navigate(['/greenHouseControl']);
   }
 
+  navigateGreenhouseDepartment() {
+    this.greenhouseControl = false;
+    this.userControl = false;
+    this.greenhouseAccessControl = false;
+    this.greenhouseDepartmentControl = true;
+  }
 }

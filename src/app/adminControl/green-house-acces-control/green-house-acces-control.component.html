@@ -44,3 +44,38 @@
     </div>
   </form>
 </div>
+
+
+<h3>Greenhouses which the selected user can access.</h3>
+<div>
+  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" id="greenhousestable">
+    <thead>
+    <tr>
+      <th class="dt-head-left">Name</th>
+      <th class="dt-head-left">Location</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let greenhouse of greenhousesForUser">
+      <td>{{ greenhouse.name }}</td>
+      <td>{{ greenhouse.location }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Users that can access the seleced Greenhouse.</h3>
+<div>
+  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" id="userstable">
+    <thead>
+    <tr>
+      <th class="dt-head-left">Username</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of usersForGreenhouse">
+      <td>{{ user.username }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -44,7 +44,7 @@ li a {
 }
 
 .btn-group button {
-    width: 33.3333%;
+    width: 25%;
     border: 1px solid var(--button-green-color); /* Green border */
     color: var(--text-dark-grey); /* White text */
     padding-left: 24px; /* Some padding */
