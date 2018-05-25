@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { DataTablesModule } from 'angular-datatables';
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/loginscreen/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,11 +15,16 @@ import { AdminComponent } from './adminControl/admin.component';
 import { UserControlComponent } from './adminControl/user-control/user-control.component';
 import { GreenHouseControlComponent } from './adminControl/green-house-control/green-house-control.component';
 import { GreenHouseAccesControlComponent } from './adminControl/green-house-acces-control/green-house-acces-control.component';
-import {GreenhouseService} from './login/services/greenhouse.service';
+import { GreenhouseService} from './login/services/greenhouse.service';
 import { GreenhouseAccesService } from './login/services/greenhouseAcces.service';
-import {User} from './dataObjects/classes/user.class';
+import { UserService} from './login/services/user.service';
 import { InfoComponent } from './info/info.component';
+import { GreenHouseDepartmentControlComponent } from './adminControl/green-house-department-control/green-house-department-control.component';
+import { ControlComponent } from './control/control.component';
+import { GreenhouseDepartmentService} from './login/services/greenhouse-department.service';
 
+
+import {GraphsComponent} from './dashboard/graphs/graphs.component';
 // import { AuthInterceptor } from './auth-intercepter.services';
 
 
@@ -31,12 +35,14 @@ import { InfoComponent } from './info/info.component';
     AppRoutingModule,
     HttpClientModule,
     DataTablesModule,
+    ReactiveFormsModule
   ],
   declarations: [
     AppComponent, HomeComponent, DashboardComponent, LoginComponent, AdminComponent, InfoComponent,
-    UserControlComponent, GreenHouseControlComponent, GreenHouseAccesControlComponent, MenuBarComponent
+    UserControlComponent, GreenHouseControlComponent, GreenHouseAccesControlComponent, MenuBarComponent,
+    GreenHouseDepartmentControlComponent, ControlComponent , GraphsComponent
   ],
-  providers: [ AuthGuard , LoginService, GreenhouseService, GreenhouseAccesService
+  providers: [ AuthGuard , LoginService, GreenhouseService, GreenhouseAccesService, UserService, GreenhouseDepartmentService
   // {
   //   provide: AuthInterceptor,
   //   useClass: TokenInterceptor,

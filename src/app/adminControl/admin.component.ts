@@ -28,6 +28,9 @@ export class AdminComponent implements OnInit {
     this.selectedTab = SelectedTab.GREENHOUSEACCESS;
   }
 
+  navigateGreenhouseDepartment() {
+    this.selectedTab = SelectedTab.DEPARTMENT;
+  }
 }
 enum SelectedTab {
   USER = 0,
