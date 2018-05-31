@@ -18,4 +18,9 @@ export class MenuBarComponent {
     logout() {
         this.loginService.logout();
     }
+
+    navigate(input: string) {
+      console.log('router request:' + input.toString());
+      this.router.navigate([`/admin/${input}`]);
+    }
 }
