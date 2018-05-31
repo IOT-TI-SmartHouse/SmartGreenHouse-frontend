@@ -11,11 +11,11 @@
     <div class="col-md-2">
       <ul class="list-group">
         <div *ngFor="let node of nodes">
-          <li (click)="loadData(node._id)" class="list-group-item" >
+          <li (click)="selectNode(node._id)" [ngClass]="{'active': selectedNode == node._id}"  class="list-group-item" >
             {{node.name}}
           </li>
         </div>
-      </ul>
+      </ul> 
     </div>
     <div class="col-md-8">
       <canvas id="generalChart"></canvas>
@@ -28,6 +28,5 @@
   <!--button (click)="loadData(nodes[0]._id)">test 1</button>
   <button (click)="loadData(nodes[1]._id)">test 2</button>
   <button (click)="loadData(nodes[2]._id)">test 3</button-->
-
 
 </div>

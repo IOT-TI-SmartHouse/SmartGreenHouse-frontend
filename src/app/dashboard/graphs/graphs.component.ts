@@ -21,6 +21,8 @@ export class GraphsComponent implements OnInit {
   data;
   chart;
 
+  selectedNode = 0;
+
   constructor(private route: ActivatedRoute, private http: HttpClient) {  }
 
   public getNodes(token: string, id: string): Observable<any> {
@@ -47,14 +49,9 @@ export class GraphsComponent implements OnInit {
     return String(localStorage.getItem('id_token'));
   }
 
-  loadNodes(id) {
-    this.getNodes(this.getToken(), id).subscribe(res => {
-      this.nodes = res.nodes;
-
-      for (let i = 0; i < this.nodes.length; i ++) {
-        this.loadData(this.nodes[i]._id);
-      }
-    });
+  selectNode(id: any) {
+    this.selectedNode = id;
+    this.loadData(id);
   }
 
   loadData(id) {
@@ -70,6 +67,17 @@ export class GraphsComponent implements OnInit {
         if (this.data[i].sensorType === 'Humidity') {
           this.drawHumidity(this.data[i].createdAt, this.data[i].value);
         }
+      }
+    });
+  }
+
+  loadNodes(id) {
+    this.selectedNode = 0;
+    this.getNodes(this.getToken(), id).subscribe(res => {
+      this.nodes = res.nodes;
+
+      for (let i = 0; i < this.nodes.length; i ++) {
+        this.loadData(this.nodes[i]._id);
       }
     });
   }
