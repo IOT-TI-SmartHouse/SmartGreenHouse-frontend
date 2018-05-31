@@ -4,7 +4,7 @@ import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs/Observable';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
-import swal from "sweetalert2";
+import swal from 'sweetalert2';
 import { UserService} from '../../login/services/user.service';
 
 declare var $: any;
@@ -53,16 +53,32 @@ export class UserControlComponent implements OnInit {
     });
   }
 
-
   public addUser(): void {
-    if(this.password === this.passwordconfirm){
+    if (this.password === this.passwordconfirm) {
       this.loginService.register(this.username, this.password, this.isAdmin).subscribe(res => {
         swal('Success!', 'Successfully registered new user!', 'success');
+        // refresh users
+        this.userService.getUsers().subscribe( response => {
+          this.users = response.users;
+          $('#userstable')
+          .DataTable()
+          .destroy();
+          this.dtTrigger.next();
+        });
         document.getElementById('usermodal').click();
+        this.clearInputFields();
       }, error => {
         swal('Register failed', 'The register attempt has failed', 'error');
-      });;
+        this.clearInputFields();
+      });
     }
     swal('Failed', 'The passwords dont match', 'error');
+  }
+
+  public clearInputFields() {
+    this.username = '';
+    this.password = '';
+    this.passwordconfirm = '';
+    this.isAdmin = false;
   }
 }
