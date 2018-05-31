@@ -12,13 +12,17 @@
   outline: none;
 }
 
+::ng-deep h1{
+
+}
+
 section {
   margin: 0px;
   padding: 0px;
 }
 
-.container {
-  margin: auto;
+::ng-deep .container {
+  margin: 10px auto;
   overflow: hidden;
 }
 

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { AppModule } from '../../app.module';
-import { Event as RouterEvent, NavigationCancel, NavigationEnd, NavigationError, Router, Routes} from '@angular/router';
+import { Router } from '@angular/router';
 import { LoginService } from '../../login/services/login.service';
 import { UserService } from '../../login/services/user.service';
 
@@ -20,7 +19,6 @@ export class MenuBarComponent {
     }
 
     navigate(input: string) {
-      console.log('router request:' + input.toString());
       this.router.navigate([`/admin/${input}`]);
     }
 }
