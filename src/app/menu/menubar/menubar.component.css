@@ -16,7 +16,11 @@ a{
   font-size:16px;
 }
 
-li{
+.dropdown-wrapper{
+  position: relative;
+}
+
+.nav-item{
   cursor: pointer;
   float: left;
   display: block;

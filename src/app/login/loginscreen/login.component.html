@@ -1,9 +1,9 @@
 <div class="login-page">
-    <div class="form">
+    <div class="form-group rounded">
         <form class="login-form">
-        <input type="text" [(ngModel)]="username" [ngModelOptions]="{standalone:true}" placeholder="username"/>
-        <input type="password" [(ngModel)]="password" [ngModelOptions]="{standalone:true}" placeholder="password"/>
-        <button (click)="login()">login</button>
+        <input class="input-group-text rounded text-left" type="text" [(ngModel)]="username" [ngModelOptions]="{standalone:true}" placeholder="username"/>
+        <input class="input-group-text rounded text-left" type="password" [(ngModel)]="password" [ngModelOptions]="{standalone:true}" placeholder="password"/>
+        <button class="btn-primary rounded" (click)="login()">login</button>
         </form>
     </div>
 
