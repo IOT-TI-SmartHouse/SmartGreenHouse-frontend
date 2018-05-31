@@ -16,4 +16,18 @@ export class UserService {
       })
     });
   }
+
+  public getCurrentUser(): Observable<any> {
+    return this.http.get(`${environment.apiEndpoint}/user/me`, {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'x-access-token': localStorage.getItem('id_token')
+      })
+    });
+  }
+
+  // returns wheter current user is a admin
+  public isAdmin(): boolean {
+    return localStorage.getItem('is_admin') === 'true';
+  }
 }

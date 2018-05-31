@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import swal from 'sweetalert2';
 import { environment } from '../../../environments/environment';
 import {HttpHeaders} from '@angular/common/http';
+import { UserService } from './user.service';
 
 @Injectable()
 export class LoginService {
@@ -13,7 +14,7 @@ export class LoginService {
     /**
      * Constructor
      */
-    constructor(private http: HttpClient, private router: Router) {
+    constructor(private http: HttpClient, private router: Router, private userService: UserService) {
         //
     }
 
@@ -42,6 +43,8 @@ export class LoginService {
         const decoded = jwt_decode(authResult.token);
 
         localStorage.setItem('id_token', authResult.token);
+        localStorage.setItem('user_id', decoded.id);
+        localStorage.setItem('is_admin', authResult.isAdmin);
         localStorage.setItem('expires_at', decoded.exp);
 
         this.router.navigate(['/home']);
@@ -49,6 +52,8 @@ export class LoginService {
 
     logout() {
         localStorage.removeItem('id_token');
+        localStorage.removeItem('user_id');
+        localStorage.removeItem('is_admin');
         localStorage.removeItem('expires_at');
         swal({
             title: 'Success!',

@@ -7,8 +7,12 @@ import { Component } from '@angular/core';
 })
 export class InfoComponent {
 
-    constructor() {
+  constructor() {
 
-    }
+  }
+
+  various() {
+    alert('alert!');
+  }
 
 }

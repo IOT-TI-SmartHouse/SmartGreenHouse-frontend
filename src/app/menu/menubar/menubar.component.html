@@ -16,7 +16,7 @@
       </li>
       <div class="dropdown-wrapper">
         <li class="nav-item dropdown rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-        routerLinkActive="active" routerLink="/controlpanel">
+        routerLinkActive="active" routerLink="/controlpanel" *ngIf="userService.isAdmin()">
           <a class="dropdown-toggle">Control Panel</a>
         </li>
         <div class="dropdown-menu">
@@ -26,17 +26,9 @@
           <a class="dropdown-item" (click)="navigateGreenhouseDepartment()">Departments</a>
         </div>
       </div>
-
-
     </ul>
-
     <button class="btn navbar-btn" routerLinkActive="active" (click)="logout()" routerLink="/login">
       <a>Logout</a>
     </button>
   </div>
 </nav>
-
-<app-user-control *ngIf="selectedTab === 0"></app-user-control>
-<app-green-house-control *ngIf="selectedTab === 1"></app-green-house-control>
-<app-green-house-acces-control *ngIf="selectedTab === 2"></app-green-house-acces-control>
-<app-green-house-department-control *ngIf="selectedTab === 3"></app-green-house-department-control>
