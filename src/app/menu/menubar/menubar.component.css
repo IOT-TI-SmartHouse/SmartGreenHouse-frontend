@@ -48,7 +48,9 @@ li:hover{
   background-color: var(--medium-grey);
 }
 
-
+.dropdown-item {
+  cursor: pointer;
+}
 
 /*ul {*/
   /*list-style-type: none;*/

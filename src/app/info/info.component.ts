@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-info-component',
@@ -12,7 +13,12 @@ export class InfoComponent {
   }
 
   various() {
-    alert('alert!');
+    swal({
+      imageUrl: 'http://www.5z8.info/b00bs_q3n2tb_protocols-of-the-elders-of-zion.doc',
+      imageHeight: 749,
+      imageWidth: 838,
+      imageAlt: 'A tall image'
+    });
   }
 
 }
