@@ -11,6 +11,7 @@ import { GreenHouseControlComponent} from './adminControl/green-house-control/gr
 import { GreenHouseAccesControlComponent} from './adminControl/green-house-acces-control/green-house-acces-control.component';
 import { InfoComponent } from './info/info.component';
 import { AdminGuard } from './admin-guard.service';
+import {GreenHouseDepartmentControlComponent} from './adminControl/green-house-department-control/green-house-department-control.component';
 
 
 const appRoutes: Routes = [
@@ -49,11 +50,6 @@ const appRoutes: Routes = [
       data: { roles : ['ADMIN'] },
       children:
         [{
-            path: 'controlpanel',
-            canActivate: [AuthGuard],
-            component: AdminComponent
-        },
-        {
           path: 'userControl',
           canActivate: [AuthGuard],
           component: UserControlComponent
@@ -67,6 +63,11 @@ const appRoutes: Routes = [
           path: 'greenHouseAccessControl',
           canActivate: [AuthGuard],
           component: GreenHouseAccesControlComponent
+        },
+        {
+          path: 'greenHouseDepartmentControl',
+          canActivate: [AuthGuard],
+          component: GreenHouseDepartmentControlComponent
         }
     ]
     }
