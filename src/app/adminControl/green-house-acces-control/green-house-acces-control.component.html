@@ -12,9 +12,11 @@
             </div>
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownUser">
-            <div *ngFor="let user of users">
+            <div *ngFor="let user of filteredUsers">
               <a class="dropdown-item" (click)="selectUser(user)">{{user.username}}</a>
             </div>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)="clearUserDropdown()">Clear selection</a>
           </div>
         </div>
       </div>
@@ -29,9 +31,11 @@
             </div>
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownGreenhouse">
-            <div *ngFor="let greenhouse of greenhouses">
+            <div *ngFor="let greenhouse of filteredGreenhouses">
               <a class="dropdown-item" (click)="selectGreenhouse(greenhouse)">{{greenhouse.name}}, location: {{greenhouse.location}}</a>
             </div>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)="clearGreenhouseDropdown()">Clear selection</a>
           </div>
         </div>
       </div>

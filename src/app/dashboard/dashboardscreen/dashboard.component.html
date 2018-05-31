@@ -5,8 +5,8 @@
     <div *ngFor="let greenhouse of greenhouses">
       <li (click)="selectGreenhouse(greenhouse._id)" class="list-group-item">
         {{greenhouse.name}}
-        <i *ngIf="greenhouse.departments.length != 0 && showcaseId != greenhouse._id" class="fas fa-chevron-down"></i>
-        <i *ngIf="greenhouse.departments.length != 0 && showcaseId == greenhouse._id" class="fas fa-chevron-right"></i>
+        <i *ngIf="greenhouse.departments !== undefined && greenhouse.departments.length != 0 && showcaseId != greenhouse._id" class="fas fa-chevron-down"></i>
+        <i *ngIf=" greenhouse.departments !== undefined && greenhouse.departments.length != 0 && showcaseId == greenhouse._id" class="fas fa-chevron-right"></i>
       </li>
       <div *ngIf="showcaseId == greenhouse._id">
         <li class="list-group-item sub-item" [routerLink]="['graphs']" [queryParams]="{ greenhouse: greenhouse._id, department: department._id }" *ngFor="let department of greenhouse.departments">
