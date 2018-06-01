@@ -3,6 +3,7 @@ import {Subject} from 'rxjs/Subject';
 import swal from 'sweetalert2';
 import { GreenhouseService } from '../../services/greenhouse.service';
 import { GreenhouseDepartmentService } from '../../services/greenhouse-department.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-green-house-department-control',
@@ -20,7 +21,7 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
   public selectedGreenhouse: any;
   public name: string;
 
-  constructor(private greenhouseService: GreenhouseService, private departmentService: GreenhouseDepartmentService) { }
+  constructor(private greenhouseService: GreenhouseService, private departmentService: GreenhouseDepartmentService, private router: Router) { }
 
   ngOnInit() {
     this.dtOptions = {
@@ -30,6 +31,8 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
       lengthChange: false
       // lengthMenu: [[10, 25, 50, 100, -1], [ 10, 25, 50, 100, 'All']]
     };
+
+    this.selectGreenhouse(this.greenhouseService.getSelectedGreenhouse());
 
     this.greenhouseService.getGreenhouses().subscribe( res => {
       this.greenhouses = res.greenhouses;
@@ -51,4 +54,8 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
     this.departmentService.register(this.name, this.selectedGreenhouse._id);
   }
 
+  navigateDepartment(department: any) {
+    this.departmentService.setSelectedDepartment(department)
+    this.router.navigate(['/dashboard/graphs']);
+  }
 }

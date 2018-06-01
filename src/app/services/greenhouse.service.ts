@@ -4,7 +4,6 @@ import swal from 'sweetalert2';
 import {Observable} from 'rxjs/Observable';
 import { environment } from "../../environments/environment";
 
-
 @Injectable()
 export class GreenhouseService {
 
@@ -42,8 +41,6 @@ export class GreenhouseService {
     });
   }
 
-
-
     // update greenhouse
     update() {
         //
@@ -69,5 +66,13 @@ export class GreenhouseService {
         'greenhouseid': greenhouseId
       })
     });
+  }
+
+  public setSelectedGreenhouse(greenhouse: any) {
+    localStorage.setItem('greenhouse', JSON.stringify(greenhouse));
+  }
+
+  public getSelectedGreenhouse() {
+    return JSON.parse(localStorage.getItem('greenhouse'));
   }
 }

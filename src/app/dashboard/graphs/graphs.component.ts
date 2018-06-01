@@ -14,7 +14,7 @@ import {SensorNodeService} from '../../services/sensor-node.service';
 export class GraphsComponent implements OnInit {
   fromDate: string;
   toDate: string;
-  department: string;
+  department: any;
   nodes;
   data;
   chart;
@@ -119,6 +119,6 @@ export class GraphsComponent implements OnInit {
     const url = new URL(window.location.href);
 
     this.drawGraph();
-    this.loadNodes(this.department);
+    this.loadNodes(this.department._id);
   }
 }

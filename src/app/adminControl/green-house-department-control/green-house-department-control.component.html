@@ -32,7 +32,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let department of departments">
+      <tr *ngFor="let department of departments" (click)="navigateDepartment(department)">
         <td>{{ department.name }}</td>
         <td>{{ department.active }}</td>
         <td>{{ department.createdAt}}</td>

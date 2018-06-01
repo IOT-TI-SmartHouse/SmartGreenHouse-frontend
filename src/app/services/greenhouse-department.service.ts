@@ -54,10 +54,10 @@ export class GreenhouseDepartmentService {
   }
 
   public setSelectedDepartment(department: any) {
-    localStorage.setItem('department', department._id);
+    localStorage.setItem('department', JSON.stringify(department));
   }
 
   public getSelectedDepartment() {
-    return localStorage.getItem('department');
+    return JSON.parse(localStorage.getItem('department'));
   }
 }
