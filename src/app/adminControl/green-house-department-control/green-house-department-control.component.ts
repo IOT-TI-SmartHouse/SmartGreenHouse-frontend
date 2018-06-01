@@ -50,4 +50,5 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
   public addDepartment(): void {
     this.departmentService.register(this.name, this.selectedGreenhouse._id);
   }
+
 }
