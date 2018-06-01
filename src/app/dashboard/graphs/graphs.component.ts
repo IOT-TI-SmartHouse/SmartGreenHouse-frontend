@@ -115,7 +115,7 @@ export class GraphsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.department = this.departmentService.getSelectedDepartment()._id;
+    this.department = this.departmentService.getSelectedDepartment();
     const url = new URL(window.location.href);
 
     this.drawGraph();

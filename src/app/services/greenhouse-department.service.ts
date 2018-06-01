@@ -8,8 +8,6 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class GreenhouseDepartmentService {
 
-  private selectedDepartment: any;
-
   constructor(private http: HttpClient) { }
 
   // create new greenhousedepartment
@@ -56,10 +54,10 @@ export class GreenhouseDepartmentService {
   }
 
   public setSelectedDepartment(department: any) {
-    this.selectedDepartment = department;
+    localStorage.setItem('department', department._id);
   }
 
   public getSelectedDepartment() {
-    return this.selectedDepartment;
+    return localStorage.getItem('department');
   }
 }

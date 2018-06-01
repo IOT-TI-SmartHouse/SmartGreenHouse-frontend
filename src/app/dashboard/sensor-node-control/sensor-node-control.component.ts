@@ -66,8 +66,6 @@ export class SensorNodeComponent implements OnInit {
   }
 
   public addSensorNode(): void {
-    // this.sensornodeService.register(this.name, this.selectedDepartment._id, this.latitude, this.longitude, this.hardwareserial);
-    // this.sensornodeService.register(this.name, this.departmentService.getSelectedDepartment()._id, this.latitude, this.longitude, this.hardwareserial);
-
+    this.sensornodeService.register(this.name, this.departmentService.getSelectedDepartment()._id, this.latitude, this.longitude, this.hardwareserial);
   }
 }
