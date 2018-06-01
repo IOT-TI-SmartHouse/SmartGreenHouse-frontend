@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
 import { GreenhouseService } from '../../services/greenhouse.service';
 import {Router} from '@angular/router';
+import swal from "sweetalert2";
 declare var $: any;
 
 @Component({
@@ -54,8 +55,21 @@ export class GreenHouseControlComponent implements OnInit {
   }
 
   public addGreenHouse(): void {
-    this.greenhouseService.register(this.name, this.location);
+    this.greenhouseService.register(this.name, this.location).subscribe(res => {
+      swal('Success!', 'Successfully registered!', 'success');
+      this.refresh();
+    }, error => {
+      swal('Register failed', 'The register attempt has failed', 'error');
+    });
     this.clearInputFields();
+  }
+
+  refresh(){
+    this.greenhouseService.getGreenhouses().subscribe( res => {
+      this.greenhouses = res.greenhouses;
+      $('#greenhouseTable').DataTable().destroy();
+      this.dtTrigger.next();
+    });
   }
 
   navigateGreenhouse(greenhouse: any) {

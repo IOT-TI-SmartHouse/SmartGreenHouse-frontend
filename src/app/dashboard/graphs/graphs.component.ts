@@ -148,6 +148,6 @@ export class GraphsComponent implements OnInit {
   }
 
   refresh(event){
-    //this.loadData();
+    this.initData(this.department);
   }
 }

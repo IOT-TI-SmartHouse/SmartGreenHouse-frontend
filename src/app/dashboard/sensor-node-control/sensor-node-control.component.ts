@@ -73,6 +73,7 @@ export class SensorNodeComponent implements OnInit {
   public addSensorNode() {
     this.sensornodeService.register(this.name,
        this.departmentService.getSelectedDepartment(), this.latitude, this.longitude, this.hardwareserial);
+    this.onCreate.emit(true);
     this.clearInputFields();
   }
 

@@ -24,10 +24,6 @@ export class GreenhouseService {
         'Content-Type':  'application/json',
         'x-access-token': localStorage.getItem('id_token')
       })
-    }).subscribe(res => {
-      swal('Success!', 'Successfully registered!', 'success');
-    }, error => {
-      swal('Register failed', 'The register attempt has failed', 'error');
     });
   }
 
