@@ -13,6 +13,7 @@
   </div>
 
   <button class="btn btn-rounded btn-app-green" (click)="addDepartment()">Add Greenhouse Department</button>
+  <hr/>
   <h5>Existing departments in {{selectedGreenhouse.name}}</h5>
   <div>
     <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" id="departmentsTable">

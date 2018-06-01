@@ -11,8 +11,8 @@
   </div>
 
   <button class="btn btn-app-green" (click)="addGreenHouseAccess()">Add Greenhouse Access</button>
-
-<h5>Greenhouses which the selected user can access.</h5>
+<hr/>
+<h5>Greenhouses available to {{selectedUser.username}}</h5>
 <div>
   <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" id="greenhousestable">
     <thead>
@@ -29,8 +29,8 @@
     </tbody>
   </table>
 </div>
-
-<h5>Users that can access the seleced Greenhouse.</h5>
+  <hr/>
+<h5>Users that can access the {{selectedGreenhouse.name}}</h5>
 <div>
   <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" id="userstable">
     <thead>
