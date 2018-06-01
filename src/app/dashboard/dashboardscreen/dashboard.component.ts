@@ -5,6 +5,7 @@ import {Observable} from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import {HttpHeaders} from '@angular/common/http';
 import {loadConfigurationFromPath} from 'tslint/lib/configuration';
+import { Greenhouse } from '../../dataObjects/classes/greenhouses.class';
 
 @Component({
   selector: 'app-dashboard-component',
@@ -13,12 +14,17 @@ import {loadConfigurationFromPath} from 'tslint/lib/configuration';
 })
 
 export class DashboardComponent implements OnInit {
-  greenhouses;
+
+  greenhouses: Greenhouse[];
   departments;
 
   public showcaseId: number;
 
   constructor(private http: HttpClient) {  }
+
+  ngOnInit() {
+    this.loadGreenhouses();
+  }
 
   public getGreenhouses(token: string): Observable<any> {
     return this.http.get(`${environment.apiEndpoint}/greenhouse/getAll`, {
@@ -46,17 +52,23 @@ export class DashboardComponent implements OnInit {
   loadGreenhouses() {
     this.getGreenhouses(this.getToken()).subscribe(res => {
       this.greenhouses = res.greenhouses;
+      this.loadDepartments();
     });
   }
 
-  loadDepartments(id) {
-    this.showcaseId = id;
-    this.getDepartments(this.getToken(), id).subscribe(res => {
-      this.departments = res.departments;
-    });
+  selectGreenhouse(id) {
+    if ( this.showcaseId !== id ) {
+      this.showcaseId = id;
+    } else {
+      this.showcaseId = 0;
+    }
   }
 
-  ngOnInit() {
-    this.loadGreenhouses();
+  loadDepartments() {
+    this.greenhouses.forEach( greenhouse => {
+      this.getDepartments(this.getToken(), greenhouse._id).subscribe(res => {
+        greenhouse.departments = res.departments;
+      });
+    });
   }
 }

@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod",
+    "build": "ng build --prod --extract-css=false",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -31,7 +31,6 @@
     "datatables.net-buttons-dt": "^1.5.1",
     "datatables.net-dt": "^1.10.16",
     "jwt-decode": "^2.2.0",
-    "popper": "^1.0.1",
     "popper.js": "^1.14.3",
     "rxjs": "^5.5.6",
     "serve": "^6.5.7",

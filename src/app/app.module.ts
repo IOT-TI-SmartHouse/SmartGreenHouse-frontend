@@ -25,6 +25,7 @@ import { GreenhouseDepartmentService} from './login/services/greenhouse-departme
 import {GraphsComponent} from './dashboard/graphs/graphs.component';
 import { SensorNodeComponent } from './control/sensor-node-control/sensor-node-control.component';
 import {SensorNodeService} from './login/services/sensor-node.service';
+import { AdminGuard } from './admin-guard.service';
 // import { AuthInterceptor } from './auth-intercepter.services';
 
 
@@ -42,7 +43,7 @@ import {SensorNodeService} from './login/services/sensor-node.service';
     UserControlComponent, GreenHouseControlComponent, GreenHouseAccesControlComponent, MenuBarComponent,
     GreenHouseDepartmentControlComponent, ControlComponent , GraphsComponent, SensorNodeComponent
   ],
-  providers: [ AuthGuard , LoginService, GreenhouseService, GreenhouseAccesService, UserService, GreenhouseDepartmentService, SensorNodeService
+  providers: [ AuthGuard , AdminGuard,  LoginService, GreenhouseService, GreenhouseAccesService, UserService, GreenhouseDepartmentService, SensorNodeService
   // {
   //   provide: AuthInterceptor,
   //   useClass: TokenInterceptor,

@@ -14,12 +14,29 @@
       <li class="nav-item rounded" routerLinkActive="active" routerLink="/info">
         <a>Info</a>
       </li>
-      <li class="nav-dropdown-item rounded" routerLinkActive="active" routerLink="/admincontrol">
-        <a>Admin Control</a>
-      </li>
-      <li class="nav-dropdown-item rounded" routerLinkActive="active" routerLink="/usercontrol">
-        <a>User Control</a>
-      </li>
+      <div class="dropdown-wrapper">
+        <li class="nav-item dropdown rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+        *ngIf="userService.isAdmin()">
+          <a class="dropdown-toggle">Control Panel</a>
+        </li>
+        <div class="dropdown-menu">
+          <li>
+            <a class="dropdown-item" (click)="navigate('userControl')">Users</a>
+          </li>
+          <li>
+            <a class="dropdown-item" (click)="navigate('greenHouseControl')">Greenhouses</a>
+          </li>
+          <li>
+            <a class="dropdown-item" (click)="navigate('greenHouseAccessControl')">Link User to Greenhouse</a>
+          </li>
+          <li>
+            <a class="dropdown-item" (click)="navigate('greenHouseDepartmentControl')">Departments</a>
+          </li>
+          <li class="nav-dropdown-item rounded" routerLinkActive="active" routerLink="/usercontrol">
+            <a>User Control</a>
+          </li>
+        </div>
+      </div>
     </ul>
     <button class="btn navbar-btn" routerLinkActive="active" (click)="logout()" routerLink="/login">
       <a>Logout</a>
