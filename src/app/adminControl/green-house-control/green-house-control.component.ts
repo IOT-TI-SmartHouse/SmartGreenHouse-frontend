@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {GreenhouseService} from '../../login/services/greenhouse.service';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs/Observable';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
-import swal from "sweetalert2";
+import swal from 'sweetalert2';
+import { GreenhouseService } from '../../services/greenhouse.service';
 declare var $: any;
 
 @Component({

@@ -1,11 +1,11 @@
 import {Component, OnInit } from '@angular/core';
-import {LoginService} from '../../login/services/login.service';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs/Observable';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
 import swal from 'sweetalert2';
-import { UserService} from '../../login/services/user.service';
+import { UserService } from '../../services/user.service';
+import { LoginService } from '../../services/login.service';
 
 declare var $: any;
 

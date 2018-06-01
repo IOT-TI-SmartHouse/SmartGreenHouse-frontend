@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AppModule } from '../../app.module';
-import { LoginService } from '../services/login.service';
 import swal from 'sweetalert2';
+import { LoginService } from "../../services/login.service";
 
 @Component({
   selector: 'app-login-component',

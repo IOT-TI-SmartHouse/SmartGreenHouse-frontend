@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Subject} from 'rxjs/Subject';
-import {GreenhouseService} from '../../login/services/greenhouse.service';
-import { GreenhouseDepartmentService} from '../../login/services/greenhouse-department.service';
+import swal from 'sweetalert2';
+import { GreenhouseService } from '../../services/greenhouse.service';
+import { GreenhouseDepartmentService } from '../../services/greenhouse-department.service';
 
 @Component({
   selector: 'app-green-house-department-control',
