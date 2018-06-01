@@ -1,38 +1,38 @@
 <div class="container">
-  <div class="row">
-  <div class="col-md-5">
+    <div class="row">
+    <div class="col-md-5">
+    </div>
+    <div class="col-md-7">
+        <h1>Graphs</h1>
+    </div>
   </div>
-  <div class="col-md-7">
-      <h1>Graphs</h1>
-  </div>
-</div>
 
-  <div class="row">
-    <div class="col-md-2">
-      <ul class="list-group">
-        <div *ngFor="let node of nodes">
-          <li (click)="selectNode(node._id)" [ngClass]="{'active': selectedNode == node._id}"  class="list-group-item" >
-            {{node.name}}
-          </li>
-        </div>
-      </ul>
-    </div>
-    <div class="col-md-8">
-      <canvas id="generalChart"></canvas>
-    </div>
-    <div class="col-md-2">
-      <button (click)="loadNodes(department);">Combine data</button>
+    <div class="row">
+      <div class="col-md-2">
+        <ul class="list-group">
+          <div *ngFor="let node of nodes">
+            <li (click)="clearGraph(); drawNode(node._id)" [ngClass]="{'active': selectedNode == node._id}"  class="list-group-item" >
+              {{node.name}}
+            </li>
+          </div>
+        </ul>
+      </div>
+      <div class="col-md-8">
+        <canvas id="generalChart"></canvas>
+      </div>
+      <div class="col-md-2">
+        <button (click)="clearGraph(); drawNodes();">Show all data</button>
+
       <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#nodemodal">Add new sensornode</button>
+      </div>
     </div>
+
+    <input type="text" placeholder="From YYYY-MM-DD" #fromDate/>
+    <input type="text" placeholder="To YYYY-MM-DD" #toDate/>
+    <button (click)="clearGraph(); setDates(fromDate.value, toDate.value); loadNodes(department);">Plot</button>
   </div>
 
-  <input type="text" placeholder="From YYYY-MM-DD" #fromDate/>
-  <input type="text" placeholder="To YYYY-MM-DD" #toDate/>
-  <button (click)="setDates(fromDate.value, toDate.value); loadNodes(department);">Plot</button>
-</div>
-
-
-<!-- Modal -->
+  <!-- Modal -->
 <div class="modal fade" id="nodemodal" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
