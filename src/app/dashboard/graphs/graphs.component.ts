@@ -20,7 +20,7 @@ export class GraphsComponent implements OnInit {
   greenhouse: string;
   department: string;
   nodes;
-  data;
+  data = [];
   chart;
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {  }
@@ -49,31 +49,55 @@ export class GraphsComponent implements OnInit {
     return String(localStorage.getItem('id_token'));
   }
 
-  loadNodes(id) {
+  //GET ALL DATA
+  initData(id) {
     this.getNodes(this.getToken(), id).subscribe(res => {
       this.nodes = res.nodes;
 
       for (let i = 0; i < this.nodes.length; i ++) {
-        this.loadData(this.nodes[i]._id);
+        this.saveData(this.nodes[i]._id);
       }
     });
   }
 
-  loadData(id) {
-    this.clearGraph();
-
+  //SAVE DATA LOCALLY AND DRAW IT
+  saveData(id) {
     this.getData(this.getToken(), id).subscribe(res => {
-      this.data = res.data;
+      this.data.push(res.data);
+      this.drawData(res.data);
+    });
+  }
 
-      for (let i = 0; i < this.data.length; i ++) {
-        if (this.data[i].sensorType === 'Temperature') {
-          this.drawTemperature(this.cleanTimestamp(this.data[i].createdAt), this.data[i].value);
-        }
-        if (this.data[i].sensorType === 'Humidity') {
-          this.drawHumidity(this.cleanTimestamp(this.data[i].createdAt), this.data[i].value);
+  //DRAW SINGLE NODE DATA
+  drawNode(id) {
+    for (let i = 0; i < this.data.length; i ++) {
+      const dataCheck = this.data[i];
+
+      for (let j = 0; j < dataCheck.length; j ++) {
+        if (dataCheck[j].node === id) {
+          this.drawData(dataCheck);
+          break;
         }
       }
-    });
+    }
+  }
+
+  //DRAW ALL NODE DATA
+  drawNodes() {
+    for (let i = 0; i < this.data.length; i ++) {
+      this.drawData(this.data[i]);
+    }
+  }
+
+  drawData(data) {
+    for (let i = 0; i < data.length; i ++) {
+      if (data[i].sensorType === 'Temperature') {
+        this.drawTemperature(this.cleanTimestamp(data[i].createdAt), data[i].value);
+      }
+      if (data[i].sensorType === 'Humidity') {
+        this.drawHumidity(this.cleanTimestamp(data[i].createdAt), data[i].value);
+      }
+    }
   }
 
   cleanTimestamp(timestamp) {
@@ -87,9 +111,7 @@ export class GraphsComponent implements OnInit {
       this.chart.data.labels.push(timestamp);
       this.chart.data.datasets[0].data.push(temperature);
       this.chart.update();
-    }
-
-    else if (timestamp < this.toDate && timestamp > this.fromDate) {
+    } else if (timestamp < this.toDate && timestamp > this.fromDate) {
       this.chart.data.labels.push(timestamp);
       this.chart.data.datasets[0].data.push(temperature);
       this.chart.update();
@@ -101,9 +123,7 @@ export class GraphsComponent implements OnInit {
       this.chart.data.labels.push(timestamp);
       this.chart.data.datasets[1].data.push(humidity);
       this.chart.update();
-    }
-
-    else if (timestamp < this.toDate && timestamp > this.fromDate) {
+    } else if (timestamp < this.toDate && timestamp > this.fromDate) {
       this.chart.data.labels.push(timestamp);
       this.chart.data.datasets[1].data.push(humidity);
       this.chart.update();
@@ -143,6 +163,6 @@ export class GraphsComponent implements OnInit {
     this.department = url.searchParams.get('department');
 
     this.drawGraph();
-    this.loadNodes(this.department);
+    this.initData(this.department);
   }
 }
