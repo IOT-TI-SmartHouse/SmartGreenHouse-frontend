@@ -23,7 +23,8 @@ export class GraphsComponent implements OnInit {
   department: string;
   nodes;
   data = [];
-  chart;
+  tempChart;
+  humiChart;
   public selectedNode: any;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private sensorNodeService: SensorNodeService,
@@ -90,25 +91,25 @@ export class GraphsComponent implements OnInit {
 
   drawTemperature(timestamp, temperature) {
     if (this.fromDate == null && this.toDate == null) {
-      this.chart.data.labels.push(timestamp);
-      this.chart.data.datasets[0].data.push(temperature);
-      this.chart.update();
+      this.tempChart.data.labels.push(timestamp);
+      this.tempChart.data.datasets[0].data.push(temperature);
+      this.tempChart.update();
     } else if (timestamp < this.toDate && timestamp > this.fromDate) {
-      this.chart.data.labels.push(timestamp);
-      this.chart.data.datasets[0].data.push(temperature);
-      this.chart.update();
+      this.tempChart.data.labels.push(timestamp);
+      this.tempChart.data.datasets[0].data.push(temperature);
+      this.tempChart.update();
     }
   }
 
   drawHumidity(timestamp, humidity) {
     if (this.fromDate == null && this.toDate == null) {
-      this.chart.data.labels.push(timestamp);
-      this.chart.data.datasets[1].data.push(humidity);
-      this.chart.update();
+      this.humiChart.data.labels.push(timestamp);
+      this.humiChart.data.datasets[0].data.push(humidity);
+      this.humiChart.update();
     } else if (timestamp < this.toDate && timestamp > this.fromDate) {
-      this.chart.data.labels.push(timestamp);
-      this.chart.data.datasets[1].data.push(humidity);
-      this.chart.update();
+      this.humiChart.data.labels.push(timestamp);
+      this.humiChart.data.datasets[0].data.push(humidity);
+      this.humiChart.update();
     }
   }
 
@@ -118,25 +119,36 @@ export class GraphsComponent implements OnInit {
   }
 
   drawGraph() {
-    const ctx = document.getElementById('generalChart');
-    this.chart = new Chart(ctx, {
+    const temp = document.getElementById('tempChart');
+    this.tempChart = new Chart(temp, {
       type: 'line',
       data: {
-        datasets: [
-          { label: 'Temperature' },
-          { label: 'Humidity' }
-          ] }
+        datasets: [{ label: 'Temperature' }]
+      }
+    });
+
+    const humi = document.getElementById('humiChart');
+    this.humiChart = new Chart(humi, {
+      type: 'line',
+      data: {
+        datasets: [{ label: 'Humidity' }]
+      }
     });
   }
 
   clearGraph() {
-    this.chart.data.labels = [];
+    this.tempChart.data.labels = [];
+    this.humiChart.data.labels = [];
 
-    for (let i = 0; i < this.chart.data.datasets.length; i ++) {
-      this.chart.data.datasets[i].data = [];
+    for (let i = 0; i < this.tempChart.data.datasets.length; i ++) {
+      this.tempChart.data.datasets[i].data = [];
+    }
+    for (let i = 0; i < this.humiChart.data.datasets.length; i ++) {
+      this.humiChart.data.datasets[i].data = [];
     }
 
-    this.chart.update();
+    this.tempChart.update();
+    this.humiChart.update();
   }
 
   ngOnInit() {
