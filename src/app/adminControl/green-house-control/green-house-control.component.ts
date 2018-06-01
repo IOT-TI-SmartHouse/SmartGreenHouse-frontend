@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {environment} from '../../../environments/environment';
-import {Observable} from 'rxjs/Observable';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
-import swal from 'sweetalert2';
 import { GreenhouseService } from '../../services/greenhouse.service';
+import {Router} from '@angular/router';
 declare var $: any;
 
 @Component({
@@ -20,7 +18,7 @@ export class GreenHouseControlComponent implements OnInit {
   public name: string;
   public location: string;
 
-  constructor( private greenhouseService: GreenhouseService, private http: HttpClient) { }
+  constructor( private greenhouseService: GreenhouseService, private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
     this.dtOptions = {
@@ -54,6 +52,8 @@ export class GreenHouseControlComponent implements OnInit {
     this.greenhouseService.register(this.name, this.location);
   }
 
-
-
+  navigateGreenhouse(greenhouse: any) {
+    this.greenhouseService.setSelectedGreenhouse(greenhouse);
+    this.router.navigate(['/admin/greenHouseDepartmentControl']);
+  }
 }
