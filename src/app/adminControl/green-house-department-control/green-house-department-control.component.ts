@@ -57,6 +57,7 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
 
   public addDepartment(): void {
     this.departmentService.register(this.name, this.selectedGreenhouse._id);
+    this.clearInputFields();
   }
 
   onOptionsSelected(event: any) {
@@ -68,4 +69,9 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
     this.departmentService.setSelectedDepartment(department);
     this.router.navigate(['/dashboard/graphs']);
   }
+
+  public clearInputFields() {
+    this.name = '';
+  }
+
 }

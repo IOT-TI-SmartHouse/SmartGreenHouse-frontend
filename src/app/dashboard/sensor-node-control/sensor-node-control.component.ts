@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import { SensorNodeService} from '../../services/sensor-node.service';
 import { GreenhouseDepartmentService} from '../../services/greenhouse-department.service';
 import { GreenhouseService} from '../../services/greenhouse.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-sensor-node',
@@ -13,6 +14,9 @@ export class SensorNodeComponent implements OnInit {
   table = $('#sensornodesTable').DataTable();
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
+
+  @Output()
+    public onCreate: EventEmitter<any> = new EventEmitter<any>();
 
   greenhouses: any = [];
   departments: any = [];
@@ -27,7 +31,7 @@ export class SensorNodeComponent implements OnInit {
   public hardwareserial: string;
 
   constructor(private sensornodeService: SensorNodeService,
-     private departmentService: GreenhouseDepartmentService, private greenhouseService: GreenhouseService) { }
+     private departmentService: GreenhouseDepartmentService, private greenhouseService: GreenhouseService, private router: Router) { }
 
   ngOnInit() {
     this.dtOptions = {
@@ -66,8 +70,16 @@ export class SensorNodeComponent implements OnInit {
     });
   }
 
-  public addSensorNode(): void {
+  public addSensorNode() {
     this.sensornodeService.register(this.name,
        this.departmentService.getSelectedDepartment(), this.latitude, this.longitude, this.hardwareserial);
+    this.clearInputFields();
+  }
+
+  public clearInputFields() {
+    this.name = '';
+    this.latitude = '';
+    this.longitude = '';
+    this.hardwareserial = '';
   }
 }

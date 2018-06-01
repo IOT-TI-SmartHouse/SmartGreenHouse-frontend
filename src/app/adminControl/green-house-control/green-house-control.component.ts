@@ -48,8 +48,14 @@ export class GreenHouseControlComponent implements OnInit {
     });
   }
 
+  public clearInputFields() {
+    this.name = '';
+    this.location = '';
+  }
+
   public addGreenHouse(): void {
     this.greenhouseService.register(this.name, this.location);
+    this.clearInputFields();
   }
 
   navigateGreenhouse(greenhouse: any) {

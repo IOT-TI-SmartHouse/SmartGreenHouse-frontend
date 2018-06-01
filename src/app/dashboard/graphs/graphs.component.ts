@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Chart } from 'chart.js';
 import { HttpClient } from '@angular/common/http';
 import { GreenhouseDepartmentService } from '../../services/greenhouse-department.service';
@@ -22,7 +22,7 @@ export class GraphsComponent implements OnInit {
   selectedNode = 0;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private sensorNodeService: SensorNodeService,
-      private departmentService: GreenhouseDepartmentService) {  }
+      private departmentService: GreenhouseDepartmentService, private router: Router) {  }
 
   selectNode(id: any) {
     this.selectedNode = id;
@@ -120,5 +120,9 @@ export class GraphsComponent implements OnInit {
 
     this.drawGraph();
     this.loadNodes(this.department._id);
+  }
+
+  refresh(event){
+    //this.loadData();
   }
 }
