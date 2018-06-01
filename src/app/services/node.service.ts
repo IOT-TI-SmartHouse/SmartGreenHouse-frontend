@@ -28,13 +28,13 @@ export class NodeService {
     }
 
     public getData(id: string): Observable<any> {
-    return this.http.get(`${environment.apiEndpoint}/sensordata/getAll`, {
-        headers: new HttpHeaders({
-        'Content-Type': 'application/Json',
-        'x-access-token': this.getToken(),
-        'node': id
-        })
-    });
+        return this.http.get(`${environment.apiEndpoint}/sensordata/getAll`, {
+            headers: new HttpHeaders({
+            'Content-Type': 'application/Json',
+            'x-access-token': this.getToken(),
+            'node': id
+            })
+        });
     }
 
     getToken() {

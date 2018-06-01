@@ -6,6 +6,9 @@ import { HttpClient } from '@angular/common/http';
 import {HttpHeaders} from '@angular/common/http';
 import {loadConfigurationFromPath} from 'tslint/lib/configuration';
 import { Greenhouse } from '../../dataObjects/classes/greenhouses.class';
+import { Router } from '@angular/router';
+import { GreenhouseDepartmentService } from '../../services/greenhouse-department.service';
+import { GreenhouseService } from '../../services/greenhouse.service';
 
 @Component({
   selector: 'app-dashboard-component',
@@ -20,37 +23,15 @@ export class DashboardComponent implements OnInit {
 
   public showcaseId: number;
 
-  constructor(private http: HttpClient) {  }
+  constructor(private http: HttpClient, private router: Router,
+       private departmentService: GreenhouseDepartmentService, private greenhouseService: GreenhouseService) {  }
 
   ngOnInit() {
     this.loadGreenhouses();
   }
 
-  public getGreenhouses(token: string): Observable<any> {
-    return this.http.get(`${environment.apiEndpoint}/greenhouse/getAll`, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/Json',
-        'x-access-token': token
-      })
-    });
-  }
-
-  public getDepartments(token: string, id: string): Observable<any> {
-    return this.http.get(`${environment.apiEndpoint}/greenhousedepartment/getAll`, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/Json',
-        'x-access-token': token,
-        'greenhouse': id
-      })
-    });
-  }
-
-  getToken() {
-    return String(localStorage.getItem('id_token'));
-  }
-
   loadGreenhouses() {
-    this.getGreenhouses(this.getToken()).subscribe(res => {
+    this.greenhouseService.getGreenhouses().subscribe(res => {
       this.greenhouses = res.greenhouses;
       this.loadDepartments();
     });
@@ -66,9 +47,14 @@ export class DashboardComponent implements OnInit {
 
   loadDepartments() {
     this.greenhouses.forEach( greenhouse => {
-      this.getDepartments(this.getToken(), greenhouse._id).subscribe(res => {
+      this.departmentService.getGreenhouseDepartments(greenhouse._id).subscribe(res => {
         greenhouse.departments = res.departments;
       });
     });
+  }
+
+  navigate(department: any) {
+    this.departmentService.setSelectedDepartment(department);
+    this.router.navigate(['/dashboard/graphs']);
   }
 }

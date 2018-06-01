@@ -7,7 +7,8 @@ import {Observable} from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import {HttpHeaders} from '@angular/common/http';
 import {loadConfigurationFromPath} from 'tslint/lib/configuration';
-import { NodeService } from "../../services/node.service";
+import { NodeService } from '../../services/node.service';
+import { GreenhouseDepartmentService } from '../../services/greenhouse-department.service';
 
 @Component({
   selector: 'app-graphs-component',
@@ -18,7 +19,6 @@ import { NodeService } from "../../services/node.service";
 export class GraphsComponent implements OnInit {
   fromDate: string;
   toDate: string;
-  greenhouse: string;
   department: string;
   nodes;
   data;
@@ -26,7 +26,8 @@ export class GraphsComponent implements OnInit {
 
   selectedNode = 0;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private nodeService: NodeService) {  }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private nodeService: NodeService,
+      private departmentService: GreenhouseDepartmentService) {  }
 
   selectNode(id: any) {
     this.selectedNode = id;
@@ -58,6 +59,7 @@ export class GraphsComponent implements OnInit {
 
   loadNodes(id) {
     this.selectedNode = 0;
+    console.log(id);
     this.nodeService.getNodes(id).subscribe(res => {
       this.nodes = res.nodes;
 
@@ -72,9 +74,7 @@ export class GraphsComponent implements OnInit {
       this.chart.data.labels.push(timestamp);
       this.chart.data.datasets[0].data.push(temperature);
       this.chart.update();
-    }
-
-    else if (timestamp < this.toDate && timestamp > this.fromDate) {
+    } else if (timestamp < this.toDate && timestamp > this.fromDate) {
       this.chart.data.labels.push(timestamp);
       this.chart.data.datasets[0].data.push(temperature);
       this.chart.update();
@@ -86,9 +86,7 @@ export class GraphsComponent implements OnInit {
       this.chart.data.labels.push(timestamp);
       this.chart.data.datasets[1].data.push(humidity);
       this.chart.update();
-    }
-
-    else if (timestamp < this.toDate && timestamp > this.fromDate) {
+    } else if (timestamp < this.toDate && timestamp > this.fromDate) {
       this.chart.data.labels.push(timestamp);
       this.chart.data.datasets[1].data.push(humidity);
       this.chart.update();
@@ -123,9 +121,8 @@ export class GraphsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.department = this.departmentService.getSelectedDepartment()._id;
     const url = new URL(window.location.href);
-    this.greenhouse = url.searchParams.get('greenhouse');
-    this.department = url.searchParams.get('department');
 
     this.drawGraph();
     this.loadNodes(this.department);
