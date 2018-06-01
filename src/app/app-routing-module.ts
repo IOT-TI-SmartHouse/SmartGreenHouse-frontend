@@ -10,8 +10,10 @@ import { UserControlComponent } from './adminControl/user-control/user-control.c
 import { GreenHouseControlComponent} from './adminControl/green-house-control/green-house-control.component';
 import { GreenHouseAccesControlComponent} from './adminControl/green-house-acces-control/green-house-acces-control.component';
 import { InfoComponent } from './info/info.component';
+import { ControlComponent} from './control/control.component';
 import { AdminGuard } from './admin-guard.service';
 import {GreenHouseDepartmentControlComponent} from './adminControl/green-house-department-control/green-house-department-control.component';
+import {SensorNodeComponent} from './dashboard/sensor-node-control/sensor-node-control.component';
 
 
 const appRoutes: Routes = [
@@ -42,6 +44,11 @@ const appRoutes: Routes = [
     {
         path: 'dashboard/graphs',
         component: GraphsComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'dashboard/sensornode',
+        component: SensorNodeComponent,
         canActivate: [AuthGuard]
     },
     {

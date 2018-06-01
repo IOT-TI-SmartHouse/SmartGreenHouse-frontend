@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Router, ActivatedRoute, Params} from '@angular/router';
-import { AppModule } from '../../app.module';
+import { ActivatedRoute} from '@angular/router';
 import { Chart } from 'chart.js';
-import {environment} from '../../../environments/environment';
-import {Observable} from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
-import {HttpHeaders} from '@angular/common/http';
-import {loadConfigurationFromPath} from 'tslint/lib/configuration';
-import { NodeService } from '../../services/node.service';
 import { GreenhouseDepartmentService } from '../../services/greenhouse-department.service';
+import {SensorNodeService} from '../../services/sensor-node.service';
 
 @Component({
   selector: 'app-graphs-component',
@@ -26,7 +21,7 @@ export class GraphsComponent implements OnInit {
 
   selectedNode = 0;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private nodeService: NodeService,
+  constructor(private route: ActivatedRoute, private http: HttpClient, private sensorNodeService: SensorNodeService,
       private departmentService: GreenhouseDepartmentService) {  }
 
   selectNode(id: any) {
@@ -37,7 +32,7 @@ export class GraphsComponent implements OnInit {
   loadData(id) {
     this.clearGraph();
 
-    this.nodeService.getData(id).subscribe(res => {
+    this.sensorNodeService.getData(id).subscribe(res => {
       this.data = res.data;
 
       for (let i = 0; i < this.data.length; i ++) {
@@ -60,7 +55,7 @@ export class GraphsComponent implements OnInit {
   loadNodes(id) {
     this.selectedNode = 0;
     console.log(id);
-    this.nodeService.getNodes(id).subscribe(res => {
+    this.sensorNodeService.getSensorNodes(id).subscribe(res => {
       this.nodes = res.nodes;
 
       for (let i = 0; i < this.nodes.length; i ++) {
@@ -116,12 +111,11 @@ export class GraphsComponent implements OnInit {
     for (let i = 0; i < this.chart.data.datasets.length; i ++) {
       this.chart.data.datasets[i].data = [];
     }
-
     this.chart.update();
   }
 
   ngOnInit() {
-    this.department = this.departmentService.getSelectedDepartment()._id;
+    this.department = this.departmentService.getSelectedDepartment();
     const url = new URL(window.location.href);
 
     this.drawGraph();

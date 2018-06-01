@@ -1,0 +1,47 @@
+<!-- Modal -->
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">ADD NEW SENSORNODE</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form">
+          <div class="row">
+            <div class="col-sm-6">
+              Sensornode name:
+            </div>
+            <div class="col-sm-6">
+              <input type="text" placeholder="sensornode name" [(ngModel)]="name" [ngModelOptions]="{standalone:true}"/>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              Latitude:
+            </div>
+            <div class="col-sm-6">
+              <input type="text" placeholder="latitude" [(ngModel)]="longitude" [ngModelOptions]="{standalone:true}"/>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              Longitude:
+            </div>
+            <div class="col-sm-6">
+              <input type="text" placeholder="longitude" [(ngModel)]="latitude" [ngModelOptions]="{standalone:true}"/>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              Hardware Serial:
+            </div>
+            <div class="col-sm-6">
+              <input type="text" placeholder="hardware serial" [(ngModel)]="hardwareserial" [ngModelOptions]="{standalone:true}"/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="addSensorNode()" data-dismiss="modal">Save</button>
+      </div>
+    </div>
