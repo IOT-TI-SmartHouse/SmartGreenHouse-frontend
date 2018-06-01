@@ -18,6 +18,7 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
   greenhouses: any = [];
   public greenhousePlaceholder = 'select a greenhouse';
   public selectedGreenhouse: any;
+  public selectedGreenhouseId: any;
   public name: string;
 
   constructor(private greenhouseService: GreenhouseService, private departmentService: GreenhouseDepartmentService) { }
@@ -41,7 +42,6 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
     this.selectedGreenhouse = greenhouse;
     this.departmentService.getGreenhouseDepartments(this.selectedGreenhouse._id).subscribe( res => {
       this.departments = res.departments;
-      console.log(res);
       $('#departmentsTable').DataTable().destroy();
       this.dtTrigger.next();
     });
@@ -51,4 +51,8 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
     this.departmentService.register(this.name, this.selectedGreenhouse._id);
   }
 
+
+  onOptionsSelected(event: any) {
+    this.selectGreenhouse(this.greenhouses.find( greenhouse => greenhouse._id === event ));
+  }
 }

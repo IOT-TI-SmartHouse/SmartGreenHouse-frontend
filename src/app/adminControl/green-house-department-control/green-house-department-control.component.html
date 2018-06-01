@@ -1,8 +1,8 @@
 <div class="container">
   <input type="text" placeholder="department name" [(ngModel)]="name" [ngModelOptions]="{standalone:true}"/>
 
-  <select class="custom-select" [(ngModel)]="selectedGreenhouse" (ngModalChange)="onChange($event)">
-    <option *ngFor="let greenhouse of greenhouses" [value]="greenhouse._id" (click)="selectGreenhouse(greenhouse)">{{greenhouse.name}} at {{greenhouse.location}}</option>
+  <select selected class="custom-select" [(ngModel)]="selectedGreenhouseId" (ngModelChange)='onOptionsSelected($event)'>
+    <option *ngFor="let greenhouse of greenhouses" [value]="greenhouse._id" >{{greenhouse.name}} at {{greenhouse.location}}</option>
   </select>
   <div class="btn-group">
     <button class="btn btn-rounded btn-app-medium-grey dropdown-toggle" type="button" id="dropdownGreenhouse" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
