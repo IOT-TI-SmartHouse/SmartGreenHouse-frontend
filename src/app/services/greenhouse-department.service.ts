@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
-import {environment} from '../../../environments/environment';
 import {HttpHeaders, HttpClient} from '@angular/common/http';
 import swal from 'sweetalert2';
 import {Observable} from 'rxjs/Observable';
+import { environment } from '../../environments/environment';
 
 
 @Injectable()
 export class GreenhouseDepartmentService {
+
+  private selectedDepartment: any;
 
   constructor(private http: HttpClient) { }
 
@@ -51,5 +53,13 @@ export class GreenhouseDepartmentService {
         'greenhouse': greenhouseid
       })
     });
+  }
+
+  public setSelectedDepartment(department: any) {
+    this.selectedDepartment = department;
+  }
+
+  public getSelectedDepartment() {
+    return this.selectedDepartment;
   }
 }

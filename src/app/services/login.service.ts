@@ -4,9 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import * as jwt_decode from 'jwt-decode';
 import { Router } from '@angular/router';
 import swal from 'sweetalert2';
-import { environment } from '../../../environments/environment';
 import {HttpHeaders} from '@angular/common/http';
 import { UserService } from './user.service';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class LoginService {

@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { GreenhouseAccesService} from '../../login/services/greenhouseAcces.service';
 import { Subject} from 'rxjs/Subject';
-import { GreenhouseService} from '../../login/services/greenhouse.service';
-import { UserService} from '../../login/services/user.service';
-import { User } from "../../dataObjects/classes/user.class";
-import { Greenhouse } from "../../dataObjects/classes/greenhouses.class";
+import { GreenhouseAccesService } from '../../services/greenhouseAcces.service';
+import { GreenhouseService } from '../../services/greenhouse.service';
+import { UserService } from '../../services/user.service';
+
 
 
 @Component({

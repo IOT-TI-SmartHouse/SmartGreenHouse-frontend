@@ -7,6 +7,8 @@ import {Observable} from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import {HttpHeaders} from '@angular/common/http';
 import {loadConfigurationFromPath} from 'tslint/lib/configuration';
+import { NodeService } from '../../services/node.service';
+import { GreenhouseDepartmentService } from '../../services/greenhouse-department.service';
 
 @Component({
   selector: 'app-graphs-component',
@@ -15,7 +17,8 @@ import {loadConfigurationFromPath} from 'tslint/lib/configuration';
 })
 
 export class GraphsComponent implements OnInit {
-  greenhouse: string;
+  fromDate: string;
+  toDate: string;
   department: string;
   nodes;
   data;
@@ -23,31 +26,8 @@ export class GraphsComponent implements OnInit {
 
   selectedNode = 0;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {  }
-
-  public getNodes(token: string, id: string): Observable<any> {
-    return this.http.get(`${environment.apiEndpoint}/sensornode/getAll`, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/Json',
-        'x-access-token': token,
-        'greenhousedepartment': id
-      })
-    });
-  }
-
-  public getData(token: string, id: string): Observable<any> {
-    return this.http.get(`${environment.apiEndpoint}/sensordata/getAll`, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/Json',
-        'x-access-token': token,
-        'node': id
-      })
-    });
-  }
-
-  getToken() {
-    return String(localStorage.getItem('id_token'));
-  }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private nodeService: NodeService,
+      private departmentService: GreenhouseDepartmentService) {  }
 
   selectNode(id: any) {
     this.selectedNode = id;
@@ -57,23 +37,30 @@ export class GraphsComponent implements OnInit {
   loadData(id) {
     this.clearGraph();
 
-    this.getData(this.getToken(), id).subscribe(res => {
+    this.nodeService.getData(id).subscribe(res => {
       this.data = res.data;
 
       for (let i = 0; i < this.data.length; i ++) {
         if (this.data[i].sensorType === 'Temperature') {
-          this.drawTemperature(this.data[i].createdAt, this.data[i].value);
+          this.drawTemperature(this.cleanTimestamp(this.data[i].createdAt), this.data[i].value);
         }
         if (this.data[i].sensorType === 'Humidity') {
-          this.drawHumidity(this.data[i].createdAt, this.data[i].value);
+          this.drawHumidity(this.cleanTimestamp(this.data[i].createdAt), this.data[i].value);
         }
       }
     });
   }
 
+  cleanTimestamp(timestamp) {
+    const date = timestamp.split('T');
+    date[1] = date[1].replace('Z', '');
+    return date[0] + ' ' + date[1];
+  }
+
   loadNodes(id) {
     this.selectedNode = 0;
-    this.getNodes(this.getToken(), id).subscribe(res => {
+    console.log(id);
+    this.nodeService.getNodes(id).subscribe(res => {
       this.nodes = res.nodes;
 
       for (let i = 0; i < this.nodes.length; i ++) {
@@ -83,15 +70,32 @@ export class GraphsComponent implements OnInit {
   }
 
   drawTemperature(timestamp, temperature) {
-    this.chart.data.labels.push(timestamp);
-    this.chart.data.datasets[0].data.push(temperature);
-    this.chart.update();
+    if (this.fromDate == null && this.toDate == null) {
+      this.chart.data.labels.push(timestamp);
+      this.chart.data.datasets[0].data.push(temperature);
+      this.chart.update();
+    } else if (timestamp < this.toDate && timestamp > this.fromDate) {
+      this.chart.data.labels.push(timestamp);
+      this.chart.data.datasets[0].data.push(temperature);
+      this.chart.update();
+    }
   }
 
   drawHumidity(timestamp, humidity) {
-    this.chart.data.labels.push(timestamp);
-    this.chart.data.datasets[1].data.push(humidity);
-    this.chart.update();
+    if (this.fromDate == null && this.toDate == null) {
+      this.chart.data.labels.push(timestamp);
+      this.chart.data.datasets[1].data.push(humidity);
+      this.chart.update();
+    } else if (timestamp < this.toDate && timestamp > this.fromDate) {
+      this.chart.data.labels.push(timestamp);
+      this.chart.data.datasets[1].data.push(humidity);
+      this.chart.update();
+    }
+  }
+
+  setDates(from, to) {
+    this.fromDate = from + ' 00:00:00.000';
+    this.toDate = to + ' 00:00:00.000';
   }
 
   drawGraph() {
@@ -117,9 +121,8 @@ export class GraphsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.department = this.departmentService.getSelectedDepartment()._id;
     const url = new URL(window.location.href);
-    this.greenhouse = url.searchParams.get('greenhouse');
-    this.department = url.searchParams.get('department');
 
     this.drawGraph();
     this.loadNodes(this.department);

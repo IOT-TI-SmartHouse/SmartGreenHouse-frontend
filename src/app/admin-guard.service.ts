@@ -6,9 +6,9 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot
 } from '@angular/router';
-import { LoginService } from './login/services/login.service';
 import {Observable} from 'rxjs/Observable';
-import { UserService } from './login/services/user.service';
+import { LoginService } from './services/login.service';
+import { UserService } from './services/user.service';
 
 @Injectable()
 export class AdminGuard implements CanActivateChild {
