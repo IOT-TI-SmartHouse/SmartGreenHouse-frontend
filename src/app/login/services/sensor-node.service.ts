@@ -10,12 +10,13 @@ export class SensorNodeService {
   constructor(private http: HttpClient) { }
 
   // create new sensornode
-  public register(name: string, greenhouseDepartment: string, latitude: string, longitude: string) {
+  public register(name: string, greenhouseDepartment: string, latitude: string, longitude: string, hardwareserial) {
     return this.http.post(`${environment.apiEndpoint}/sensornode/register`, {
       name: name,
       greenhouseDepartment: greenhouseDepartment,
       latitude: latitude,
-      longitude: longitude
+      longitude: longitude,
+      hardwareSerial: hardwareserial
     }, {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -27,7 +28,6 @@ export class SensorNodeService {
       swal('Register failed', 'The register attempt has failed', 'error');
     });
   }
-
 
   // update sensornode
   public update(id: string, name: string, greenhouseDepartment: string, latitude: string, longitude: string) {

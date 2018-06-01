@@ -23,7 +23,7 @@ export class GraphsComponent implements OnInit {
 
   selectedNode = 0;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {  }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) {  }
 
   public getNodes(token: string, id: string): Observable<any> {
     return this.http.get(`${environment.apiEndpoint}/sensornode/getAll`, {
@@ -112,7 +112,6 @@ export class GraphsComponent implements OnInit {
     for (let i = 0; i < this.chart.data.datasets.length; i ++) {
       this.chart.data.datasets[i].data = [];
     }
-
     this.chart.update();
   }
 

@@ -15,13 +15,14 @@
             {{node.name}}
           </li>
         </div>
-      </ul> 
+      </ul>
     </div>
     <div class="col-md-8">
       <canvas id="generalChart"></canvas>
     </div>
     <div class="col-md-2">
       <button (click)="loadNodes(department);">Combine data</button>
+      <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#nodemodal">Add new sensornode</button>
     </div>
   </div>
 
@@ -30,3 +31,13 @@
   <button (click)="loadData(nodes[2]._id)">test 3</button-->
 
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="nodemodal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <app-sensor-node></app-sensor-node>
+  </div>
+</div>
+

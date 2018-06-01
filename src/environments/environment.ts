@@ -6,5 +6,6 @@
 export const environment = {
   production: false,
   apiEndpoint: 'http://145.48.6.78:443/service'
+  //apiEndpoint: `${window.location.hostname}/service`
   // apiEndpoint: 'http://localhost:3000'
 };

@@ -23,7 +23,7 @@ import { GreenHouseDepartmentControlComponent } from './adminControl/green-house
 import { ControlComponent } from './control/control.component';
 import { GreenhouseDepartmentService} from './login/services/greenhouse-department.service';
 import {GraphsComponent} from './dashboard/graphs/graphs.component';
-import { SensorNodeComponent } from './control/sensor-node-control/sensor-node-control.component';
+import { SensorNodeComponent } from './dashboard/sensor-node-control/sensor-node-control.component';
 import {SensorNodeService} from './login/services/sensor-node.service';
 import { AdminGuard } from './admin-guard.service';
 // import { AuthInterceptor } from './auth-intercepter.services';

@@ -24,6 +24,7 @@ export class SensorNodeComponent implements OnInit {
   public name: string;
   public latitude: string;
   public longitude: string;
+  public hardwareserial: string;
 
   constructor(private sensornodeService: SensorNodeService, private departmentService: GreenhouseDepartmentService, private greenhouseService: GreenhouseService) { }
 
@@ -65,6 +66,8 @@ export class SensorNodeComponent implements OnInit {
   }
 
   public addSensorNode(): void {
-    this.sensornodeService.register(this.name, this.selectedDepartment._id, this.latitude, this.longitude);
+    // this.sensornodeService.register(this.name, this.selectedDepartment._id, this.latitude, this.longitude, this.hardwareserial);
+    // this.sensornodeService.register(this.name, this.departmentService.getSelectedDepartment()._id, this.latitude, this.longitude, this.hardwareserial);
+
   }
 }
