@@ -1,38 +1,15 @@
 <div class="container">
-  <div class="btn-group">
-    <button class="btn dropdown-toggle" type="button" id="dropdownUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <div *ngIf="selectedUser != null">
-        {{selectedUser.username}}
-      </div>
-      <div *ngIf="selectedUser == null">
-        {{ userPlaceholder }}
-      </div>
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownUser">
-      <div *ngFor="let user of filteredUsers">
-        <a class="dropdown-item" (click)="selectUser(user)">{{user.username}}</a>
-      </div>
-      <div class="dropdown-divider"></div>
-      <a class="dropdown-item" (click)="clearUserDropdown()">Clear selection</a>
-    </div>
+
+  <div class="form-group">
+    <select selected class="custom-select" [(ngModel)]="selectedUserId" (ngModelChange)='onUserSelected($event)'>
+      <option *ngFor="let user of filteredUsers" [value]="user._id">{{user.username}}</option>
+    </select>
+
+    <select selected class="custom-select" [(ngModel)]="selectedGreenhouseId" (ngModelChange)='onOptionsSelected($event)'>
+      <option *ngFor="let greenhouse of filteredGreenhouses" [value]="greenhouse._id" >{{greenhouse.name}} at {{greenhouse.location}}</option>
+    </select>
   </div>
-  <div class="btn-group">
-    <button class="btn dropdown-toggle" type="button" id="dropdownGreenhouse" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <div *ngIf="selectedGreenhouse != null">
-        {{selectedGreenhouse.name}}, location: {{selectedGreenhouse.location}}
-      </div>
-      <div *ngIf="selectedGreenhouse == null">
-        {{ greenhousePlaceholder }}
-      </div>
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownGreenhouse">
-      <div *ngFor="let greenhouse of filteredGreenhouses">
-        <a class="dropdown-item" (click)="selectGreenhouse(greenhouse)">{{greenhouse.name}}, location: {{greenhouse.location}}</a>
-      </div>
-      <div class="dropdown-divider"></div>
-      <a class="dropdown-item" (click)="clearGreenhouseDropdown()">Clear selection</a>
-    </div>
-  </div>
+
   <button class="btn btn-app-green" (click)="addGreenHouseAccess()">Add Greenhouse Access</button>
 
 <h3>Greenhouses which the selected user can access.</h3>
@@ -67,5 +44,4 @@
     </tr>
     </tbody>
   </table>
-</div>
 </div>
