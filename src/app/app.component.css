@@ -12,18 +12,21 @@
   outline: none;
 }
 
-::ng-deep h1{
+::ng-deep .container {
+  /*margin: 10px auto;*/
+  overflow: hidden;
+}
 
+::ng-deep .btn-app-green{
+  background-color: var(--button-green-color);
+  margin: 10px 10px 10px 10px;
+  color: white;
+  text-transform: uppercase;
 }
 
 section {
   margin: 0px;
   padding: 0px;
-}
-
-::ng-deep .container {
-  /*margin: 10px auto;*/
-  overflow: hidden;
 }
 
 footer{
