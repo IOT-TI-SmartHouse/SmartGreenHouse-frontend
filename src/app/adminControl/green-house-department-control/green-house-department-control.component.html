@@ -1,35 +1,23 @@
 <div class="container">
-  <div class="form">
-    <form class="register-form">
-      <div class="row">
-        <div class="col-md-2">
           <input type="text" placeholder="department name" [(ngModel)]="name" [ngModelOptions]="{standalone:true}"/>
-        </div>
-        <div class="col-md-2">
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownGreenhouse" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <div *ngIf="selectedGreenhouse != null">
-                {{selectedGreenhouse.name}}, location: {{selectedGreenhouse.location}}
-              </div>
-              <div *ngIf="selectedGreenhouse == null">
-                {{ greenhousePlaceholder }}
-              </div>
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownGreenhouse">
-              <div *ngFor="let greenhouse of greenhouses">
-                <a class="dropdown-item" (click)="selectGreenhouse(greenhouse)">{{greenhouse.name}}, location: {{greenhouse.location}}</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-2">
-          <button class="btn btn-lg col-md-12" (click)="addDepartment()">Add Greenhouse Department</button>
-        </div>
-      </div>
-    </form>
-  </div>
 
+           <div class="btn-group">
+             <button class="btn btn-rounded dropdown-toggle" type="button" id="dropdownGreenhouse" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <div *ngIf="selectedGreenhouse != null">
+                 {{selectedGreenhouse.name}}, location: {{selectedGreenhouse.location}}
+               </div>
+               <div *ngIf="selectedGreenhouse == null">
+                 {{ greenhousePlaceholder }}
+               </div>
+             </button>
+             <div class="dropdown-menu" aria-labelledby="dropdownGreenhouse">
+               <div *ngFor="let greenhouse of greenhouses">
+                 <a class="dropdown-item" (click)="selectGreenhouse(greenhouse)">{{greenhouse.name}}, location: {{greenhouse.location}}</a>
+               </div>
+             </div>
+           </div>
 
+          <button class="btn btn-rounded btn-app-green" (click)="addDepartment()">Add Greenhouse Department</button>
   <h3>Departments in the selected greenhouse.</h3>
   <div>
     <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" id="departmentsTable">

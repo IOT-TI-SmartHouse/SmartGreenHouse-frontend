@@ -3,6 +3,7 @@
   z-index: 1;
   text-align: left;
 }
+
 .form input {
   font-family: "Roboto", sans-serif;
   outline: 0;
@@ -14,10 +15,6 @@
   box-sizing: border-box;
   font-size: 14px;
   float: right;
-}
-
-button {
-  background-color: var(--button-green-color);
 }
 
 .form label{
