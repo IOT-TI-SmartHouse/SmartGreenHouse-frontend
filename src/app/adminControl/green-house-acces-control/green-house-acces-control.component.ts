@@ -25,7 +25,9 @@ export class GreenHouseAccesControlComponent implements OnInit {
   public userPlaceholder = 'select a user';
   public greenhousePlaceholder = 'select a greenhouse';
   public selectedUser: any;
+  public selectedUserId: any;
   public selectedGreenhouse: any;
+  public selectedGreenhouseId: any;
 
   constructor(
     private greenhouseAccessService: GreenhouseAccesService,
@@ -141,5 +143,13 @@ export class GreenHouseAccesControlComponent implements OnInit {
       .DataTable()
       .destroy();
     this.dtTrigger.next();
+  }
+
+  onOptionsSelected(event: any) {
+    this.selectGreenhouse(this.greenhouses.find( greenhouse => greenhouse._id === event ));
+  }
+
+  onUserSelected(event: any) {
+    this.selectUser(this.users.find( user => user._id === event ));
   }
 }
