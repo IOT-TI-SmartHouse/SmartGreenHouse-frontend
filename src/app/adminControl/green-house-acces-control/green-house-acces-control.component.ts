@@ -51,7 +51,7 @@ export class GreenHouseAccesControlComponent implements OnInit {
 
     this.userService.getUsers().subscribe(res => {
       this.users = res.users;
-      this.filteredUsers = this.users;
+      this.filteredUsers = this.users.filter(x => !x.isAdmin);
     });
   }
 
