@@ -26,10 +26,9 @@
     </div>
   </div>
 
-  <!--button (click)="loadData(nodes[0]._id)">test 1</button>
-  <button (click)="loadData(nodes[1]._id)">test 2</button>
-  <button (click)="loadData(nodes[2]._id)">test 3</button-->
-
+  <input type="text" placeholder="From YYYY-MM-DD" #fromDate/>
+  <input type="text" placeholder="To YYYY-MM-DD" #toDate/>
+  <button (click)="setDates(fromDate.value, toDate.value); loadNodes(department);">Plot</button>
 </div>
 
 
