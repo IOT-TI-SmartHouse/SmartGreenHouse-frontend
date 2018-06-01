@@ -26,6 +26,7 @@ import { GreenhouseDepartmentService} from './login/services/greenhouse-departme
 
 import {GraphsComponent} from './dashboard/graphs/graphs.component';
 import { AdminGuard } from './admin-guard.service';
+import {NodeService} from './services/node.service';
 // import { AuthInterceptor } from './auth-intercepter.services';
 
 
@@ -43,7 +44,7 @@ import { AdminGuard } from './admin-guard.service';
     UserControlComponent, GreenHouseControlComponent, GreenHouseAccesControlComponent, MenuBarComponent,
     GreenHouseDepartmentControlComponent, ControlComponent , GraphsComponent
   ],
-  providers: [ AuthGuard , AdminGuard,  LoginService, GreenhouseService, GreenhouseAccesService, UserService, GreenhouseDepartmentService
+  providers: [ AuthGuard , AdminGuard,  LoginService, GreenhouseService, GreenhouseAccesService, UserService, GreenhouseDepartmentService, NodeService
   // {
   //   provide: AuthInterceptor,
   //   useClass: TokenInterceptor,
