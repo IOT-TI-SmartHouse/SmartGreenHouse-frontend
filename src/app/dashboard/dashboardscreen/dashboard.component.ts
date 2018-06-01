@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AppModule } from '../../app.module';
-import {environment} from '../../../environments/environment';
-import {Observable} from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
-import {HttpHeaders} from '@angular/common/http';
-import {loadConfigurationFromPath} from 'tslint/lib/configuration';
 import { Greenhouse } from '../../dataObjects/classes/greenhouses.class';
 import { Router } from '@angular/router';
 import { GreenhouseDepartmentService } from '../../services/greenhouse-department.service';

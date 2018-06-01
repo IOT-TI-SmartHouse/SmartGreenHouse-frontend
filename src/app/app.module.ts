@@ -20,15 +20,15 @@ import { ControlComponent } from './control/control.component';
 
 
 import {GraphsComponent} from './dashboard/graphs/graphs.component';
+import { SensorNodeComponent } from './dashboard/sensor-node-control/sensor-node-control.component';
+import {SensorNodeService} from './services/sensor-node.service';
 import { AdminGuard } from './admin-guard.service';
-import {NodeService} from './services/node.service';
 import { GreenHouseDepartmentControlComponent } from './adminControl/green-house-department-control/green-house-department-control.component';
 import { LoginService } from './services/login.service';
 import { GreenhouseService } from './services/greenhouse.service';
 import { GreenhouseAccesService } from './services/greenhouseAcces.service';
 import { UserService } from './services/user.service';
 import { GreenhouseDepartmentService } from './services/greenhouse-department.service';
-// import { AuthInterceptor } from './auth-intercepter.services';
 
 
 @NgModule({
@@ -43,10 +43,10 @@ import { GreenhouseDepartmentService } from './services/greenhouse-department.se
   declarations: [
     AppComponent, HomeComponent, DashboardComponent, LoginComponent, AdminComponent, InfoComponent,
     UserControlComponent, GreenHouseControlComponent, GreenHouseAccesControlComponent, MenuBarComponent,
-    GreenHouseDepartmentControlComponent, ControlComponent , GraphsComponent
+    GreenHouseDepartmentControlComponent, ControlComponent , GraphsComponent, SensorNodeComponent
   ],
   providers: [ AuthGuard , AdminGuard,  LoginService, GreenhouseService,
-     GreenhouseAccesService, UserService, GreenhouseDepartmentService, NodeService
+     GreenhouseAccesService, UserService, GreenhouseDepartmentService, SensorNodeService
   // {
   //   provide: AuthInterceptor,
   //   useClass: TokenInterceptor,
