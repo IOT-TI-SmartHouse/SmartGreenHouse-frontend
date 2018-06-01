@@ -1,27 +1,19 @@
 <div class="container">
-  <input type="text" placeholder="department name" [(ngModel)]="name" [ngModelOptions]="{standalone:true}"/>
+  <div class="form-group">
+    <label for="custom-select" class="col-form-label">Selected Greenhouse</label>
+    <select class="custom-select" id="custom-select"[(ngModel)]="selectedGreenhouseId" (ngModelChange)='onOptionsSelected($event)'>
+      <option *ngFor="let greenhouse of greenhouses" [value]="greenhouse._id">{{greenhouse.name}} at {{greenhouse.location}}</option>
+    </select>
+  </div>
 
-  <select selected class="custom-select" [(ngModel)]="selectedGreenhouseId" (ngModelChange)='onOptionsSelected($event)'>
-    <option *ngFor="let greenhouse of greenhouses" [value]="greenhouse._id" >{{greenhouse.name}} at {{greenhouse.location}}</option>
-  </select>
-  <div class="btn-group">
-    <button class="btn btn-rounded btn-app-medium-grey dropdown-toggle" type="button" id="dropdownGreenhouse" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <div *ngIf="selectedGreenhouse != null">
-        {{selectedGreenhouse.name}}, location: {{selectedGreenhouse.location}}
-      </div>
-      <div *ngIf="selectedGreenhouse == null">
-        {{ greenhousePlaceholder }}
-      </div>
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownGreenhouse">
-      <div *ngFor="let greenhouse of greenhouses">
-        <a class="dropdown-item" (click)="selectGreenhouse(greenhouse)">{{greenhouse.name}}, location: {{greenhouse.location}}</a>
-      </div>
-    </div>
+  <div class="form-group">
+    <label for="department-text-input" class="col-form-label">New department name</label>
+    <input class="form-control" placeholder="main department" type="text" id="department-text-input"
+             [(ngModel)]="name" [ngModelOptions]="{standalone:true}" >
   </div>
 
   <button class="btn btn-rounded btn-app-green" (click)="addDepartment()">Add Greenhouse Department</button>
-  <h3>Departments in the selected greenhouse.</h3>
+  <h5>Existing departments in {{selectedGreenhouse.name}}</h5>
   <div>
     <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" id="departmentsTable">
       <thead>

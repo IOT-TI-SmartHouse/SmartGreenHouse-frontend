@@ -63,6 +63,7 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
     console.log(this.greenhouses.find( greenhouse => greenhouse._id === event ));
     this.selectGreenhouse(this.greenhouses.find( greenhouse => greenhouse._id === event ));
   }
+
   navigateDepartment(department: any) {
     this.departmentService.setSelectedDepartment(department);
     this.router.navigate(['/dashboard/graphs']);
