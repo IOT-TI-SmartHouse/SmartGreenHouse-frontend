@@ -22,7 +22,8 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
   public selectedGreenhouseId: any;
   public name: string;
 
-  constructor(private greenhouseService: GreenhouseService, private departmentService: GreenhouseDepartmentService, private router: Router) { }
+  constructor(private greenhouseService: GreenhouseService,
+    private departmentService: GreenhouseDepartmentService, private router: Router) { }
 
   ngOnInit() {
     this.dtOptions = {
@@ -33,7 +34,11 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
       // lengthMenu: [[10, 25, 50, 100, -1], [ 10, 25, 50, 100, 'All']]
     };
 
-    this.selectGreenhouse(this.greenhouseService.getSelectedGreenhouse());
+    const greenhouse = this.greenhouseService.getSelectedGreenhouse();
+    if ( greenhouse != undefined) {
+      this.selectGreenhouse(greenhouse);
+      localStorage.removeItem('greenhouse');
+    }
 
     this.greenhouseService.getGreenhouses().subscribe( res => {
       this.greenhouses = res.greenhouses;
@@ -55,6 +60,7 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
   }
 
   onOptionsSelected(event: any) {
+    console.log(this.greenhouses.find( greenhouse => greenhouse._id === event ));
     this.selectGreenhouse(this.greenhouses.find( greenhouse => greenhouse._id === event ));
   }
 
