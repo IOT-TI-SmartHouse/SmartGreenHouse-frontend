@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Subject} from 'rxjs/Subject';
-import { SensorNodeService} from '../../login/services/sensor-node.service';
-import { GreenhouseDepartmentService} from '../../login/services/greenhouse-department.service';
-import { GreenhouseService} from '../../login/services/greenhouse.service';
+import { SensorNodeService} from '../../services/sensor-node.service';
+import { GreenhouseDepartmentService} from '../../services/greenhouse-department.service';
+import { GreenhouseService} from '../../services/greenhouse.service';
 
 @Component({
   selector: 'app-sensor-node',

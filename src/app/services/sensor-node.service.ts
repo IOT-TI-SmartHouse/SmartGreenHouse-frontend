@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import {environment} from '../../../environments/environment';
 import {HttpHeaders, HttpClient} from '@angular/common/http';
 import swal from 'sweetalert2';
 import {Observable} from 'rxjs/Observable';
+import {environment} from '../../environments/environment';
+import {getToken} from 'codelyzer/angular/styles/cssLexer';
 
 @Injectable()
 export class SensorNodeService {
@@ -40,7 +41,7 @@ export class SensorNodeService {
     }, {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
-        'x-access-token': localStorage.getItem('id_token')
+        'x-access-token': this.getToken()
       })
     }).subscribe(res => {
       swal('Success!', 'Successfully updated sensornode!', 'success');
@@ -53,10 +54,23 @@ export class SensorNodeService {
     return this.http.get(`${environment.apiEndpoint}/sensornode/getAll`, {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
-        'x-access-token': localStorage.getItem('id_token'),
+        'x-access-token': this.getToken(),
         'greenhousedepartment': departmentid
       })
     });
   }
 
+  public getData(id: string): Observable<any> {
+    return this.http.get(`${environment.apiEndpoint}/sensordata/getAll`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/Json',
+        'x-access-token': this.getToken(),
+        'node': id
+      })
+    });
+  }
+
+  getToken() {
+    return String(localStorage.getItem('id_token'));
+  }
 }
