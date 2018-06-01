@@ -54,12 +54,12 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
     this.departmentService.register(this.name, this.selectedGreenhouse._id);
   }
 
-
   onOptionsSelected(event: any) {
     this.selectGreenhouse(this.greenhouses.find( greenhouse => greenhouse._id === event ));
   }
+
   navigateDepartment(department: any) {
-    this.departmentService.setSelectedDepartment(department)
+    this.departmentService.setSelectedDepartment(department);
     this.router.navigate(['/dashboard/graphs']);
   }
 }
