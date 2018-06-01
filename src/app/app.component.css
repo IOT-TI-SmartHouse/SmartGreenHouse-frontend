@@ -2,7 +2,7 @@
   --old-green-color: #21b700;
   --green-color: #7CBB00;
   --light-grey: #f6f6f6;
-  --medium-grey: #cecece;
+  --medium-grey: #d7d7d7;
   --text-dark-grey: #1d1d1d;
   --old-button-green-color: #21b700;
   --button-green-color: #7CBB00;
@@ -12,18 +12,28 @@
   outline: none;
 }
 
-::ng-deep h1{
+::ng-deep .container {
+  /*margin: 10px auto;*/
+  overflow: hidden;
+}
 
+::ng-deep .btn-app-green{
+  background-color: var(--button-green-color);
+  margin: 10px 10px 10px 10px;
+  color: white;
+  text-transform: uppercase;
+}
+
+::ng-deep .btn-app-medium-grey{
+  background-color: var(--medium-grey);
+  margin: 10px 10px 10px 10px;
+  color: black;
+  text-transform: uppercase;
 }
 
 section {
   margin: 0px;
   padding: 0px;
-}
-
-::ng-deep .container {
-  /*margin: 10px auto;*/
-  overflow: hidden;
 }
 
 footer{
