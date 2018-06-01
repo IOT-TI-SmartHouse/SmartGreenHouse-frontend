@@ -10,7 +10,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let greenhouse of greenhouses">
+      <tr *ngFor="let greenhouse of greenhouses" (click)="navigateGreenhouse(greenhouse)">
         <td>{{ greenhouse.name }}</td>
         <td>{{ greenhouse.location }}</td>
         <td>{{ greenhouse.createdAt}}</td>
