@@ -1,5 +1,5 @@
   <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light ">
-    <!--<div class="container">-->
+    <div class="container">
       <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -15,7 +15,7 @@
           <li class="nav-item rounded" routerLinkActive="active" routerLink="/info">
             <a>Info</a>
           </li>
-          <div class="dropdown-wrapper">
+          <div class="wrapper">
             <li class="nav-item dropdown rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                 *ngIf="userService.isAdmin()">
               <a class="dropdown-toggle">Control Panel</a>
@@ -40,7 +40,7 @@
           <a>Logout</a>
         </button>
       </div>
-    <!--</div>-->
+    </div>
 
   </nav>
 
