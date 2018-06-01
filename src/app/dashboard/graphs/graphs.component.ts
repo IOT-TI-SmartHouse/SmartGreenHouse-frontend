@@ -7,6 +7,7 @@ import {Observable} from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import {HttpHeaders} from '@angular/common/http';
 import {loadConfigurationFromPath} from 'tslint/lib/configuration';
+import { NodeService } from "../../services/node.service";
 
 @Component({
   selector: 'app-graphs-component',
@@ -23,31 +24,7 @@ export class GraphsComponent implements OnInit {
 
   selectedNode = 0;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {  }
-
-  public getNodes(token: string, id: string): Observable<any> {
-    return this.http.get(`${environment.apiEndpoint}/sensornode/getAll`, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/Json',
-        'x-access-token': token,
-        'greenhousedepartment': id
-      })
-    });
-  }
-
-  public getData(token: string, id: string): Observable<any> {
-    return this.http.get(`${environment.apiEndpoint}/sensordata/getAll`, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/Json',
-        'x-access-token': token,
-        'node': id
-      })
-    });
-  }
-
-  getToken() {
-    return String(localStorage.getItem('id_token'));
-  }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private nodeService: NodeService) {  }
 
   selectNode(id: any) {
     this.selectedNode = id;
@@ -57,7 +34,7 @@ export class GraphsComponent implements OnInit {
   loadData(id) {
     this.clearGraph();
 
-    this.getData(this.getToken(), id).subscribe(res => {
+    this.nodeService.getData(id).subscribe(res => {
       this.data = res.data;
 
       for (let i = 0; i < this.data.length; i ++) {
@@ -73,7 +50,7 @@ export class GraphsComponent implements OnInit {
 
   loadNodes(id) {
     this.selectedNode = 0;
-    this.getNodes(this.getToken(), id).subscribe(res => {
+    this.nodeService.getNodes(id).subscribe(res => {
       this.nodes = res.nodes;
 
       for (let i = 0; i < this.nodes.length; i ++) {
