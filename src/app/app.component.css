@@ -1,10 +1,8 @@
 ::ng-deep :root{
-  --old-green-color: #21b700;
   --green-color: #7CBB00;
   --light-grey: #f6f6f6;
   --medium-grey: #d7d7d7;
   --text-dark-grey: #1d1d1d;
-  --old-button-green-color: #21b700;
   --button-green-color: #7CBB00;
 }
 
@@ -14,7 +12,7 @@
 
 ::ng-deep .container {
   /*margin: 10px auto;*/
-  overflow: hidden;
+  overflow: visible;
 }
 
 ::ng-deep .btn-app-green{
@@ -29,6 +27,10 @@
   margin: 10px 10px 10px 10px;
   color: black;
   text-transform: uppercase;
+}
+
+::ng-deep hr{
+  border-color: var(--button-green-color);
 }
 
 section {

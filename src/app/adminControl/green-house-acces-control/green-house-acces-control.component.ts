@@ -1,16 +1,17 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Subject} from 'rxjs/Subject';
 import { GreenhouseAccesService } from '../../services/greenhouseAcces.service';
 import { GreenhouseService } from '../../services/greenhouse.service';
 import { UserService } from '../../services/user.service';
-
-
+import swal from 'sweetalert2';
+declare var $: any;
 
 @Component({
   selector: 'app-green-house-acces-control',
   templateUrl: './green-house-acces-control.component.html',
   styleUrls: ['./green-house-acces-control.component.css']
 })
+
 export class GreenHouseAccesControlComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
@@ -19,7 +20,6 @@ export class GreenHouseAccesControlComponent implements OnInit {
   greenhousesForUser: any[];
   filteredGreenhouses: any[];
   users: any[];
-  usersForGreenhouse: any[];
   filteredUsers: any[];
 
   public userPlaceholder = 'select a user';
@@ -46,19 +46,21 @@ export class GreenHouseAccesControlComponent implements OnInit {
 
     this.greenhouseService.getGreenhouses().subscribe(res => {
       this.greenhouses = res.greenhouses;
-      this.filteredGreenhouses = this.greenhouses;
+      this.filteredGreenhouses = this.greenhouses.sort();
     });
 
     this.userService.getUsers().subscribe(res => {
       this.users = res.users;
-      this.filteredUsers = this.users;
+      this.filteredUsers = this.users.filter(x => !x.isAdmin).sort();
     });
   }
 
   public selectUser(user) {
     this.selectedUser = user;
+    this.selectedGreenhouse = null;
+    $('#greenhouseSelect').val([]);
     this.greenhouseService.getAll(user._id).subscribe(res => {
-      this.greenhousesForUser = (res as any).greenhouses;
+      this.greenhousesForUser = (res as any).greenhouses.filter(x => x != null);
 
       // filter the greenhouses list to only contain greenhouses that the user does not already have access to
       this.filteredGreenhouses = this.filterList(
@@ -66,9 +68,6 @@ export class GreenHouseAccesControlComponent implements OnInit {
         this.greenhousesForUser
       );
 
-      $('#userstable')
-        .DataTable()
-        .destroy();
       $('#greenhousestable')
         .DataTable()
         .destroy();
@@ -78,27 +77,18 @@ export class GreenHouseAccesControlComponent implements OnInit {
 
   public selectGreenhouse(greenhouse) {
     this.selectedGreenhouse = greenhouse;
-    this.greenhouseService.getAllAccess(greenhouse._id).subscribe(res => {
-      this.usersForGreenhouse = (res as any).users;
-
-      // filter the users list to only contain users that do not already have acces to the greenhouse
-      this.filteredUsers = this.filterList(this.users, this.usersForGreenhouse);
-
-      $('#userstable')
-        .DataTable()
-        .destroy();
-      $('#greenhousestable')
-        .DataTable()
-        .destroy();
-      this.dtTrigger.next();
-    });
   }
 
   public addGreenHouseAccess(): void {
     this.greenhouseAccessService.register(
       this.selectedUser._id,
       this.selectedGreenhouse._id
-    );
+    ).subscribe(res => {
+      swal('Success!', 'Successfully registered new access!', 'success');
+      this.refresh();
+    }, error => {
+      swal('Register failed', 'The register attempt has failed', 'error');
+    });
   }
 
   /**
@@ -116,33 +106,7 @@ export class GreenHouseAccesControlComponent implements OnInit {
         }
       });
       return !found;
-    });
-  }
-
-  clearUserDropdown() {
-    this.selectedUser = null;
-    this.greenhousesForUser = [];
-    this.filteredGreenhouses = this.greenhouses;
-    $('#userstable')
-    .DataTable()
-    .destroy();
-    $('#greenhousestable')
-      .DataTable()
-      .destroy();
-    this.dtTrigger.next();
-  }
-
-  clearGreenhouseDropdown() {
-    this.selectedGreenhouse = null;
-    this.usersForGreenhouse = [];
-    this.filteredUsers = this.users;
-    $('#userstable')
-      .DataTable()
-      .destroy();
-    $('#greenhousestable')
-      .DataTable()
-      .destroy();
-    this.dtTrigger.next();
+    }).sort();
   }
 
   onOptionsSelected(event: any) {
@@ -151,5 +115,46 @@ export class GreenHouseAccesControlComponent implements OnInit {
 
   onUserSelected(event: any) {
     this.selectUser(this.users.find( user => user._id === event ));
+  }
+
+  refresh(): void {
+    $('#greenhouseSelect').val([]);
+    this.selectedGreenhouse = null;
+
+    this.greenhouseService.getAll(this.selectedUser._id).subscribe(res => {
+      this.greenhousesForUser = (res as any).greenhouses.filter(x => x != null);
+
+      // filter the greenhouses list to only contain greenhouses that the user does not already have access to
+      this.filteredGreenhouses = this.filterList(
+        this.greenhouses,
+        this.greenhousesForUser
+      );
+    });
+
+    $('#greenhousestable')
+      .DataTable()
+      .destroy();
+    this.dtTrigger.next();
+  }
+
+  removeAccess(greenhouse: any) {
+    swal({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.value) {
+        this.greenhouseAccessService.delete(this.selectedUser._id, greenhouse._id).subscribe(res => {
+          swal('Success!', 'Successfully removed access!', 'success');
+          this.refresh();
+        }, error => {
+          swal('Delete failed', 'The delete attempt has failed', 'error');
+        });
+      }
+    });
   }
 }

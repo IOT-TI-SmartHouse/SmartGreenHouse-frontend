@@ -6,7 +6,6 @@ import { MyDateRangePickerModule } from 'mydaterangepicker';
 import { LoginComponent } from './login/loginscreen/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing-module';
-import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './auth-guard.services';
 import { DashboardComponent } from './dashboard/dashboardscreen/dashboard.component';
@@ -43,7 +42,7 @@ import { GreenhouseDepartmentService } from './services/greenhouse-department.se
     ReactiveFormsModule,
   ],
   declarations: [
-    AppComponent, HomeComponent, DashboardComponent, LoginComponent, AdminComponent, InfoComponent,
+    AppComponent, DashboardComponent, LoginComponent, AdminComponent, InfoComponent,
     UserControlComponent, GreenHouseControlComponent, GreenHouseAccesControlComponent, MenuBarComponent,
     GreenHouseDepartmentControlComponent, ControlComponent , GraphsComponent, SensorNodeComponent
   ],

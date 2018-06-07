@@ -46,7 +46,7 @@ export class LoginService {
         localStorage.setItem('is_admin', authResult.isAdmin);
         localStorage.setItem('expires_at', decoded.exp);
 
-        this.router.navigate(['/home']);
+        this.router.navigate(['/dashboard']);
     }
 
     logout() {

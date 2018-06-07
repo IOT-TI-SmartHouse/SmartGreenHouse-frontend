@@ -1,10 +1,10 @@
   <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light ">
-    <!--<div class="container">-->
+    <div class="container">
       <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <a class="navbar-brand">
-        <img routerLink="/home" routerLinkActive="inactive" src="../../../assets/icons/smartgreenhouse-logo.png" height="45"/>
+        <img routerLink="/dashboard" routerLinkActive="inactive" src="../../../assets/icons/smartgreenhouse-logo.png" height="45"/>
       </a>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -15,7 +15,7 @@
           <li class="nav-item rounded" routerLinkActive="active" routerLink="/info">
             <a>Info</a>
           </li>
-          <div class="dropdown-wrapper">
+          <div class="wrapper">
             <li class="nav-item dropdown rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                 *ngIf="userService.isAdmin()">
               <a class="dropdown-toggle">Control Panel</a>
@@ -40,7 +40,7 @@
           <a>Logout</a>
         </button>
       </div>
-    <!--</div>-->
+    </div>
 
   </nav>
 

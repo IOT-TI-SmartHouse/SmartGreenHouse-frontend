@@ -20,10 +20,6 @@ export class GreenhouseDepartmentService {
         'Content-Type':  'application/json',
         'x-access-token': localStorage.getItem('id_token')
       })
-    }).subscribe(res => {
-      swal('Success!', 'Successfully registered new department!', 'success');
-    }, error => {
-      swal('Register failed', 'The register attempt has failed', 'error');
     });
   }
 
@@ -36,10 +32,6 @@ export class GreenhouseDepartmentService {
         'Content-Type':  'application/json',
         'x-access-token': localStorage.getItem('id_token')
       })
-    }).subscribe(res => {
-      swal('Success!', 'Successfully deleted the department!', 'success');
-    }, error => {
-      swal('Register failed', 'The delete attempt has failed', 'error');
     });
   }
 
