@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
-import { AppModule } from '../../app.module';
 import { Chart } from 'chart.js';
-import {environment} from '../../../environments/environment';
-import {Observable} from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
-import {HttpHeaders} from '@angular/common/http';
-import {loadConfigurationFromPath} from 'tslint/lib/configuration';
 import { GreenhouseDepartmentService } from '../../services/greenhouse-department.service';
 import { SensorNodeService } from '../../services/sensor-node.service';
 
@@ -17,8 +12,10 @@ import { SensorNodeService } from '../../services/sensor-node.service';
 })
 
 export class GraphsComponent implements OnInit {
-  fromDate: string;
-  toDate: string;
+  fromDate = '';
+  toDate = '';
+  preDate: string;
+  nexDate: string;
   greenhouse: string;
   department: string;
   nodes;
@@ -90,32 +87,54 @@ export class GraphsComponent implements OnInit {
   }
 
   drawTemperature(timestamp, temperature) {
-    if (this.fromDate == null && this.toDate == null) {
-      this.tempChart.data.labels.push(timestamp);
-      this.tempChart.data.datasets[0].data.push(temperature);
-      this.tempChart.update();
-    } else if (timestamp < this.toDate && timestamp > this.fromDate) {
-      this.tempChart.data.labels.push(timestamp);
-      this.tempChart.data.datasets[0].data.push(temperature);
-      this.tempChart.update();
+    if (this.fromDate !== ''  && this.fromDate !== '') {
+      if (timestamp < this.toDate && timestamp > this.fromDate) {
+        this.tempChart.data.labels.push(timestamp);
+        this.tempChart.data.datasets[0].data.push(temperature);
+        this.tempChart.update();
+      }
+    } else {
+      if (timestamp < this.preDate && timestamp > this.nexDate) {
+        this.tempChart.data.labels.push(timestamp);
+        this.tempChart.data.datasets[0].data.push(temperature);
+        this.tempChart.update();
+      }
     }
   }
 
   drawHumidity(timestamp, humidity) {
-    if (this.fromDate == null && this.toDate == null) {
-      this.humiChart.data.labels.push(timestamp);
-      this.humiChart.data.datasets[0].data.push(humidity);
-      this.humiChart.update();
-    } else if (timestamp < this.toDate && timestamp > this.fromDate) {
-      this.humiChart.data.labels.push(timestamp);
-      this.humiChart.data.datasets[0].data.push(humidity);
-      this.humiChart.update();
+    if (this.fromDate !== ''  && this.fromDate !== '') {
+      if (timestamp < this.toDate && timestamp > this.fromDate) {
+        this.humiChart.data.labels.push(timestamp);
+        this.humiChart.data.datasets[0].data.push(humidity);
+        this.humiChart.update();
+      }
+    } else {
+      if (timestamp < this.preDate && timestamp > this.nexDate) {
+        this.humiChart.data.labels.push(timestamp);
+        this.humiChart.data.datasets[0].data.push(humidity);
+        this.humiChart.update();
+      }
     }
   }
 
   setDates(from, to) {
-    this.fromDate = from + ' 00:00:00.000';
-    this.toDate = to + ' 00:00:00.000';
+    if (from === '' || to === '') {
+      alert('Set both dates please.');
+    } else {
+      this.fromDate = from + ' 00:00:00.000';
+      this.toDate = to + ' 00:00:00.000';
+    }
+  }
+
+  setDefaultDates() {
+    const date = new Date();
+    const yyyy = date.getFullYear();
+    const mm = date.getMonth() + 1;
+    const dd = date.getDate();
+
+    this.preDate = yyyy + '-' + mm + '-' + dd + ' 00:00:00.000';
+    this.nexDate = yyyy + '-' + mm + '-' + (dd + 1) + ' 00:00:00.000';
   }
 
   drawGraph() {
@@ -155,6 +174,7 @@ export class GraphsComponent implements OnInit {
     const url = new URL(window.location.href);
     this.department = this.departmentService.getSelectedDepartment()._id;
 
+    this.setDefaultDates();
     this.drawGraph();
     this.initData(this.department);
   }

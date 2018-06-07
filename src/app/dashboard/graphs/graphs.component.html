@@ -24,7 +24,7 @@
         <canvas id="humiChart"></canvas>
       </div>
       <div class="col-md-2">
-        <button (click)="clearGraph(); drawNodes();">Show all data</button>
+        <button (click)="clearGraph(); drawNodes();">Show all nodes</button>
 
       <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#nodemodal">Add new sensornode</button>
       </div>
@@ -32,7 +32,7 @@
 
     <input type="text" placeholder="From YYYY-MM-DD" #fromDate/>
     <input type="text" placeholder="To YYYY-MM-DD" #toDate/>
-    <button (click)="clearGraph(); setDates(fromDate.value, toDate.value); loadNodes(department);">Plot</button>
+    <button (click)="clearGraph(); setDates(fromDate.value, toDate.value); drawNodes();">Plot</button>
   </div>
 
   <!-- Modal -->
