@@ -3,6 +3,7 @@ import { Subject} from 'rxjs/Subject';
 import { GreenhouseAccesService } from '../../services/greenhouseAcces.service';
 import { GreenhouseService } from '../../services/greenhouse.service';
 import { UserService } from '../../services/user.service';
+declare var $: any;
 import swal from 'sweetalert2';
 
 @Component({
@@ -155,5 +156,24 @@ export class GreenHouseAccesControlComponent implements OnInit {
 
   onUserSelected(event: any) {
     this.selectUser(this.users.find( user => user._id === event ));
+  }
+
+  refresh(): void {
+    this.greenhouseService.getGreenhouses().subscribe(res => {
+      this.greenhouses = res.greenhouses;
+      this.filteredGreenhouses = this.greenhouses;
+    });
+
+    this.userService.getUsers().subscribe(res => {
+      this.users = res.users;
+      this.filteredUsers = this.users.filter(x => !x.isAdmin);
+    });
+    $('#userstable')
+      .DataTable()
+      .destroy();
+    $('#greenhousestable')
+      .DataTable()
+      .destroy();
+    this.dtTrigger.next();
   }
 }
