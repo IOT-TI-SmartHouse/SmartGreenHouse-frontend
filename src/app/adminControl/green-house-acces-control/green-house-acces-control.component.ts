@@ -3,6 +3,7 @@ import { Subject} from 'rxjs/Subject';
 import { GreenhouseAccesService } from '../../services/greenhouseAcces.service';
 import { GreenhouseService } from '../../services/greenhouse.service';
 import { UserService } from '../../services/user.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-green-house-acces-control',
@@ -97,7 +98,11 @@ export class GreenHouseAccesControlComponent implements OnInit {
     this.greenhouseAccessService.register(
       this.selectedUser._id,
       this.selectedGreenhouse._id
-    );
+    ).subscribe(res => {
+      swal('Success!', 'Successfully registered new access!', 'success');
+    }, error => {
+      swal('Register failed', 'The register attempt has failed', 'error');
+    });
   }
 
   /**
