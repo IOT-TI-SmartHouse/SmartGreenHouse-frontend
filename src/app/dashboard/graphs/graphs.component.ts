@@ -147,7 +147,7 @@ export class GraphsComponent implements OnInit {
     this.initData(this.department);
   }
 
-  refresh(event){
+  refresh(event) {
     this.initData(this.department);
   }
 }
