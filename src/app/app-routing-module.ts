@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth-guard.services';
 import { DashboardComponent } from './dashboard/dashboardscreen/dashboard.component';
 import { GraphsComponent} from './dashboard/graphs/graphs.component';
@@ -15,21 +14,15 @@ import { AdminGuard } from './admin-guard.service';
 import {GreenHouseDepartmentControlComponent} from './adminControl/green-house-department-control/green-house-department-control.component';
 import {SensorNodeComponent} from './dashboard/sensor-node-control/sensor-node-control.component';
 
-
 const appRoutes: Routes = [
     {
         path: '',
-        redirectTo: '/home',
+        redirectTo: '/dashboard',
         pathMatch: 'full'
     },
     {
         path: 'login',
         component: LoginComponent
-    },
-    {
-        path: 'home',
-        component: HomeComponent,
-        canActivate: [AuthGuard]
     },
     {
         path: 'info',

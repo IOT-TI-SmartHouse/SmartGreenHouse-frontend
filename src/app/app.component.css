@@ -12,7 +12,7 @@
 
 ::ng-deep .container {
   /*margin: 10px auto;*/
-  overflow: hidden;
+  overflow: visible;
 }
 
 ::ng-deep .btn-app-green{
