@@ -85,4 +85,23 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
     });
   }
 
+  removeDepartment(department: any) {
+    swal({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.value) {
+        this.departmentService.delete(department._id).subscribe(res => {
+          swal('Success!', 'Successfully removed Department!', 'success');
+          this.refresh();
+        }, error => {
+          swal('Delete failed', 'The delete attempt has failed', 'error');
+        });
+      }
+    });
 }

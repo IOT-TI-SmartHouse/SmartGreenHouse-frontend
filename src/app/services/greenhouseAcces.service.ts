@@ -29,4 +29,18 @@ export class GreenhouseAccesService {
     });
   }
 
+
+  // delete greenhouseaccess
+  public delete(user: string, greenhouse: string) {
+    return this.http.post(`${environment.apiEndpoint}/greenhouseaccess/delete`, {
+      user: user,
+      greenhouse: greenhouse
+    }, {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'x-access-token': localStorage.getItem('id_token')
+      })
+    });
+  }
+
 }
