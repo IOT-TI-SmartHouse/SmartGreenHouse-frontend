@@ -13,10 +13,8 @@ import { SensorNodeService } from '../../services/sensor-node.service';
 })
 
 export class GraphsComponent implements OnInit {
-  fromDate = '';
-  toDate = '';
-  preDate: string;
-  nexDate: string;
+  fromDate = new Date();
+  toDate = new Date();
   greenhouse: string;
   department: string;
   nodes;
@@ -83,51 +81,47 @@ export class GraphsComponent implements OnInit {
   }
 
   cleanTimestamp(timestamp) {
-    const date = timestamp.split('T');
-    date[1] = date[1].slice(0, -8);
-    return date[0] + ' ' + date[1];
+    const timestampArray = timestamp.split('T');
+    const dateArray = timestampArray[0].split('-');
+    const timeArray = timestampArray[1].split(':');
+
+    const date = new Date();
+    date.setFullYear(dateArray[0], (dateArray[1] - 1), dateArray[2]);
+    date.setUTCHours(timeArray[0], timeArray[1], 0, 0);
+
+    return date;
   }
 
-  drawTemperature(timestamp, temperature) {
-    if (this.fromDate !== ''  && this.fromDate !== '') {
-      if (timestamp < this.toDate && timestamp > this.fromDate) {
-        this.tempChart.data.labels.push(timestamp);
-        this.tempChart.data.datasets[0].data.push(temperature);
-        this.tempChart.update();
-      }
-    } else {
-      if (timestamp < this.preDate && timestamp > this.nexDate) {
-        this.tempChart.data.labels.push(timestamp);
-        this.tempChart.data.datasets[0].data.push(temperature);
-        this.tempChart.update();
-      }
+  drawTemperature(date, temperature) {
+    if (date < this.toDate && date > this.fromDate) {
+      this.tempChart.data.labels.push(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDay()
+        + ' ' + date.getHours() + ':' + date.getMinutes());
+      this.tempChart.data.datasets[0].data.push(temperature);
+      this.tempChart.update();
     }
   }
 
-  drawHumidity(timestamp, humidity) {
-    if (this.fromDate !== ''  && this.fromDate !== '') {
-      if (timestamp < this.toDate && timestamp > this.fromDate) {
-        this.humiChart.data.labels.push(timestamp);
-        this.humiChart.data.datasets[0].data.push(humidity);
-        this.humiChart.update();
-      }
-    } else {
-      if (timestamp < this.preDate && timestamp > this.nexDate) {
-        this.humiChart.data.labels.push(timestamp);
-        this.humiChart.data.datasets[0].data.push(humidity);
-        this.humiChart.update();
-      }
+  drawHumidity(date, humidity) {
+    if (date < this.toDate && date > this.fromDate) {
+      this.humiChart.data.labels.push(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDay()
+        + ' ' + date.getHours() + ':' + date.getMinutes());
+      this.humiChart.data.datasets[0].data.push(humidity);
+      this.humiChart.update();
     }
   }
 
   setDefaultDates() {
     const date = new Date();
     const yyyy = date.getFullYear();
-    const mm = date.getMonth() + 1;
+    const mm = date.getMonth();
     const dd = date.getDate();
 
-    this.preDate = yyyy + '-' + mm + '-' + dd + ' 00:00';
-    this.nexDate = yyyy + '-' + mm + '-' + (dd + 1) + ' 00:00';
+    this.fromDate.setFullYear(yyyy, mm, dd);
+    this.fromDate.setHours(0, 0, 0, 0 );
+
+    this.toDate.setFullYear(yyyy, mm, dd + 1);
+    this.toDate.setHours(0, 0, 0, 0 );
+
 
     this.dateModel = {beginDate: {year: yyyy, month: mm, day: dd},
       endDate: {year: yyyy, month: mm, day: (dd + 1)}};
@@ -167,8 +161,8 @@ export class GraphsComponent implements OnInit {
   }
 
   setDates(event: IMyDateRangeModel) {
-    this.fromDate = event.beginDate.year + '-' + event.beginDate.month + '-' + event.beginDate.day + ' 00:00';
-    this.toDate = event.endDate.year + '-' + event.endDate.month + '-' + event.endDate.day + ' 00:00';
+    this.fromDate.setFullYear(event.beginDate.year, event.beginDate.month - 1, event.beginDate.day);
+    this.toDate.setFullYear(event.endDate.year, event.endDate.month - 1, event.endDate.day);
   }
 
   ngOnInit() {
