@@ -1,8 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import swal from 'sweetalert2';
 import {Observable} from 'rxjs/Observable';
-import { environment } from "../../environments/environment";
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class GreenhouseService {

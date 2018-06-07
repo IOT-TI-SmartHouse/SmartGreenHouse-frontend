@@ -4,6 +4,7 @@ import swal from 'sweetalert2';
 import { GreenhouseService } from '../../services/greenhouse.service';
 import { GreenhouseDepartmentService } from '../../services/greenhouse-department.service';
 import {Router} from '@angular/router';
+declare var $: any;
 
 @Component({
   selector: 'app-green-house-department-control',
@@ -34,29 +35,31 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
       // lengthMenu: [[10, 25, 50, 100, -1], [ 10, 25, 50, 100, 'All']]
     };
 
-    const greenhouse = this.greenhouseService.getSelectedGreenhouse();
-    if ( greenhouse != undefined) {
-      this.selectGreenhouse(greenhouse);
-      localStorage.removeItem('greenhouse');
-    }
-
     this.greenhouseService.getGreenhouses().subscribe( res => {
       this.greenhouses = res.greenhouses;
       console.log(res);
     });
+
+    const greenhouse = this.greenhouseService.getSelectedGreenhouse();
+
+    if ( greenhouse != null) {
+      this.selectGreenhouse(greenhouse);
+      localStorage.removeItem('greenhouse');
+    }
   }
 
   public selectGreenhouse(greenhouse) {
     this.selectedGreenhouse = greenhouse;
-    this.departmentService.getGreenhouseDepartments(this.selectedGreenhouse._id).subscribe( res => {
-      this.departments = res.departments;
-      $('#departmentsTable').DataTable().destroy();
-      this.dtTrigger.next();
-    });
+    this.refresh();
   }
 
   public addDepartment(): void {
-    this.departmentService.register(this.name, this.selectedGreenhouse._id);
+    this.departmentService.register(this.name, this.selectedGreenhouse._id).subscribe(res => {
+      swal('Success!', 'Successfully registered!', 'success');
+      this.refresh();
+    }, error => {
+      swal('Register failed', 'The register attempt has failed', 'error');
+    });
     this.clearInputFields();
   }
 
@@ -72,6 +75,14 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
 
   public clearInputFields() {
     this.name = '';
+  }
+
+  refresh(): void {
+    this.departmentService.getGreenhouseDepartments(this.selectedGreenhouse._id).subscribe( res => {
+      this.departments = res.departments;
+      $('#departmentsTable').DataTable().destroy();
+      this.dtTrigger.next();
+    });
   }
 
 }

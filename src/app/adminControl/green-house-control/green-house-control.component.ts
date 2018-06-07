@@ -64,7 +64,7 @@ export class GreenHouseControlComponent implements OnInit {
     this.clearInputFields();
   }
 
-  refresh(){
+  refresh(): void {
     this.greenhouseService.getGreenhouses().subscribe( res => {
       this.greenhouses = res.greenhouses;
       $('#greenhouseTable').DataTable().destroy();

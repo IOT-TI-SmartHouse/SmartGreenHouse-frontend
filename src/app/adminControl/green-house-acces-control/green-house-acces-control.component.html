@@ -10,38 +10,41 @@
     </select>
   </div>
 
+<div *ngIf="selectedGreenhouse">
   <button class="btn btn-app-green" (click)="addGreenHouseAccess()">Add Greenhouse Access</button>
-<hr/>
-<h5>Greenhouses available to {{selectedUser.username}}</h5>
-<div>
-  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" id="greenhousestable">
-    <thead>
-    <tr>
-      <th class="dt-head-left">Name</th>
-      <th class="dt-head-left">Location</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let greenhouse of greenhousesForUser">
-      <td>{{ greenhouse.name }}</td>
-      <td>{{ greenhouse.location }}</td>
-    </tr>
-    </tbody>
-  </table>
-</div>
   <hr/>
-<h5>Users that can access the {{selectedGreenhouse.name}}</h5>
-<div>
-  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" id="userstable">
-    <thead>
-    <tr>
-      <th class="dt-head-left">Username</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let user of usersForGreenhouse">
-      <td>{{ user.username }}</td>
-    </tr>
-    </tbody>
-  </table>
+  <h5>Greenhouses available to {{selectedUser.username}}</h5>
+  <div>
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" id="greenhousestable">
+      <thead>
+      <tr>
+        <th class="dt-head-left">Name</th>
+        <th class="dt-head-left">Location</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let greenhouse of greenhousesForUser">
+        <td>{{ greenhouse.name }}</td>
+        <td>{{ greenhouse.location }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <hr/>
+  <h5>Users that can access the {{selectedGreenhouse.name}}</h5>
+  <div>
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" id="userstable">
+      <thead>
+      <tr>
+        <th class="dt-head-left">Username</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of usersForGreenhouse">
+        <td>{{ user.username }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
+

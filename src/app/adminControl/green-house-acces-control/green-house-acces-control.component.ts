@@ -3,6 +3,7 @@ import { Subject} from 'rxjs/Subject';
 import { GreenhouseAccesService } from '../../services/greenhouseAcces.service';
 import { GreenhouseService } from '../../services/greenhouse.service';
 import { UserService } from '../../services/user.service';
+declare var $: any;
 
 @Component({
   selector: 'app-green-house-acces-control',
@@ -21,8 +22,6 @@ export class GreenHouseAccesControlComponent implements OnInit {
   usersForGreenhouse: any[];
   filteredUsers: any[];
 
-  public userPlaceholder = 'select a user';
-  public greenhousePlaceholder = 'select a greenhouse';
   public selectedUser: any;
   public selectedUserId: any;
   public selectedGreenhouse: any;
@@ -43,14 +42,14 @@ export class GreenHouseAccesControlComponent implements OnInit {
       // lengthMenu: [[10, 25, 50, 100, -1], [ 10, 25, 50, 100, 'All']]
     };
 
-    this.greenhouseService.getGreenhouses().subscribe(res => {
-      this.greenhouses = res.greenhouses;
-      this.filteredGreenhouses = this.greenhouses;
-    });
-
     this.userService.getUsers().subscribe(res => {
       this.users = res.users;
       this.filteredUsers = this.users.filter(x => !x.isAdmin);
+    });
+
+    this.greenhouseService.getGreenhouses().subscribe(res => {
+      this.greenhouses = res.greenhouses;
+      this.filteredGreenhouses = this.greenhouses;
     });
   }
 
@@ -150,5 +149,24 @@ export class GreenHouseAccesControlComponent implements OnInit {
 
   onUserSelected(event: any) {
     this.selectUser(this.users.find( user => user._id === event ));
+  }
+
+  refresh(): void {
+    this.greenhouseService.getGreenhouses().subscribe(res => {
+      this.greenhouses = res.greenhouses;
+      this.filteredGreenhouses = this.greenhouses;
+    });
+
+    this.userService.getUsers().subscribe(res => {
+      this.users = res.users;
+      this.filteredUsers = this.users.filter(x => !x.isAdmin);
+    });
+    $('#userstable')
+      .DataTable()
+      .destroy();
+    $('#greenhousestable')
+      .DataTable()
+      .destroy();
+    this.dtTrigger.next();
   }
 }

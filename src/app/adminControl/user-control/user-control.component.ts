@@ -60,9 +60,7 @@ export class UserControlComponent implements OnInit {
         // refresh users
         this.userService.getUsers().subscribe( response => {
           this.users = response.users;
-          $('#userstable')
-          .DataTable()
-          .destroy();
+          $('#userstable').DataTable().destroy();
           this.dtTrigger.next();
         });
         document.getElementById('usermodal').click();
