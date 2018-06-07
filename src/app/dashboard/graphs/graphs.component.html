@@ -6,7 +6,7 @@
         <h1>Graphs</h1>
     </div>
   </div>
-  
+
     <div class="row">
       <div class="col-md-2">
         <ul class="list-group">
@@ -25,18 +25,17 @@
           <button type="button" class="btn btn-app-green" data-toggle="modal" data-target="#nodemodal">Add new sensornode</button>
       </div>
     </div>
-  
+
     <input type="text" placeholder="From YYYY-MM-DD" #fromDate/>
     <input type="text" placeholder="To YYYY-MM-DD" #toDate/>
     <button (click)="clearGraph(); setDates(fromDate.value, toDate.value); loadNodes(department);">Plot</button>
   </div>
-  
+
   <!-- Modal -->
 <div class="modal fade" id="nodemodal" role="dialog">
-    <div class="modal-dialog">
-      <!-- Modal content-->
-      <app-sensor-node></app-sensor-node>
-    </div>
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <app-sensor-node (onCreate)="refresh($event)"></app-sensor-node>
   </div>
-  
-  
+</div>
+

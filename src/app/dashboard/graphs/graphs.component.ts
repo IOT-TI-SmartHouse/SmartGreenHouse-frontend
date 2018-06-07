@@ -27,7 +27,7 @@ export class GraphsComponent implements OnInit {
   public selectedNode: any;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private sensorNodeService: SensorNodeService,
-    private departmentService: GreenhouseDepartmentService) {  }
+      private departmentService: GreenhouseDepartmentService, private router: Router) {  }
 
   // GET ALL DATA
   initData(id) {
@@ -144,6 +144,10 @@ export class GraphsComponent implements OnInit {
     this.department = this.departmentService.getSelectedDepartment()._id;
 
     this.drawGraph();
+    this.initData(this.department);
+  }
+
+  refresh(event){
     this.initData(this.department);
   }
 }

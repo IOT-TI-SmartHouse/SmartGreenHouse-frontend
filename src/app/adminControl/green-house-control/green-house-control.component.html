@@ -2,7 +2,7 @@
   <button type="button" class="btn btn-rounded btn-app-green" data-toggle="modal" data-target="#usermodal">Add new greenhouse</button>
   <hr/>
   <div>
-    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" id="greenhouseTable">
       <thead>
       <tr>
         <th class="dt-head-left">Name</th>
@@ -50,7 +50,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-rounded btn-app-green" (click)="addGreenHouse()">Save</button>
+          <button type="button" class="btn btn-rounded btn-app-green" data-dismiss="modal" (click)="addGreenHouse()">Save</button>
         </div>
       </div>
     </div>
