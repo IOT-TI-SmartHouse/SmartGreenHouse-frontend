@@ -8,7 +8,7 @@
   </div>
 
     <div class="row">
-      <div class="col-md-2" style="height: 400px; overflow-y: auto">
+      <div class="col-md-2" style="max-height: 400px; overflow-y: auto">
         <ul class="list-group">
           <div *ngFor="let node of nodes">
             <li style="overflow: hidden"(click)="clearGraph(); drawNode(node._id)" [ngClass]="{'active': selectedNode == node._id}"  class="list-group-item" >
@@ -18,17 +18,21 @@
         </ul>
       </div>
 
+      <div class="col-md-8">
+          <canvas id="tempChart"></canvas>
+      </div>
+
       <div class="col-md-2">
           <button type="button" class="btn btn-app-medium-grey" (click)="clearGraph(); drawNodes();">Show all data</button>
           <button type="button" class="btn btn-app-green" data-toggle="modal" data-target="#nodemodal">Add new sensornode</button>
       </div>
 
-      <div class="col-md-12">
-        <canvas id="tempChart"></canvas>
-      </div>
-      <div class="col-md-12">
-        <canvas id="humiChart"></canvas>
-      </div>
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+          <canvas id="humiChart"></canvas>
+        </div>
+
+        <div class="col-md-2"></div>
     </div>
 
 
