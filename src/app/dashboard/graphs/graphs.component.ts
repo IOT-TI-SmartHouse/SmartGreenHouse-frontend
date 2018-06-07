@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
-import { AppModule } from '../../app.module';
+import {IMyDateRangeModel, IMyDrpOptions} from 'mydaterangepicker';
 import { Chart } from 'chart.js';
-import {environment} from '../../../environments/environment';
-import {Observable} from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
-import {HttpHeaders} from '@angular/common/http';
-import {loadConfigurationFromPath} from 'tslint/lib/configuration';
 import { GreenhouseDepartmentService } from '../../services/greenhouse-department.service';
 import { SensorNodeService } from '../../services/sensor-node.service';
 
@@ -17,14 +13,16 @@ import { SensorNodeService } from '../../services/sensor-node.service';
 })
 
 export class GraphsComponent implements OnInit {
-  fromDate: string;
-  toDate: string;
+  fromDate = new Date();
+  toDate = new Date();
   greenhouse: string;
   department: string;
   nodes;
   data = [];
-  chart;
+  tempChart;
+  humiChart;
   public selectedNode: any;
+  public dateModel: any;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private sensorNodeService: SensorNodeService,
       private departmentService: GreenhouseDepartmentService, private router: Router) {  }
@@ -84,66 +82,95 @@ export class GraphsComponent implements OnInit {
   }
 
   cleanTimestamp(timestamp) {
-    const date = timestamp.split('T');
-    date[1] = date[1].replace('Z', '');
-    return date[0] + ' ' + date[1];
+    const timestampArray = timestamp.split('T');
+    const dateArray = timestampArray[0].split('-');
+    const timeArray = timestampArray[1].split(':');
+
+    const date = new Date();
+    date.setFullYear(dateArray[0], (dateArray[1] - 1), dateArray[2]);
+    date.setUTCHours(timeArray[0], timeArray[1], 0, 0);
+
+    return date;
   }
 
-  drawTemperature(timestamp, temperature) {
-    if (this.fromDate == null && this.toDate == null) {
-      this.chart.data.labels.push(timestamp);
-      this.chart.data.datasets[0].data.push(temperature);
-      this.chart.update();
-    } else if (timestamp < this.toDate && timestamp > this.fromDate) {
-      this.chart.data.labels.push(timestamp);
-      this.chart.data.datasets[0].data.push(temperature);
-      this.chart.update();
+  drawTemperature(date, temperature) {
+    if (date < this.toDate && date > this.fromDate) {
+      this.tempChart.data.labels.push(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDay()
+        + ' ' + date.getHours() + ':' + date.getMinutes());
+      this.tempChart.data.datasets[0].data.push(temperature);
+      this.tempChart.update();
     }
   }
 
-  drawHumidity(timestamp, humidity) {
-    if (this.fromDate == null && this.toDate == null) {
-      this.chart.data.labels.push(timestamp);
-      this.chart.data.datasets[1].data.push(humidity);
-      this.chart.update();
-    } else if (timestamp < this.toDate && timestamp > this.fromDate) {
-      this.chart.data.labels.push(timestamp);
-      this.chart.data.datasets[1].data.push(humidity);
-      this.chart.update();
+  drawHumidity(date, humidity) {
+    if (date < this.toDate && date > this.fromDate) {
+      this.humiChart.data.labels.push(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDay()
+        + ' ' + date.getHours() + ':' + date.getMinutes());
+      this.humiChart.data.datasets[0].data.push(humidity);
+      this.humiChart.update();
     }
   }
 
-  setDates(from, to) {
-    this.fromDate = from + ' 00:00:00.000';
-    this.toDate = to + ' 00:00:00.000';
+  setDefaultDates() {
+    const date = new Date();
+    const yyyy = date.getFullYear();
+    const mm = date.getMonth();
+    const dd = date.getDate();
+
+    this.fromDate.setFullYear(yyyy, mm, dd);
+    this.fromDate.setHours(0, 0, 0, 0 );
+
+    this.toDate.setFullYear(yyyy, mm, dd + 1);
+    this.toDate.setHours(0, 0, 0, 0 );
+
+
+    this.dateModel = {beginDate: {year: yyyy, month: mm, day: dd},
+      endDate: {year: yyyy, month: mm, day: (dd + 1)}};
   }
 
   drawGraph() {
-    const ctx = document.getElementById('generalChart');
-    this.chart = new Chart(ctx, {
+    const temp = document.getElementById('tempChart');
+    this.tempChart = new Chart(temp, {
       type: 'line',
       data: {
-        datasets: [
-          { label: 'Temperature' },
-          { label: 'Humidity' }
-          ] }
+        datasets: [{ label: 'Temperature' }]
+      }
+    });
+
+    const humi = document.getElementById('humiChart');
+    this.humiChart = new Chart(humi, {
+      type: 'line',
+      data: {
+        datasets: [{ label: 'Humidity' }]
+      }
     });
   }
 
   clearGraph() {
-    this.chart.data.labels = [];
+    this.tempChart.data.labels = [];
+    this.humiChart.data.labels = [];
 
-    for (let i = 0; i < this.chart.data.datasets.length; i ++) {
-      this.chart.data.datasets[i].data = [];
+    for (let i = 0; i < this.tempChart.data.datasets.length; i ++) {
+      this.tempChart.data.datasets[i].data = [];
+    }
+    for (let i = 0; i < this.humiChart.data.datasets.length; i ++) {
+      this.humiChart.data.datasets[i].data = [];
     }
 
-    this.chart.update();
+    this.tempChart.update();
+    this.humiChart.update();
+  }
+
+  setDates(event: IMyDateRangeModel) {
+    this.fromDate.setFullYear(event.beginDate.year, event.beginDate.month - 1, event.beginDate.day);
+    this.toDate.setFullYear(event.endDate.year, event.endDate.month - 1, event.endDate.day);
   }
 
   ngOnInit() {
     const url = new URL(window.location.href);
     this.department = this.departmentService.getSelectedDepartment()._id;
 
+    this.setDefaultDates();
     this.drawGraph();
     this.initData(this.department);
   }

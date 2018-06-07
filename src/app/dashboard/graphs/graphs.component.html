@@ -8,7 +8,7 @@
   </div>
 
     <div class="row">
-      <div class="col-md-2" style="height: 400px; overflow-y: auto">
+      <div class="col-md-2" style="max-height: 400px; overflow-y: auto">
         <ul class="list-group">
           <div *ngFor="let node of nodes">
             <li style="overflow: hidden"(click)="clearGraph(); drawNode(node)" [ngClass]="{'active': selectedNode && selectedNode._id == node._id}"  class="list-group-item" >
@@ -17,9 +17,11 @@
           </div>
         </ul>
       </div>
+
       <div class="col-md-8">
-        <canvas id="generalChart"></canvas>
+          <canvas id="tempChart"></canvas>
       </div>
+
       <div class="col-md-2">
           <button type="button" class="btn btn-app-medium-grey" (click)="clearGraph(); drawNodes();">Show all data</button>
           <button type="button" class="btn btn-app-green" data-toggle="modal" data-target="#nodemodal">Add new sensornode</button>
@@ -27,11 +29,19 @@
             <button type="button" class="btn btn-app-medium-grey" data-toggle="modal" data-target="#nodemodaledit">Edit sensornode</button>
         </div>
       </div>
+
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+          <canvas id="humiChart"></canvas>
+        </div>
+
+        <div class="col-md-2"></div>
     </div>
 
-    <input type="text" placeholder="From YYYY-MM-DD" #fromDate/>
-    <input type="text" placeholder="To YYYY-MM-DD" #toDate/>
-    <button (click)="clearGraph(); setDates(fromDate.value, toDate.value); loadNodes(department);">Plot</button>
+
+    <form #myForm="ngForm" novalidate>
+      <my-date-range-picker name="mydaterange" [(ngModel)]="dateModel" required (dateRangeChanged)="clearGraph(); setDates($event); drawNodes();"></my-date-range-picker>
+    </form>
   </div>
 
   <!-- Modal -->
@@ -49,4 +59,3 @@
     <app-sensor-node [isNew]="false" [node]="selectedNode" (onCreate)="refresh($event)" ></app-sensor-node>
   </div>
 </div>
-

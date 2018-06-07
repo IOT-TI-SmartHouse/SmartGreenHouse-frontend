@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { DataTablesModule } from 'angular-datatables';
 import { AppComponent } from './app.component';
+import { MyDateRangePickerModule } from 'mydaterangepicker';
 import { LoginComponent } from './login/loginscreen/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing-module';
@@ -34,10 +35,11 @@ import { GreenhouseDepartmentService } from './services/greenhouse-department.se
   imports: [
     BrowserModule,
     FormsModule,
+    MyDateRangePickerModule,
     AppRoutingModule,
     HttpClientModule,
     DataTablesModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [
     AppComponent, DashboardComponent, LoginComponent, AdminComponent, InfoComponent,
