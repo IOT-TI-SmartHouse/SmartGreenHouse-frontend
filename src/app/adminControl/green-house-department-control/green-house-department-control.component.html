@@ -14,15 +14,15 @@
         <thead>
         <tr>
           <th class="dt-head-left">Name</th>
-          <th class="dt-head-left">Active</th>
           <th class="dt-head-left">Created At</th>
+          <th></th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let department of departments" (click)="navigateDepartment(department)">
-          <td>{{ department.name }}</td>
-          <td>{{ department.active }}</td>
-          <td>{{ department.createdAt}}</td>
+        <tr *ngFor="let department of departments">
+          <td (click)="navigateDepartment(department)">{{ department.name }}</td>
+          <td (click)="navigateDepartment(department)">{{ department.createdAt}}</td>
+          <td><button class="btn btn-danger" (click)="removeDepartment(department)">X</button> </td>
         </tr>
         </tbody>
       </table>
