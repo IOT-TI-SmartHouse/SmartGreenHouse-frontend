@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
+import {IMyDateRangeModel, IMyDrpOptions} from 'mydaterangepicker';
 import { Chart } from 'chart.js';
 import { HttpClient } from '@angular/common/http';
 import { GreenhouseDepartmentService } from '../../services/greenhouse-department.service';
@@ -23,6 +24,7 @@ export class GraphsComponent implements OnInit {
   tempChart;
   humiChart;
   public selectedNode: any;
+  public dateModel: any;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private sensorNodeService: SensorNodeService,
     private departmentService: GreenhouseDepartmentService) {  }
@@ -82,7 +84,7 @@ export class GraphsComponent implements OnInit {
 
   cleanTimestamp(timestamp) {
     const date = timestamp.split('T');
-    date[1] = date[1].replace('Z', '');
+    date[1] = date[1].slice(0, -8);
     return date[0] + ' ' + date[1];
   }
 
@@ -118,23 +120,17 @@ export class GraphsComponent implements OnInit {
     }
   }
 
-  setDates(from, to) {
-    if (from === '' || to === '') {
-      alert('Set both dates please.');
-    } else {
-      this.fromDate = from + ' 00:00:00.000';
-      this.toDate = to + ' 00:00:00.000';
-    }
-  }
-
   setDefaultDates() {
     const date = new Date();
     const yyyy = date.getFullYear();
     const mm = date.getMonth() + 1;
     const dd = date.getDate();
 
-    this.preDate = yyyy + '-' + mm + '-' + dd + ' 00:00:00.000';
-    this.nexDate = yyyy + '-' + mm + '-' + (dd + 1) + ' 00:00:00.000';
+    this.preDate = yyyy + '-' + mm + '-' + dd + ' 00:00';
+    this.nexDate = yyyy + '-' + mm + '-' + (dd + 1) + ' 00:00';
+
+    this.dateModel = {beginDate: {year: yyyy, month: mm, day: dd},
+      endDate: {year: yyyy, month: mm, day: (dd + 1)}};
   }
 
   drawGraph() {
@@ -168,6 +164,11 @@ export class GraphsComponent implements OnInit {
 
     this.tempChart.update();
     this.humiChart.update();
+  }
+
+  setDates(event: IMyDateRangeModel) {
+    this.fromDate = event.beginDate.year + '-' + event.beginDate.month + '-' + event.beginDate.day + ' 00:00';
+    this.toDate = event.endDate.year + '-' + event.endDate.month + '-' + event.endDate.day + ' 00:00';
   }
 
   ngOnInit() {
