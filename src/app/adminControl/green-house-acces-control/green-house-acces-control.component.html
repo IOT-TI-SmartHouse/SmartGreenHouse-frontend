@@ -1,16 +1,20 @@
 <div class="container">
 
   <div class="form-group">
-    <select selected class="custom-select" [(ngModel)]="selectedUserId" (ngModelChange)='onUserSelected($event)'>
+
+    <label for="custom-select" class="col-form-label">{{userPlaceholder}}</label>
+    <select id="userSelect" selected class="custom-select .has-clear" [(ngModel)]="selectedUserId" (ngModelChange)='onUserSelected($event)'>
       <option *ngFor="let user of filteredUsers" [value]="user._id">{{user.username}}</option>
     </select>
 
-    <select selected class="custom-select" [(ngModel)]="selectedGreenhouseId" (ngModelChange)='onOptionsSelected($event)'>
+    <label for="custom-select" class="col-form-label">{{greenhousePlaceholder}}</label>
+    <select id="greenhouseSelect" selected class="custom-select .has-clear" [(ngModel)]="selectedGreenhouseId" (ngModelChange)='onOptionsSelected($event)'>
       <option *ngFor="let greenhouse of filteredGreenhouses" [value]="greenhouse._id" >{{greenhouse.name}} at {{greenhouse.location}}</option>
     </select>
   </div>
 
-<div *ngIf="selectedGreenhouse">
+  <!-- if only the greenhouse is selected show wich user has access to it -->
+<div *ngIf="selectedUser != null && selectedGreenhouse == null">
   <button class="btn btn-app-green" (click)="addGreenHouseAccess()">Add Greenhouse Access</button>
   <hr/>
   <h5>Greenhouses available to {{selectedUser.username}}</h5>
@@ -30,6 +34,11 @@
       </tbody>
     </table>
   </div>
+  <button class="btn btn-app-green" (click)="addGreenHouseAccess()">Give user access to greenhouse</button>
+
+
+<!-- if only the user is selected show wich greenhouses the user already has acces to -->
+<div *ngIf="selectedGreenhouse != null && selectedUser == null">
   <hr/>
   <h5>Users that can access the {{selectedGreenhouse.name}}</h5>
   <div>
@@ -47,4 +56,3 @@
     </table>
   </div>
 </div>
-
