@@ -52,13 +52,14 @@ export class GraphsComponent implements OnInit {
   }
 
   // DRAW SINGLE NODE DATA
-  drawNode(id) {
-    this.selectedNode = id;
+  drawNode(node) {
+    this.selectedNode = node;
+    console.log(this.selectedNode);
     for (let i = 0; i < this.data.length; i ++) {
       const dataCheck = this.data[i];
 
       for (let j = 0; j < dataCheck.length; j ++) {
-        if (dataCheck[j].node === id) {
+        if (dataCheck[j].node === node._id) {
           this.drawData(dataCheck);
           break;
         }
@@ -179,7 +180,7 @@ export class GraphsComponent implements OnInit {
     this.initData(this.department);
   }
 
-  refresh(event) {
+  refresh(event){
     this.initData(this.department);
   }
 }
