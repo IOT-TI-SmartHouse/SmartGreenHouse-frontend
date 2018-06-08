@@ -4,7 +4,7 @@
     <div class="col-md-7">
         <h1>{{department.name}}</h1>
     </div>
-  </div>
+    </div>
 
     <div class="row">
         <div class="col-md-2">
@@ -33,13 +33,10 @@
               <my-date-range-picker name="mydaterange" [(ngModel)]="dateModel" required (dateRangeChanged)="clearGraph(); setDates($event); drawNodes();"></my-date-range-picker>
           </form>
       </div>
-
     </div>
-  </div>
+  <app-map></app-map>
+</div>
 
-<app-map>
-
-</app-map>
 
 
 <!-- Modal -->
