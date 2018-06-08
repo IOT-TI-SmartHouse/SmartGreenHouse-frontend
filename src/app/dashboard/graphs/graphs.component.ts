@@ -38,6 +38,7 @@ export class GraphsComponent implements OnInit {
       this.nodes = res.nodes;
       for (let i = 0; i < this.nodes.length; i ++) {
         this.saveData(this.nodes[i]._id);
+        this.map.create(this.nodes[i]._id, this.nodes[i].name, this.nodes[i].latitude, this.nodes[i].longitude);
       }
     });
   }
@@ -47,7 +48,6 @@ export class GraphsComponent implements OnInit {
     this.sensorNodeService.getData(id).subscribe(res => {
       this.data.push(res.data);
       this.drawData(res.data);
-      this.map.update(id, res.data);
     });
   }
 
@@ -78,9 +78,11 @@ export class GraphsComponent implements OnInit {
   drawData(data) {
     for (let i = 0; i < data.length; i ++) {
       if (data[i].sensorType === 'Temperature') {
+        this.map.update(data[i].node, data[i].value, null);
         this.drawTemperature(this.cleanTimestamp(data[i].createdAt), data[i].value);
       }
       if (data[i].sensorType === 'Humidity') {
+        this.map.update(data[i].node, null , data[i].value);
         this.drawHumidity(this.cleanTimestamp(data[i].createdAt), data[i].value);
       }
     }
