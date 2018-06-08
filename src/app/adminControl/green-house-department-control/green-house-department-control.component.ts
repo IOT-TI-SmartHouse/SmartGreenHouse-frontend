@@ -24,7 +24,8 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
   public name: string;
 
   constructor(private greenhouseService: GreenhouseService,
-    private departmentService: GreenhouseDepartmentService, private router: Router) { }
+              private departmentService: GreenhouseDepartmentService, private router: Router) {
+  }
 
   ngOnInit() {
     this.dtOptions = {
@@ -35,14 +36,14 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
       // lengthMenu: [[10, 25, 50, 100, -1], [ 10, 25, 50, 100, 'All']]
     };
 
-    this.greenhouseService.getGreenhouses().subscribe( res => {
+    this.greenhouseService.getGreenhouses().subscribe(res => {
       this.greenhouses = res.greenhouses;
       console.log(res);
     });
 
     const greenhouse = this.greenhouseService.getSelectedGreenhouse();
 
-    if ( greenhouse != null) {
+    if (greenhouse != null) {
       this.selectGreenhouse(greenhouse);
       localStorage.removeItem('greenhouse');
     }
@@ -64,8 +65,8 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
   }
 
   onOptionsSelected(event: any) {
-    console.log(this.greenhouses.find( greenhouse => greenhouse._id === event ));
-    this.selectGreenhouse(this.greenhouses.find( greenhouse => greenhouse._id === event ));
+    console.log(this.greenhouses.find(greenhouse => greenhouse._id === event));
+    this.selectGreenhouse(this.greenhouses.find(greenhouse => greenhouse._id === event));
   }
 
   navigateDepartment(department: any) {
@@ -78,7 +79,7 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
   }
 
   refresh(): void {
-    this.departmentService.getGreenhouseDepartments(this.selectedGreenhouse._id).subscribe( res => {
+    this.departmentService.getGreenhouseDepartments(this.selectedGreenhouse._id).subscribe(res => {
       this.departments = res.departments;
       $('#departmentsTable').DataTable().destroy();
       this.dtTrigger.next();
@@ -104,4 +105,5 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
         });
       }
     });
+  }
 }

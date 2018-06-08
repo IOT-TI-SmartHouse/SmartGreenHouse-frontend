@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {IMyDateRangeModel, IMyDrpOptions} from 'mydaterangepicker';
 import { Chart } from 'chart.js';
 import { HttpClient } from '@angular/common/http';
 import { GreenhouseDepartmentService } from '../../services/greenhouse-department.service';
 import { SensorNodeService } from '../../services/sensor-node.service';
+import {MapComponent} from '../map/map.component';
 
 @Component({
   selector: 'app-graphs-component',
@@ -24,14 +25,17 @@ export class GraphsComponent implements OnInit {
   public selectedNode: any;
   public dateModel: any;
 
+  @ViewChild(MapComponent)
+  public map: MapComponent;
+
   constructor(private route: ActivatedRoute, private http: HttpClient, private sensorNodeService: SensorNodeService,
-      private departmentService: GreenhouseDepartmentService, private router: Router) {  }
+      private departmentService: GreenhouseDepartmentService, private router: Router) {
+  }
 
   // GET ALL DATA
   initData(id) {
     this.sensorNodeService.getSensorNodes(id).subscribe(res => {
       this.nodes = res.nodes;
-
       for (let i = 0; i < this.nodes.length; i ++) {
         this.saveData(this.nodes[i]._id);
       }
@@ -43,6 +47,7 @@ export class GraphsComponent implements OnInit {
     this.sensorNodeService.getData(id).subscribe(res => {
       this.data.push(res.data);
       this.drawData(res.data);
+      this.map.update(id, res.data);
     });
   }
 

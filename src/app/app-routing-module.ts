@@ -13,6 +13,7 @@ import { ControlComponent} from './control/control.component';
 import { AdminGuard } from './admin-guard.service';
 import {GreenHouseDepartmentControlComponent} from './adminControl/green-house-department-control/green-house-department-control.component';
 import {SensorNodeComponent} from './dashboard/sensor-node-control/sensor-node-control.component';
+import {MapComponent} from './dashboard/map/map.component';
 
 const appRoutes: Routes = [
     {
@@ -43,6 +44,11 @@ const appRoutes: Routes = [
         path: 'dashboard/sensornode',
         component: SensorNodeComponent,
         canActivate: [AuthGuard]
+    },
+    {
+      path: 'dashboard/map',
+      component: MapComponent,
+      canActivate: [AuthGuard]
     },
     {
       path: 'admin',

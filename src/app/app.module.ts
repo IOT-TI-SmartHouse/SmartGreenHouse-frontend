@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing-module';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './auth-guard.services';
+import { AgmCoreModule} from '@agm/core';
 import { DashboardComponent } from './dashboard/dashboardscreen/dashboard.component';
 import { MenuBarComponent } from './menu/menubar/menubar.component';
 import { AdminComponent } from './adminControl/admin.component';
@@ -29,6 +30,7 @@ import { GreenhouseService } from './services/greenhouse.service';
 import { GreenhouseAccesService } from './services/greenhouseAcces.service';
 import { UserService } from './services/user.service';
 import { GreenhouseDepartmentService } from './services/greenhouse-department.service';
+import { MapComponent } from './dashboard/map/map.component';
 
 
 @NgModule({
@@ -40,11 +42,12 @@ import { GreenhouseDepartmentService } from './services/greenhouse-department.se
     HttpClientModule,
     DataTablesModule,
     ReactiveFormsModule,
+    AgmCoreModule.forRoot({ apiKey: 'AIzaSyA51cn3Kj9Vf59T-S5-JHVtU78NHxrRRm4'})
   ],
   declarations: [
     AppComponent, DashboardComponent, LoginComponent, AdminComponent, InfoComponent,
     UserControlComponent, GreenHouseControlComponent, GreenHouseAccesControlComponent, MenuBarComponent,
-    GreenHouseDepartmentControlComponent, ControlComponent , GraphsComponent, SensorNodeComponent
+    GreenHouseDepartmentControlComponent, ControlComponent , GraphsComponent, SensorNodeComponent, MapComponent
   ],
   providers: [ AuthGuard , AdminGuard,  LoginService, GreenhouseService,
      GreenhouseAccesService, UserService, GreenhouseDepartmentService, SensorNodeService
