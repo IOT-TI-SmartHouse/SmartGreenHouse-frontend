@@ -10,7 +10,7 @@
         <div class="col-md-2">
           <ul class="list-group" style="max-height: 400px; overflow-y: auto">
             <div *ngFor="let node of nodes">
-              <li style="overflow: hidden"(click)="clearGraph(); drawNode(node._id)" [ngClass]="{'active': selectedNode == node._id}"  class="list-group-item" >
+              <li style="overflow: hidden"(click)="clearGraph(); drawNode(node)" [ngClass]="{'active': selectedNode && selectedNode._id == node._id}"  class="list-group-item" >
                 {{node.name}}
               </li>
             </div>

@@ -24,6 +24,7 @@ export class SensorNodeComponent implements OnInit {
   @Input('node')
     set node(node: any) {
       if (node != null) {
+        console.log(node);
         this.id = node._id;
         this.name = node.name;
         this.latitude = node.latitude;
