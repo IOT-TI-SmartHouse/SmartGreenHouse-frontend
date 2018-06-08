@@ -32,7 +32,6 @@ export class SensorNodeService {
 
   // update sensornode
   public update(id: string, name: string, greenhouseDepartment: string, latitude: string, longitude: string, hardwareserial: string) {
-    console.log("updating");
     return this.http.post(`${environment.apiEndpoint}/sensornode/update`, {
       id: id,
       name: name,

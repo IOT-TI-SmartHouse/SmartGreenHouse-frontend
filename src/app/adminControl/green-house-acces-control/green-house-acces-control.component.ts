@@ -22,8 +22,8 @@ export class GreenHouseAccesControlComponent implements OnInit {
   users: any[];
   filteredUsers: any[];
 
-  public userPlaceholder = 'select a user';
-  public greenhousePlaceholder = 'select a greenhouse';
+  public userPlaceholder = 'Select a user';
+  public greenhousePlaceholder = 'Select a greenhouse';
   public selectedUser: any;
   public selectedUserId: any;
   public selectedGreenhouse: any;
@@ -41,7 +41,6 @@ export class GreenHouseAccesControlComponent implements OnInit {
       pageLength: 10,
       searching: false,
       lengthChange: false
-      // lengthMenu: [[10, 25, 50, 100, -1], [ 10, 25, 50, 100, 'All']]
     };
 
     this.greenhouseService.getGreenhouses().subscribe(res => {
@@ -50,8 +49,8 @@ export class GreenHouseAccesControlComponent implements OnInit {
     });
 
     this.userService.getUsers().subscribe(res => {
-      this.users = res.users;
-      this.filteredUsers = this.users.filter(x => !x.isAdmin).sort();
+      //this.users = res.users;
+      this.filteredUsers = (res as any).users.filter(x => !x.isAdmin).sort();
     });
   }
 
@@ -67,11 +66,9 @@ export class GreenHouseAccesControlComponent implements OnInit {
         this.greenhouses,
         this.greenhousesForUser
       );
-
-      $('#greenhousestable')
-        .DataTable()
-        .destroy();
+      $('#greenhousestable').DataTable().clear().destroy();
       this.dtTrigger.next();
+      //$('#greenhousestable').DataTable().draw();
     });
   }
 
@@ -114,12 +111,12 @@ export class GreenHouseAccesControlComponent implements OnInit {
   }
 
   onUserSelected(event: any) {
-    this.selectUser(this.users.find( user => user._id === event ));
+    this.selectUser(this.filteredUsers.find(user => user._id === event));
   }
 
   refresh(): void {
-    $('#greenhouseSelect').val([]);
     this.selectedGreenhouse = null;
+    $('#greenhouseSelect').val([]);
 
     this.greenhouseService.getAll(this.selectedUser._id).subscribe(res => {
       this.greenhousesForUser = (res as any).greenhouses.filter(x => x != null);
@@ -131,10 +128,9 @@ export class GreenHouseAccesControlComponent implements OnInit {
       );
     });
 
-    $('#greenhousestable')
-      .DataTable()
-      .destroy();
-    this.dtTrigger.next();
+    //$('#greenhousestable').DataTable().draw('full-reset');
+    //$('#greenhousestable').DataTable().clear().destroy();
+    //this.dtTrigger.next();
   }
 
   removeAccess(greenhouse: any) {
