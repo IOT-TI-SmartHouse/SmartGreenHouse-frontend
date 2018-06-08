@@ -49,7 +49,6 @@ export class GreenHouseAccesControlComponent implements OnInit {
     });
 
     this.userService.getUsers().subscribe(res => {
-      //this.users = res.users;
       this.filteredUsers = (res as any).users.filter(x => !x.isAdmin).sort();
     });
   }
@@ -57,7 +56,7 @@ export class GreenHouseAccesControlComponent implements OnInit {
   public selectUser(user) {
     this.selectedUser = user;
     this.selectedGreenhouse = null;
-    $('#greenhouseSelect').val([]);
+
     this.greenhouseService.getAll(user._id).subscribe(res => {
       this.greenhousesForUser = (res as any).greenhouses.filter(x => x != null);
 
@@ -68,7 +67,7 @@ export class GreenHouseAccesControlComponent implements OnInit {
       );
       $('#greenhousestable').DataTable().clear().destroy();
       this.dtTrigger.next();
-      //$('#greenhousestable').DataTable().draw();
+      $('#greenhouseSelect').val([]);
     });
   }
 
@@ -115,22 +114,7 @@ export class GreenHouseAccesControlComponent implements OnInit {
   }
 
   refresh(): void {
-    this.selectedGreenhouse = null;
-    $('#greenhouseSelect').val([]);
-
-    this.greenhouseService.getAll(this.selectedUser._id).subscribe(res => {
-      this.greenhousesForUser = (res as any).greenhouses.filter(x => x != null);
-
-      // filter the greenhouses list to only contain greenhouses that the user does not already have access to
-      this.filteredGreenhouses = this.filterList(
-        this.greenhouses,
-        this.greenhousesForUser
-      );
-    });
-
-    //$('#greenhousestable').DataTable().draw('full-reset');
-    //$('#greenhousestable').DataTable().clear().destroy();
-    //this.dtTrigger.next();
+    this.selectUser(this.selectedUser);
   }
 
   removeAccess(greenhouse: any) {
