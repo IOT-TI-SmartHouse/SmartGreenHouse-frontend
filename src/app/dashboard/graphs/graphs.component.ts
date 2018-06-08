@@ -17,7 +17,7 @@ export class GraphsComponent implements OnInit {
   fromDate = new Date();
   toDate = new Date();
   greenhouse: string;
-  department: string;
+  department: any;
   nodes;
   data = [];
   tempChart;
@@ -175,14 +175,14 @@ export class GraphsComponent implements OnInit {
 
   ngOnInit() {
     const url = new URL(window.location.href);
-    this.department = this.departmentService.getSelectedDepartment()._id;
+    this.department = this.departmentService.getSelectedDepartment();
 
     this.setDefaultDates();
     this.drawGraph();
-    this.initData(this.department);
+    this.initData(this.department._id);
   }
 
-  refresh(event){
-    this.initData(this.department);
+  refresh(event) {
+    this.initData(this.department._id);
   }
 }
