@@ -54,7 +54,6 @@ export class GraphsComponent implements OnInit {
   // DRAW SINGLE NODE DATA
   drawNode(node) {
     this.selectedNode = node;
-    console.log(this.selectedNode);
     for (let i = 0; i < this.data.length; i ++) {
       const dataCheck = this.data[i];
 
@@ -101,7 +100,7 @@ export class GraphsComponent implements OnInit {
   }
 
   drawTemperature(date, temperature) {
-    if (date < this.toDate && date > this.fromDate) {
+    if (date.getTime() < this.toDate.getTime() && date.getTime() > this.fromDate.getTime()) {
       this.tempChart.data.labels.push(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDay()
         + ' ' + date.getHours() + ':' + date.getMinutes());
       this.tempChart.data.datasets[0].data.push(temperature);
@@ -171,6 +170,13 @@ export class GraphsComponent implements OnInit {
   setDates(event: IMyDateRangeModel) {
     this.fromDate.setFullYear(event.beginDate.year, event.beginDate.month - 1, event.beginDate.day);
     this.toDate.setFullYear(event.endDate.year, event.endDate.month - 1, event.endDate.day);
+
+    // redraw selected nodes
+    if (this.selectedNode) {
+      this.drawNode(this.selectedNode);
+    } else {
+      this.drawNodes();
+    }
   }
 
   ngOnInit() {
