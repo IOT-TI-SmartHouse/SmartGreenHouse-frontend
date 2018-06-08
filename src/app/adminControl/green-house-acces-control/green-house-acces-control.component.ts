@@ -56,6 +56,7 @@ export class GreenHouseAccesControlComponent implements OnInit {
   public selectUser(user) {
     this.selectedUser = user;
     this.selectedGreenhouse = null;
+    this.selectedGreenhouseId = null;
 
     this.greenhouseService.getAll(user._id).subscribe(res => {
       this.greenhousesForUser = (res as any).greenhouses.filter(x => x != null);
