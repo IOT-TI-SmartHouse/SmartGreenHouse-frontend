@@ -27,7 +27,7 @@ export class SensorNodeComponent implements OnInit {
     this.name = node.name;
     this.latitude = node.latitude;
     this.longitude = node.longitude;
-    this.hardwareserial = node.hardwareserial;
+    this.hardwareSerial = node.hardwareSerial;
   }
 
   greenhouses: any = [];
@@ -41,7 +41,7 @@ export class SensorNodeComponent implements OnInit {
   public name: string;
   public latitude: string;
   public longitude: string;
-  public hardwareserial: string;
+  public hardwareSerial: string;
 
   constructor(private sensornodeService: SensorNodeService,
      private departmentService: GreenhouseDepartmentService, private greenhouseService: GreenhouseService, private router: Router) { }
@@ -84,16 +84,15 @@ export class SensorNodeComponent implements OnInit {
 
   public addSensorNode() {
     this.sensornodeService.register(this.name,
-       this.departmentService.getSelectedDepartment(), this.latitude, this.longitude, this.hardwareserial);
+       this.departmentService.getSelectedDepartment(), this.latitude, this.longitude, this.hardwareSerial);
     this.onCreate.emit(true);
     this.clearInputFields();
   }
 
   public editSensorNode() {
     this.sensornodeService.update(this.id, this.name,
-      this.departmentService.getSelectedDepartment(), this.latitude, this.longitude, this.hardwareserial).subscribe(res => {
+      this.departmentService.getSelectedDepartment(), this.latitude, this.longitude, this.hardwareSerial).subscribe(res => {
       swal('Success!', 'Successfully updated sensornode!', 'success');
-      this.clearInputFields();
     }, error => {
       swal('Update failed', 'The update attempt has failed', 'error');
     });
@@ -104,6 +103,6 @@ export class SensorNodeComponent implements OnInit {
     this.name = '';
     this.latitude = '';
     this.longitude = '';
-    this.hardwareserial = '';
+    this.hardwareSerial = '';
   }
 }
