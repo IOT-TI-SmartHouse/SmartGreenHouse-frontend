@@ -22,7 +22,7 @@
         <tr *ngFor="let department of departments">
           <td (click)="navigateDepartment(department)">{{ department.name }}</td>
           <td (click)="navigateDepartment(department)">{{ department.createdAt}}</td>
-          <td><button class="btn btn-danger" (click)="removeDepartment(department)">X</button> </td>
+          <td><button class="btn btn-app-red" (click)="removeDepartment(department)">X</button> </td>
         </tr>
         </tbody>
       </table>

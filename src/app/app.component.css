@@ -4,6 +4,7 @@
   --medium-grey: #d7d7d7;
   --text-dark-grey: #1d1d1d;
   --button-green-color: #7CBB00;
+  --button-red-color: #e52013;
 }
 
 ::ng-deep :focus{
@@ -17,6 +18,13 @@
 
 ::ng-deep .btn-app-green{
   background-color: var(--button-green-color);
+  margin: 10px 10px 10px 10px;
+  color: white;
+  text-transform: uppercase;
+}
+
+::ng-deep .btn-app-red{
+  background-color: var(--button-red-color);
   margin: 10px 10px 10px 10px;
   color: white;
   text-transform: uppercase;
