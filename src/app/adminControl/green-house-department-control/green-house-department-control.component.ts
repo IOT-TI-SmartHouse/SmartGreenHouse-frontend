@@ -104,4 +104,5 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
         });
       }
     });
+  }
 }
