@@ -30,7 +30,7 @@
         </div>
           <hr/>
           <form #myForm="ngForm" novalidate>
-              <my-date-range-picker name="mydaterange" [(ngModel)]="dateModel" required (dateRangeChanged)="clearGraph(); setDates($event); drawNodes();"></my-date-range-picker>
+              <my-date-range-picker name="mydaterange" [(ngModel)]="dateModel" required (dateRangeChanged)="clearGraph(); setDates($event);"></my-date-range-picker>
           </form>
       </div>
 
