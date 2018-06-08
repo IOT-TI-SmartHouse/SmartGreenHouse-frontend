@@ -23,11 +23,14 @@ export class SensorNodeComponent implements OnInit {
     public isNew = false;
   @Input('node')
     set node(node: any) {
-    this.id = node._id;
-    this.name = node.name;
-    this.latitude = node.latitude;
-    this.longitude = node.longitude;
-    this.hardwareSerial = node.hardwareSerial;
+      if (node != null) {
+        console.log(node);
+        this.id = node._id;
+        this.name = node.name;
+        this.latitude = node.latitude;
+        this.longitude = node.longitude;
+        this.hardwareSerial = node.hardwareSerial;
+      }
   }
 
   greenhouses: any = [];
