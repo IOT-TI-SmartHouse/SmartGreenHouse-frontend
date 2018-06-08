@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MouseEvent} from '@agm/core';
+import { MapsAPILoader} from '@agm/core';
 
 @Component({
   selector: 'app-map',
@@ -12,13 +13,17 @@ export class MapComponent implements OnInit {
   zoom = 4;
 
   // initial center position for the map
-  lat = 51.673858;
-  lng = 7.815982;
+  lat = 0;
+  lng = 0;
 
   color = 'green';
   markers: Marker[] = [];
+  latlngBounds;
+  MapsAPILoader;
 
-  constructor() {
+  constructor(private mapsAPILoader: MapsAPILoader) {
+    this.MapsAPILoader = mapsAPILoader;
+    this.updateBounds();
   }
 
   ngOnInit() {
@@ -26,33 +31,43 @@ export class MapComponent implements OnInit {
 
   update(sensorId: string, temperature?: number, humidity?: number) {
     let nodeExists = false;
-    for (const marker in this.markers) {
+    this.markers.forEach( marker => {
       if ((marker as any).sensorId === sensorId) {
         if (temperature !== null || temperature !== undefined) {
-          marker['temperature'] = temperature;
+          marker.temperature = temperature;
         }
         if (humidity !== null || humidity !== undefined) {
-          marker['humidity'] = humidity;
+          marker.humidity = humidity;
         }
         nodeExists = true;
-        // console.log('updated node: ' + sensorId);
       }
-    }
+    });
     if (!nodeExists) {
-      // console.log('updating a non-existing node is not possible: ' + sensorId);
+      console.log('updating a non-existing node is not possible: ' + sensorId);
     }
+    this.updateBounds();
+  }
+
+  updateBounds() {
+    this.MapsAPILoader.load().then(() => {
+      this.latlngBounds = new window['google'].maps.LatLngBounds();
+      this.markers.forEach((location) => {
+        this.latlngBounds.extend(new window['google'].maps.LatLng(location.lat, location.lng));
+      });
+    });
   }
 
   create(sensorId: string, sensorName: string, latitude: number, longitude: number) {
     for (const marker in this.markers) {
       if (marker['sensorId'] === sensorId) {
-        console.log('creating an already existing node is not allowed. Sensor id: ' + sensorId);
+        console.log('creating an already existing map node is not allowed. Sensor id: ' + sensorId);
         return;
       }
     }
-    console.log('created node: ' + sensorId);
-    this.markers.push({sensorId: sensorId, label: sensorName, lat: latitude, lng: longitude, draggable: false});
-    console.log('markers size: ' +  this.markers.length);
+    console.log('created map node: ' + sensorName);
+    this.markers.push({sensorId: sensorId, label: sensorName, lat: latitude, lng: longitude, draggable: false, radius: 10});
+
+    this.updateBounds();
   }
 
   clickedMarker(label: string, index: number) {
@@ -76,4 +91,5 @@ export class MapComponent implements OnInit {
     color?: string;
     temperature?: number;
     humidity?: number;
+    radius?: number;
 }
