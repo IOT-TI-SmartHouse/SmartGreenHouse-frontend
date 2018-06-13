@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MouseEvent} from '@agm/core';
-import { MapsAPILoader} from '@agm/core';
+import {MapsAPILoader} from '@agm/core';
 
 @Component({
   selector: 'app-map',
@@ -31,7 +31,7 @@ export class MapComponent implements OnInit {
 
   update(sensorId: string, temperature?: number, humidity?: number) {
     let nodeExists = false;
-    this.markers.forEach( marker => {
+    this.markers.forEach(marker => {
       if ((marker as any).sensorId === sensorId) {
         if (temperature !== null || temperature !== undefined) {
           marker.temperature = temperature;
