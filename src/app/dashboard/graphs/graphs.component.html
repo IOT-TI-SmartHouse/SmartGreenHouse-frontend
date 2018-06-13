@@ -1,21 +1,18 @@
 <div class="container">
-    <div class="row">
-    <div class="col-md-5"></div>
-    <div class="col-md-7">
+    <div class="title">
         <h1>{{department.name}}</h1>
-    </div>
     </div>
 
     <div class="row">
-        <div class="col-md-2">
-          <ul class="list-group" style="max-height: 400px; overflow-y: auto">
-            <div *ngFor="let node of nodes">
-              <li style="overflow: hidden"(click)="clearGraph(); drawNode(node)" [ngClass]="{'active': selectedNode && selectedNode._id == node._id}"  class="list-group-item" >
-                {{node.name}}
-              </li>
-            </div>
-          </ul>
-        </div>
+      <div class="col-md-2">
+        <ul class="list-group" style="max-height: 400px; overflow-y: auto">
+          <div *ngFor="let node of nodes">
+            <li style="overflow: hidden"(click)="clearGraph(); drawNode(node)" [ngClass]="{'active': selectedNode && selectedNode._id == node._id}"  class="list-group-item" >
+              {{node.name}}
+            </li>
+          </div>
+        </ul>
+      </div>
 
       <div class="col-md-8">
           <canvas id="tempChart"></canvas>
@@ -34,6 +31,11 @@
           </form>
       </div>
     </div>
+
+  <div class="title">
+    <h1>Node locations</h1>
+  </div>
+
   <app-map></app-map>
 </div>
 
