@@ -10,7 +10,6 @@
 }
 
 a{
-  color: var(--text-dark-grey);
   text-decoration:none;
   text-transform: uppercase;
   font-size:16px;
@@ -49,11 +48,11 @@ a{
 }
 
 .active{
+  color: white;
   background-color: var(--button-green-color);
 }
 
 li a {
-  color: var(--text-dark-grey);
   text-align: left;
 }
 
@@ -62,5 +61,6 @@ li:focus{
 }
 
 li:hover{
+  color: var(--text-dark-grey);
   background-color: var(--light-grey);
 }

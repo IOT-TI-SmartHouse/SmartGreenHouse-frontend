@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MouseEvent} from '@agm/core';
-import { MapsAPILoader} from '@agm/core';
+import {MapsAPILoader} from '@agm/core';
 
 @Component({
   selector: 'app-map',
