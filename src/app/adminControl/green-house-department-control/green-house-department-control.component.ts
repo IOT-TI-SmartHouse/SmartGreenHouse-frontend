@@ -37,7 +37,6 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
 
     this.greenhouseService.getGreenhouses().subscribe(res => {
       this.greenhouses = res.greenhouses;
-      console.log(res);
     });
 
     const greenhouse = this.greenhouseService.getSelectedGreenhouse();
@@ -64,7 +63,6 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
   }
 
   onOptionsSelected(event: any) {
-    console.log(this.greenhouses.find(greenhouse => greenhouse._id === event));
     this.selectGreenhouse(this.greenhouses.find(greenhouse => greenhouse._id === event));
   }
 

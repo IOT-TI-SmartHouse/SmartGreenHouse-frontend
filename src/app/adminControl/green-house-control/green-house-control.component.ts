@@ -28,7 +28,6 @@ export class GreenHouseControlComponent implements OnInit {
       lengthMenu: [[10, 25, 50, 100, -1], [ 10, 25, 50, 100, 'All']],
     };
     this.greenhouseService.getGreenhouses().subscribe( res => {
-      console.log(res);
       this.greenhouses = res.greenhouses;
       this.dtTrigger.next();
     });
