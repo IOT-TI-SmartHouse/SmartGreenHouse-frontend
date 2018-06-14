@@ -1,9 +1,6 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    {{title}}
-  </h1>
-  <div>
-    <app-login-component></app-login-component>
-  </div>
-</div>
+<header *ngIf="loginService.isLoggedIn()">
+    <app-menubar-component></app-menubar-component>
+</header>
+<section style="margin-top: 72.591px" id="router">
+  <router-outlet></router-outlet>
+</section>

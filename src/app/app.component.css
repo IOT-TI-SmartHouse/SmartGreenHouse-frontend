@@ -1,0 +1,57 @@
+::ng-deep :root{
+  --green-color: #7CBB00;
+  --light-grey: #f6f6f6;
+  --medium-grey: #d7d7d7;
+  --text-dark-grey: #1d1d1d;
+  --button-green-color: #7CBB00;
+  --button-red-color: #e52013;
+}
+
+::ng-deep :focus{
+  outline: none;
+}
+
+::ng-deep .container {
+  overflow: visible;
+}
+
+::ng-deep .btn-app-green{
+  background-color: var(--button-green-color);
+  margin: 10px 10px 10px 10px;
+  color: white;
+  text-transform: uppercase;
+}
+
+::ng-deep .btn-app-red{
+  background-color: var(--button-red-color);
+  margin: 10px 10px 10px 10px;
+  color: white;
+  text-transform: uppercase;
+}
+
+::ng-deep .btn-app-medium-grey{
+  background-color: var(--medium-grey);
+  margin: 10px 10px 10px 10px;
+  color: black;
+  text-transform: uppercase;
+}
+
+::ng-deep hr{
+  border-color: var(--button-green-color);
+}
+
+section {
+  margin: 0;
+  padding: 0;
+}
+
+footer{
+  padding: 0;
+  margin-top: 0;
+  color: var(--text-dark-grey);
+  background-color: var(--light-grey);
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}

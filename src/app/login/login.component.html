@@ -1,4 +1,11 @@
-<input type="text" [(ngModel)]="username" placeholder="username">
-<input type="password" [(ngModel)]="password" placeholder="password">
-
-<button (click)="login()">Login</button>
+<div class="login-page">
+    <div class="form-group rounded">
+        <form class="login-form">
+        <input class="input-group-text rounded text-left" type="text" [(ngModel)]="username" [ngModelOptions]="{standalone:true}" placeholder="username"/>
+        <input class="input-group-text rounded text-left" type="password" [(ngModel)]="password" [ngModelOptions]="{standalone:true}" placeholder="password"/>
+        <button class="btn-primary rounded" (click)="login()">login</button>
+        </form>
+    </div>
+    <div class="loadingOverlay" *ngIf="loading"></div>
+    <div class="loader" *ngIf="loading"></div>
+</div>

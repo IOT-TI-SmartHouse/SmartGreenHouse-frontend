@@ -1,0 +1,12 @@
+.list-group-item {
+    cursor: pointer;
+}
+
+.list-group-item.active {
+  background-color: var(--button-green-color);
+  border-color: var(--button-green-color);
+}
+
+.title {
+  text-align: center;
+}

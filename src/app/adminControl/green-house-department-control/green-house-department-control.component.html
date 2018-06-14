@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="form-group">
+    <label for="custom-select" class="col-form-label">Selected Greenhouse</label>
+    <select class="custom-select" id="custom-select"[(ngModel)]="selectedGreenhouseId" (ngModelChange)='onOptionsSelected($event)'>
+      <option *ngFor="let greenhouse of greenhouses" [value]="greenhouse._id">{{greenhouse.name}} at {{greenhouse.location}}</option>
+    </select>
+  </div>
+  <button *ngIf="selectedGreenhouse != null" type="button" class="btn btn-rounded btn-app-green" data-toggle="modal" data-target="#departmentmodal">CREATE NEW DEPARTMENT</button>
+
+  <div *ngIf="selectedGreenhouse">
+    <h5>Existing departments in {{selectedGreenhouse.name}}</h5>
+    <div>
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" id="departmentsTable">
+        <thead>
+        <tr>
+          <th class="dt-head-left">Name</th>
+          <th class="dt-head-left">Created At</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let department of departments">
+          <td (click)="navigateDepartment(department)">{{ department.name }}</td>
+          <td (click)="navigateDepartment(department)">{{ department.createdAt}}</td>
+          <td><button class="btn btn-app-red" (click)="removeDepartment(department)">X</button> </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="selectedGreenhouse">
+  <!-- Modal -->
+  <div class="modal fade" id="departmentmodal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Create a new department in {{selectedGreenhouse.name}}</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form">
+            <div class="row">
+              <div class="col-sm-6">
+                Department name:
+              </div>
+              <div class="col-sm-6">
+                <input type="text" placeholder="department name" [(ngModel)]="name" [ngModelOptions]="{standalone:true}"/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-rounded btn-app-green" data-dismiss="modal" (click)="addDepartment()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

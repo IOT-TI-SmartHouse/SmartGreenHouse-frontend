@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="form-group">
+    <label for="userSelect" class="col-form-label">{{userPlaceholder}}</label>
+    <select id="userSelect" selected class="custom-select" [(ngModel)]="selectedUserId" (ngModelChange)='onUserSelected($event)'>
+      <option *ngFor="let user of filteredUsers" [value]="user._id">{{user.username}}</option>
+    </select>
+
+    <label for="greenhouseSelect" class="col-form-label">{{greenhousePlaceholder}}</label>
+    <select id="greenhouseSelect" selected class="custom-select" [(ngModel)]="selectedGreenhouseId" (ngModelChange)='onOptionsSelected($event)'>
+      <option *ngFor="let greenhouse of filteredGreenhouses" [value]="greenhouse._id" >{{greenhouse.name}} at {{greenhouse.location}}</option>
+    </select>
+  </div>
+  <div *ngIf="selectedUser && selectedGreenhouse">
+    <button class="btn btn-app-green" (click)="addGreenHouseAccess()">Give user access to greenhouse</button>
+  </div>
+
+  <!-- if only the greenhouse is selected show wich user has access to it -->
+  <div *ngIf="selectedUser != null">
+    <hr/>
+    <h5>Greenhouses available to {{selectedUser.username}}</h5>
+    <div>
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" id="greenhousestable">
+        <thead>
+        <tr>
+          <th class="dt-head-left">Name</th>
+          <th class="dt-head-left">Location</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let greenhouse of greenhousesForUser">
+          <td>{{ greenhouse.name }}</td>
+          <td>{{ greenhouse.location }}</td>
+          <td><button class="btn btn-danger" (click)="removeAccess(greenhouse)">X</button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

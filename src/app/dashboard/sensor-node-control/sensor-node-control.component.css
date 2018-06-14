@@ -1,0 +1,31 @@
+.dropdown-menu {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.form {
+  position: relative;
+  z-index: 1;
+  text-align: left;
+}
+
+.form input {
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+  float: right;
+}
+
+button {
+  background-color: var(--button-green-color);
+}
+
+.form label{
+  float: left;
+}
+

@@ -1,0 +1,13 @@
+li {
+    cursor: pointer;
+}
+
+.sub-item {
+    padding-left: 45px;
+    color: black;
+}
+
+.inline_svg {
+  max-height: 14px;
+  max-width: 14px;
+}

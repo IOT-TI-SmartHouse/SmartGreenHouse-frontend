@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="title">
+        <h1>{{department.name}}</h1>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2">
+        <ul class="list-group" style="max-height: 400px; overflow-y: auto">
+          <div *ngFor="let node of nodes">
+            <li style="overflow: hidden"(click)="clearGraph(); drawNode(node)" [ngClass]="{'active': selectedNode && selectedNode._id == node._id}"  class="list-group-item" >
+              {{node.name}}
+            </li>
+          </div>
+        </ul>
+      </div>
+
+      <div class="col-md-8">
+          <canvas id="tempChart"></canvas>
+          <canvas id="humiChart"></canvas>
+      </div>
+
+      <div class="col-md-2">
+          <button type="button" class="btn btn-app-medium-grey" (click)="clearGraph(); drawNodes();">Show all data</button>
+          <button type="button" class="btn btn-app-green" data-toggle="modal" data-target="#nodemodal">Add new sensornode</button>
+        <div *ngIf="selectedNode">
+            <button type="button" class="btn btn-app-medium-grey" data-toggle="modal" data-target="#nodemodaledit">Edit sensornode</button>
+        </div>
+          <hr/>
+          <form #myForm="ngForm" novalidate>
+              <my-date-range-picker name="mydaterange" [(ngModel)]="dateModel" required (dateRangeChanged)="clearGraph(); setDates($event);"></my-date-range-picker>
+          </form>
+      </div>
+    </div>
+
+  <div class="title">
+    <h1>Sensor locations</h1>
+  </div>
+  <app-map></app-map>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="nodemodal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <app-sensor-node [isNew]="true" (onCreate)="refresh($event)"></app-sensor-node>
+  </div>
+</div>
+
+<!-- Modal edit -->
+<div class="modal fade" id="nodemodaledit" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <app-sensor-node [isNew]="false" [node]="selectedNode" (onCreate)="refresh($event)" ></app-sensor-node>
+  </div>
+</div>
