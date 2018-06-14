@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Greenhouse } from '../../dataObjects/classes/greenhouses.class';
 import { Router } from '@angular/router';
 import { GreenhouseDepartmentService } from '../../services/greenhouse-department.service';
 import { GreenhouseService } from '../../services/greenhouse.service';
@@ -10,10 +9,9 @@ import { GreenhouseService } from '../../services/greenhouse.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-
 export class DashboardComponent implements OnInit {
 
-  greenhouses: Greenhouse[];
+  greenhouses: any[];
   departments;
 
   public showcaseId: number;
@@ -25,14 +23,14 @@ export class DashboardComponent implements OnInit {
     this.loadGreenhouses();
   }
 
-  loadGreenhouses() {
+  public loadGreenhouses() {
     this.greenhouseService.getGreenhouses().subscribe(res => {
       this.greenhouses = res.greenhouses;
       this.loadDepartments();
     });
   }
 
-  selectGreenhouse(id) {
+  public selectGreenhouse(id) {
     if ( this.showcaseId !== id ) {
       this.showcaseId = id;
     } else {
@@ -40,7 +38,7 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  loadDepartments() {
+  public loadDepartments() {
     this.greenhouses.forEach( greenhouse => {
       this.departmentService.getGreenhouseDepartments(greenhouse._id).subscribe(res => {
         greenhouse.departments = res.departments;
@@ -48,7 +46,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  navigate(department: any) {
+  public navigate(department: any) {
     this.departmentService.setSelectedDepartment(department);
     this.router.navigate(['/dashboard/graphs']);
   }

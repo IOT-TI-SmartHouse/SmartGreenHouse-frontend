@@ -3,7 +3,6 @@ import {HttpHeaders, HttpClient} from '@angular/common/http';
 import swal from 'sweetalert2';
 import {Observable} from 'rxjs/Observable';
 import {environment} from '../../environments/environment';
-import {getToken} from 'codelyzer/angular/styles/cssLexer';
 
 @Injectable()
 export class SensorNodeService {
@@ -67,7 +66,7 @@ export class SensorNodeService {
     });
   }
 
-  getToken() {
+  public getToken() {
     return String(localStorage.getItem('id_token'));
   }
 }

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Subject} from 'rxjs/Subject';
+import { Subject } from 'rxjs/Subject';
 import swal from 'sweetalert2';
 import { GreenhouseService } from '../../services/greenhouse.service';
 import { GreenhouseDepartmentService } from '../../services/greenhouse-department.service';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 declare var $: any;
 
 @Component({
@@ -33,7 +33,6 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
       pageLength: 10,
       searching: false,
       lengthChange: false
-      // lengthMenu: [[10, 25, 50, 100, -1], [ 10, 25, 50, 100, 'All']]
     };
 
     this.greenhouseService.getGreenhouses().subscribe(res => {
@@ -69,7 +68,7 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
     this.selectGreenhouse(this.greenhouses.find(greenhouse => greenhouse._id === event));
   }
 
-  navigateDepartment(department: any) {
+  public navigateDepartment(department: any) {
     this.departmentService.setSelectedDepartment(department);
     this.router.navigate(['/dashboard/graphs']);
   }
@@ -86,7 +85,7 @@ export class GreenHouseDepartmentControlComponent implements OnInit {
     });
   }
 
-  removeDepartment(department: any) {
+  public removeDepartment(department: any) {
     swal({
       title: 'Are you sure?',
       text: 'You won\'t be able to revert this!',

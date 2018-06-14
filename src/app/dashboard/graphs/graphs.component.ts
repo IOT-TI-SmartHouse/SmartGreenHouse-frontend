@@ -1,18 +1,17 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {Router, ActivatedRoute, Params} from '@angular/router';
-import {IMyDateRangeModel, IMyDrpOptions} from 'mydaterangepicker';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { IMyDateRangeModel } from 'mydaterangepicker';
 import { Chart } from 'chart.js';
 import { HttpClient } from '@angular/common/http';
 import { GreenhouseDepartmentService } from '../../services/greenhouse-department.service';
 import { SensorNodeService } from '../../services/sensor-node.service';
-import {MapComponent} from '../map/map.component';
+import { MapComponent } from '../map/map.component';
 
 @Component({
   selector: 'app-graphs-component',
   templateUrl: './graphs.component.html',
   styleUrls: ['./graphs.component.css']
 })
-
 export class GraphsComponent implements OnInit {
   fromDate = new Date();
   toDate = new Date();
@@ -29,11 +28,11 @@ export class GraphsComponent implements OnInit {
   public map: MapComponent;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private sensorNodeService: SensorNodeService,
-      private departmentService: GreenhouseDepartmentService, private router: Router) {
+      private departmentService: GreenhouseDepartmentService) {
   }
 
   // GET ALL DATA
-  initData(id) {
+  public initData(id) {
     this.sensorNodeService.getSensorNodes(id).subscribe(res => {
       this.nodes = res.nodes;
       for (let i = 0; i < this.nodes.length; i ++) {
@@ -44,7 +43,7 @@ export class GraphsComponent implements OnInit {
   }
 
   // SAVE DATA LOCALLY AND DRAW IT
-  saveData(id) {
+  public saveData(id) {
     this.sensorNodeService.getData(id).subscribe(res => {
       this.data.push(res.data);
       this.drawData(res.data);
@@ -52,7 +51,7 @@ export class GraphsComponent implements OnInit {
   }
 
   // DRAW SINGLE NODE DATA
-  drawNode(node) {
+  public drawNode(node) {
     this.selectedNode = node;
     for (let i = 0; i < this.data.length; i ++) {
       const dataCheck = this.data[i];
@@ -67,14 +66,14 @@ export class GraphsComponent implements OnInit {
   }
 
   // DRAW ALL NODE DATA
-  drawNodes() {
+  public drawNodes() {
     this.selectedNode = null;
     for (let i = 0; i < this.data.length; i ++) {
       this.drawData(this.data[i]);
     }
   }
 
-  drawData(data) {
+  public drawData(data) {
     for (let i = 0; i < data.length; i ++) {
       if (data[i].sensorType === 'Temperature') {
         this.map.update(data[i].node, data[i].value, null);
@@ -87,7 +86,7 @@ export class GraphsComponent implements OnInit {
     }
   }
 
-  cleanTimestamp(timestamp) {
+  public cleanTimestamp(timestamp) {
     const timestampArray = timestamp.split('T');
     const dateArray = timestampArray[0].split('-');
     const timeArray = timestampArray[1].split(':');
@@ -99,7 +98,7 @@ export class GraphsComponent implements OnInit {
     return date;
   }
 
-  drawTemperature(date, temperature) {
+  public drawTemperature(date, temperature) {
     if (date.getTime() < this.toDate.getTime() && date.getTime() > this.fromDate.getTime()) {
       this.tempChart.data.labels.push(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDay()
         + ' ' + date.getHours() + ':' + date.getMinutes());
@@ -108,7 +107,7 @@ export class GraphsComponent implements OnInit {
     }
   }
 
-  drawHumidity(date, humidity) {
+  public drawHumidity(date, humidity) {
     if (date < this.toDate && date > this.fromDate) {
       this.humiChart.data.labels.push(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDay()
         + ' ' + date.getHours() + ':' + date.getMinutes());
@@ -117,7 +116,7 @@ export class GraphsComponent implements OnInit {
     }
   }
 
-  setDefaultDates() {
+  public setDefaultDates() {
     const date = new Date();
     const yyyy = date.getFullYear();
     const mm = date.getMonth();
@@ -134,7 +133,7 @@ export class GraphsComponent implements OnInit {
       endDate: {year: yyyy, month: mm, day: (dd + 1)}};
   }
 
-  drawGraph() {
+  public drawGraph() {
     const temp = document.getElementById('tempChart');
     this.tempChart = new Chart(temp, {
       type: 'line',
@@ -152,7 +151,7 @@ export class GraphsComponent implements OnInit {
     });
   }
 
-  clearGraph() {
+  public clearGraph() {
     this.tempChart.data.labels = [];
     this.humiChart.data.labels = [];
 
@@ -162,12 +161,11 @@ export class GraphsComponent implements OnInit {
     for (let i = 0; i < this.humiChart.data.datasets.length; i ++) {
       this.humiChart.data.datasets[i].data = [];
     }
-
     this.tempChart.update();
     this.humiChart.update();
   }
 
-  setDates(event: IMyDateRangeModel) {
+  public setDates(event: IMyDateRangeModel) {
     this.fromDate.setFullYear(event.beginDate.year, event.beginDate.month - 1, event.beginDate.day);
     this.toDate.setFullYear(event.endDate.year, event.endDate.month - 1, event.endDate.day);
 
@@ -180,15 +178,13 @@ export class GraphsComponent implements OnInit {
   }
 
   ngOnInit() {
-    const url = new URL(window.location.href);
     this.department = this.departmentService.getSelectedDepartment();
-
     this.setDefaultDates();
     this.drawGraph();
     this.initData(this.department._id);
   }
 
-  refresh(event) {
+  refresh() {
     this.initData(this.department._id);
   }
 }

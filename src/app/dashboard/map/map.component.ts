@@ -70,13 +70,13 @@ export class MapComponent implements OnInit {
     this.updateBounds();
   }
 
-  clickedMarker(label: string, index: number) {
+  public clickedMarker(label: string, index: number) {
     console.log(`clicked the marker: ${label || index}`);
   }
 
-  mapClicked($event: MouseEvent) {  }
+  public mapClicked($event: MouseEvent) {  }
 
-  markerDragEnd(m: Marker, $event: MouseEvent) {
+  public markerDragEnd(m: Marker, $event: MouseEvent) {
     console.log('dragEnd', m, $event);
   }
 }

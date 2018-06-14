@@ -1,14 +1,11 @@
-import {Component, OnInit } from '@angular/core';
-import {environment} from '../../../environments/environment';
-import {Observable} from 'rxjs/Observable';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
 import swal from 'sweetalert2';
 import { UserService } from '../../services/user.service';
 import { LoginService } from '../../services/login.service';
 
 declare var $: any;
-
 
 @Component({
   selector: 'app-user-control',
@@ -31,21 +28,6 @@ export class UserControlComponent implements OnInit {
       pagingType: 'full_numbers',
       pageLength: 10,
       lengthMenu: [[10, 25, 50, 100, -1], [ 10, 25, 50, 100, 'All']],
-      // dom: 'Bfrtip',
-      // buttons: [
-      //   'pageLength',
-      //   'colvis',
-      //   'copy',
-      //   'print',
-      //   'excel'//,
-      //   // {
-      //   //   text: 'Add user',
-      //   //   key: '1',
-      //   //   action: function (e, dt, node, config) {
-      //   //     alert('Angular is amazing! this button even works while it produces a compile error :)');
-      //   //   }
-      //   // }
-      // ]
     };
     this.userService.getUsers().subscribe( res => {
       this.users = res.users;

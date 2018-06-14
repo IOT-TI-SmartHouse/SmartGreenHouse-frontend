@@ -1,21 +1,17 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as jwt_decode from 'jwt-decode';
 import { Router } from '@angular/router';
 import swal from 'sweetalert2';
-import {HttpHeaders} from '@angular/common/http';
-import { UserService } from './user.service';
-import {environment} from '../../environments/environment';
+import { HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class LoginService {
-
     /**
      * Constructor
      */
-    constructor(private http: HttpClient, private router: Router, private userService: UserService) {
-        //
-    }
+    constructor(private http: HttpClient, private router: Router) { }
 
     public login(username: string, password: string) {
         return this.http.post(`${environment.apiEndpoint}/user/login`, {
@@ -37,7 +33,6 @@ export class LoginService {
         });
     }
 
-
     public setSession(authResult) {
         const decoded = jwt_decode(authResult.token);
 
@@ -49,7 +44,7 @@ export class LoginService {
         this.router.navigate(['/dashboard']);
     }
 
-    logout() {
+    public logout() {
         localStorage.removeItem('id_token');
         localStorage.removeItem('user_id');
         localStorage.removeItem('is_admin');
@@ -72,11 +67,7 @@ export class LoginService {
         return (Date.now() / 1000) < this.getExpiration();
     }
 
-    isLoggedOut() {
-        return !this.isLoggedIn();
-    }
-
-    getExpiration() {
+    public getExpiration() {
         const expiration = localStorage.getItem('expires_at');
         const expiresAt = JSON.parse(expiration);
         return expiresAt;

@@ -1,10 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Subject} from 'rxjs/Subject';
-import { SensorNodeService} from '../../services/sensor-node.service';
-import { GreenhouseDepartmentService} from '../../services/greenhouse-department.service';
-import { GreenhouseService} from '../../services/greenhouse.service';
-import {Router} from '@angular/router';
-import swal from "sweetalert2";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { SensorNodeService } from '../../services/sensor-node.service';
+import { GreenhouseDepartmentService } from '../../services/greenhouse-department.service';
+import { GreenhouseService } from '../../services/greenhouse.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sensor-node',
@@ -12,33 +10,24 @@ import swal from "sweetalert2";
   styleUrls: ['./sensor-node-control.component.css']
 })
 export class SensorNodeComponent implements OnInit {
-  table = $('#sensornodesTable').DataTable();
-  dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<any> = new Subject();
 
-  @Output()
-    public onCreate: EventEmitter<any> = new EventEmitter<any>();
+  public onCreate: EventEmitter<any> = new EventEmitter<any>();
 
   @Input()
-    public isNew = false;
+  public isNew = false;
   @Input('node')
-    set node(node: any) {
-      if (node != null) {
-        this.id = node._id;
-        this.name = node.name;
-        this.latitude = node.latitude;
-        this.longitude = node.longitude;
-        this.hardwareSerial = node.hardwareSerial;
-      }
+  set node(node: any) {
+    if (node != null) {
+      this.id = node._id;
+      this.name = node.name;
+      this.latitude = node.latitude;
+      this.longitude = node.longitude;
+      this.hardwareSerial = node.hardwareSerial;
+    }
   }
 
   greenhouses: any = [];
   departments: any = [];
-  sensornodes: any = [];
-  public greenhousePlaceholder = 'select a greenhouse';
-  public departmentsPlaceholder = 'select a department';
-  public selectedDepartment: any;
-  public selectedGreenhouse: any;
   public id: string;
   public name: string;
   public latitude: string;
@@ -46,47 +35,17 @@ export class SensorNodeComponent implements OnInit {
   public hardwareSerial: string;
 
   constructor(private sensornodeService: SensorNodeService,
-     private departmentService: GreenhouseDepartmentService, private greenhouseService: GreenhouseService, private router: Router) { }
+              private departmentService: GreenhouseDepartmentService, private greenhouseService: GreenhouseService) { }
 
   ngOnInit() {
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10,
-      searching: false,
-      lengthChange: false
-      // lengthMenu: [[10, 25, 50, 100, -1], [ 10, 25, 50, 100, 'All']]
-    };
-
     this.greenhouseService.getGreenhouses().subscribe( res => {
       this.greenhouses = res.greenhouses;
     });
   }
 
-  public selectGreenhouse(greenhouse) {
-    this.selectedGreenhouse = greenhouse;
-    this.departmentService.getGreenhouseDepartments(this.selectedGreenhouse._id).subscribe( res => {
-      this.departments = res.departments;
-      console.log(res);
-      $('#departmentsTable').DataTable().destroy();
-      $('#sensornodesTable').DataTable().destroy();
-      this.dtTrigger.next();
-    });
-  }
-
-  public selectDepartment(department) {
-    this.selectedDepartment = department;
-    this.sensornodeService.getSensorNodes(this.selectedDepartment._id).subscribe( res => {
-      this.sensornodes = res.nodes;
-      console.log(res);
-      $('#departmentsTable').DataTable().destroy();
-      $('#sensornodesTable').DataTable().destroy();
-      this.dtTrigger.next();
-    });
-  }
-
   public addSensorNode() {
     this.sensornodeService.register(this.name,
-       this.departmentService.getSelectedDepartment(), this.latitude, this.longitude, this.hardwareSerial);
+      this.departmentService.getSelectedDepartment(), this.latitude, this.longitude, this.hardwareSerial);
     this.onCreate.emit(true);
     this.clearInputFields();
   }
@@ -96,7 +55,7 @@ export class SensorNodeComponent implements OnInit {
       this.departmentService.getSelectedDepartment(), this.latitude, this.longitude, this.hardwareSerial).subscribe(res => {
       swal('Success!', 'Successfully updated sensornode!', 'success');
     }, error => {
-      swal('Update failed', 'The update attempt has failed', 'error');
+      swal('Update failed', 'The update attempt has failed:', 'error');
     });
     this.onCreate.emit(true);
   }

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-info-component',
@@ -8,7 +7,5 @@ import swal from 'sweetalert2';
 })
 export class InfoComponent {
 
-  constructor() {
-
-  }
+  constructor() { }
 }

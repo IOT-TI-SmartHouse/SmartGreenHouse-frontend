@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { Subject} from 'rxjs/Subject';
-import { GreenhouseAccesService } from '../../services/greenhouseAcces.service';
+import { GreenhouseAccessService } from '../../services/greenhouse-access.service';
 import { GreenhouseService } from '../../services/greenhouse.service';
 import { UserService } from '../../services/user.service';
 import swal from 'sweetalert2';
@@ -30,7 +30,7 @@ export class GreenHouseAccesControlComponent implements OnInit {
   public selectedGreenhouseId: any;
 
   constructor(
-    private greenhouseAccessService: GreenhouseAccesService,
+    private greenhouseAccessService: GreenhouseAccessService,
     private greenhouseService: GreenhouseService,
     private userService: UserService
   ) {}
@@ -93,7 +93,7 @@ export class GreenHouseAccesControlComponent implements OnInit {
    * @param fullList list to filter
    * @param secondList list that contains the elements to filter out
    */
-  filterList(fullList: any[], secondList: any[]): any[] {
+  public filterList(fullList: any[], secondList: any[]): any[] {
     let found;
     return fullList.filter(firstElement => {
       found = false;
@@ -118,7 +118,7 @@ export class GreenHouseAccesControlComponent implements OnInit {
     this.selectUser(this.selectedUser);
   }
 
-  removeAccess(greenhouse: any) {
+  public removeAccess(greenhouse: any) {
     swal({
       title: 'Are you sure?',
       text: 'You won\'t be able to revert this!',

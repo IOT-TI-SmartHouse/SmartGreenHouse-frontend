@@ -1,7 +1,4 @@
-import { ChangeDetectorRef, Component, Inject } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Event as RouterEvent, NavigationCancel, NavigationEnd, NavigationError, Router, Routes} from '@angular/router';
-import { subscribeOn } from 'rxjs/operator/subscribeOn';
+import { Component } from '@angular/core';
 import { LoginService } from './services/login.service';
 
 @Component({
@@ -11,11 +8,5 @@ import { LoginService } from './services/login.service';
 })
 export class AppComponent {
 
-  constructor(private router: Router, public loginService: LoginService) {
-
-  }
-
-  logout() {
-    this.loginService.logout();
-  }
+  constructor(public loginService: LoginService) { }
 }

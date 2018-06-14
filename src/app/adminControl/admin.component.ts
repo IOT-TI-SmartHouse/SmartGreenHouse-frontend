@@ -1,34 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
-
-export class AdminComponent implements OnInit {
+export class AdminComponent {
 
   public selectedTab: SelectedTab = SelectedTab.USER;
 
   constructor() { }
 
-  ngOnInit() {
-  }
-
-  navigateUser() {
+  public navigateUser() {
     this.selectedTab = SelectedTab.USER;
   }
 
-  navigateGreenhouse() {
+  public navigateGreenhouse() {
     this.selectedTab = SelectedTab.GREENHOUSE;
   }
 
-  navigateGreenhouseAccess() {
+  public navigateGreenhouseAccess() {
     this.selectedTab = SelectedTab.GREENHOUSEACCESS;
   }
 
-  navigateGreenhouseDepartment() {
+  public navigateGreenhouseDepartment() {
     this.selectedTab = SelectedTab.DEPARTMENT;
   }
 }

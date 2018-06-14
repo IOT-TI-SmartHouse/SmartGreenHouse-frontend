@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
 import { GreenhouseService } from '../../services/greenhouse.service';
-import {Router} from '@angular/router';
-import swal from "sweetalert2";
+import { Router } from '@angular/router';
+import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
@@ -26,21 +26,6 @@ export class GreenHouseControlComponent implements OnInit {
       pagingType: 'full_numbers',
       pageLength: 10,
       lengthMenu: [[10, 25, 50, 100, -1], [ 10, 25, 50, 100, 'All']],
-      // dom: 'Bfrtip',
-      // buttons: [
-      //   'pageLength',
-      //   'colvis',
-      //   'copy',
-      //   'print',
-      //   'excel'//,
-      //   // {
-      //   //   text: 'Add user',
-      //   //   key: '1',
-      //   //   action: function (e, dt, node, config) {
-      //   //     alert('Angular is amazing! this button even works while it produces a compile error :)');
-      //   //   }
-      //   // }
-      // ]
     };
     this.greenhouseService.getGreenhouses().subscribe( res => {
       console.log(res);
@@ -72,7 +57,7 @@ export class GreenHouseControlComponent implements OnInit {
     });
   }
 
-  navigateGreenhouse(greenhouse: any) {
+  public navigateGreenhouse(greenhouse: any) {
     this.greenhouseService.setSelectedGreenhouse(greenhouse);
     this.router.navigate(['/admin/greenHouseDepartmentControl']);
   }
