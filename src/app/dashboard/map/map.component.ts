@@ -31,7 +31,7 @@ export class MapComponent implements OnInit {
 
   update(sensorId: string, temperature?: number, humidity?: number) {
     let nodeExists = false;
-    this.markers.forEach(marker => {
+    for (const marker of this.markers) {
       if ((marker as any).sensorId === sensorId) {
         if (temperature !== null || temperature !== undefined) {
           marker.temperature = temperature;
@@ -41,7 +41,7 @@ export class MapComponent implements OnInit {
         }
         nodeExists = true;
       }
-    });
+    }
     if (!nodeExists) {
       console.log('updating a non-existing node is not possible: ' + sensorId);
     }

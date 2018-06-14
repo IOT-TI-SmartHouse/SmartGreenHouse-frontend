@@ -47,6 +47,22 @@ export class GraphsComponent implements OnInit {
     this.sensorNodeService.getData(id).subscribe(res => {
       this.data.push(res.data);
       this.drawData(res.data);
+
+      // check last of temp and hum to update the map
+      let tempFound, humFound;
+      for (let i = res.data.length - 1; i >= 0 ; i--) {
+        if (res.data[i].sensorType === 'Humidity' && !humFound) {
+          this.drawMapData(res.data[i]);
+          humFound = true;
+        }
+        if (res.data[i].sensorType === 'Temperature' && !tempFound) {
+          this.drawMapData(res.data[i]);
+          tempFound = true;
+        }
+        if (tempFound && humFound) {
+          return;
+        }
+      }
     });
   }
 
@@ -73,14 +89,20 @@ export class GraphsComponent implements OnInit {
     }
   }
 
-  public drawData(data) {
+  public drawMapData(data) {
+    if (data.sensorType === 'Humidity') {
+      this.map.update(data.node, null, data.value);
+    } else if (data.sensorType === 'Temperature') {
+      this.map.update(data.node, data.value, null);
+    }
+  }
+
+  drawData(data) {
     for (let i = 0; i < data.length; i ++) {
       if (data[i].sensorType === 'Temperature') {
-        this.map.update(data[i].node, data[i].value, null);
         this.drawTemperature(this.cleanTimestamp(data[i].createdAt), data[i].value);
       }
       if (data[i].sensorType === 'Humidity') {
-        this.map.update(data[i].node, null , data[i].value);
         this.drawHumidity(this.cleanTimestamp(data[i].createdAt), data[i].value);
       }
     }
