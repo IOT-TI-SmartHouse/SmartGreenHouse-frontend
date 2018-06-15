@@ -11,7 +11,7 @@ import { UserService } from '../services/user.service';
 export class MenuBarComponent {
     title = 'Smart Greenhouse Application';
 
-    constructor(private router: Router, private loginService: LoginService, private userService: UserService) { }
+    constructor(private router: Router, private loginService: LoginService, public userService: UserService) { }
 
     public logout() {
         this.loginService.logout();
