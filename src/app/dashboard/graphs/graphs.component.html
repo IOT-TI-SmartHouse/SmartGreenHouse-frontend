@@ -42,7 +42,7 @@
 <div class="modal fade" id="nodemodal" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
-    <app-sensor-node [isNew]="true" (onCreate)="refresh($event)"></app-sensor-node>
+    <app-sensor-node [isNew]="true" (onCreate)="refresh()"></app-sensor-node>
   </div>
 </div>
 
@@ -50,6 +50,6 @@
 <div class="modal fade" id="nodemodaledit" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
-    <app-sensor-node [isNew]="false" [node]="selectedNode" (onCreate)="refresh($event)" ></app-sensor-node>
+    <app-sensor-node [isNew]="false" [node]="selectedNode" (onCreate)="refresh()" ></app-sensor-node>
   </div>
 </div>
