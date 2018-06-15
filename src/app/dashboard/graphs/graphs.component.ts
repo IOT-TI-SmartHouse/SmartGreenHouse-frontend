@@ -84,9 +84,29 @@ export class GraphsComponent implements OnInit {
   // DRAW ALL NODE DATA
   public drawNodes() {
     this.selectedNode = null;
+    let allData = [];
+    // add all data of all nodes in one array
     for (let i = 0; i < this.data.length; i ++) {
-      this.drawData(this.data[i]);
+      allData = allData.concat(this.data[i]);
     }
+    // sort the data on the date
+    allData.sort((n1, n2) => {
+      if (new Date(n1.createdAt).getTime() > new Date(n2.createdAt).getTime()) {
+        return 1;
+      }
+
+      if (new Date(n1.createdAt).getTime() < new Date(n2.createdAt).getTime()) {
+        return -1;
+      }
+
+      return 0;
+    });
+    // draw all data
+    this.drawData(allData);
+
+    // for (let i = 0; i < this.data.length; i ++) {
+    //   this.drawData(this.data[i]);
+    // }
   }
 
   public drawMapData(data) {
@@ -115,7 +135,7 @@ export class GraphsComponent implements OnInit {
 
     const date = new Date();
     date.setFullYear(dateArray[0], (dateArray[1] - 1), dateArray[2]);
-    date.setUTCHours(timeArray[0], timeArray[1], 0, 0);
+    date.setHours(timeArray[0], timeArray[1], 0, 0);
 
     return date;
   }
@@ -123,7 +143,7 @@ export class GraphsComponent implements OnInit {
   public drawTemperature(date, temperature) {
     if (date.getTime() < this.toDate.getTime() && date.getTime() > this.fromDate.getTime()) {
       this.tempChart.data.labels.push(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDay()
-        + ' ' + date.getHours() + ':' + date.getMinutes());
+        + ' ' + date.getHours() + ':' + (date.getMinutes() < 10 ? '0' : '' ) + date.getMinutes());
       this.tempChart.data.datasets[0].data.push(temperature);
       this.tempChart.update();
     }
@@ -132,7 +152,7 @@ export class GraphsComponent implements OnInit {
   public drawHumidity(date, humidity) {
     if (date < this.toDate && date > this.fromDate) {
       this.humiChart.data.labels.push(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDay()
-        + ' ' + date.getHours() + ':' + date.getMinutes());
+        + ' ' + date.getHours() + ':' + (date.getMinutes() < 10 ? '0' : '' ) + date.getMinutes());
       this.humiChart.data.datasets[0].data.push(humidity);
       this.humiChart.update();
     }
