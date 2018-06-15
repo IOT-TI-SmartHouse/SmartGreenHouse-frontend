@@ -11,8 +11,8 @@ export class MapComponent implements OnInit {
   zoom = 4;
 
   // initial center position for the map
-  lat = 0;
-  lng = 0;
+  lat = 52;
+  lng = 5;
 
   color = 'green';
   markers: Marker[] = [];
@@ -52,7 +52,7 @@ export class MapComponent implements OnInit {
   }
 
   create(sensorId: string, sensorName: string, latitude: number, longitude: number) {
-    this.markers.push({sensorId: sensorId, label: sensorName, lat: latitude, lng: longitude, draggable: false, radius: 10});
+    this.markers.push({sensorId: sensorId, label: sensorName, lat: latitude, lng: longitude, draggable: false, radius: 0});
     this.updateBounds();
   }
 }
