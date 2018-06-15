@@ -9,8 +9,8 @@
       "outDir": "dist",
       "assets": [
         "assets",
-        "favicon.ico",
-        "greenhouse.ico"
+        "./src/assets/icons/chevron-down.svg",
+        "./src/assets/icons/chevron-right.svg"
       ],
       "index": "index.html",
       "main": "main.ts",
